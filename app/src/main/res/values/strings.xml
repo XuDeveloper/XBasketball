@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">XBasketball</string>
+
+    <string name="open"></string>
+    <string name="close"></string>
+
 </resources>
