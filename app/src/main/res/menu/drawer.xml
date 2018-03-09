@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.MainActivity">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_person"
+            android:title="个人设置" />
+        <item
+            android:id="@+id/navigation_item_intimity"
+            android:title="隐私设置" />
+        <item
+            android:id="@+id/navigation_item_system"
+            android:title="系统设置 " />
+
+        <item
+            android:id="@+id/navigation_item_about"
+            android:title="关于" />
+    </group>
+
+</menu>
