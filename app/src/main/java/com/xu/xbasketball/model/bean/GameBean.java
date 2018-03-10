@@ -6,4 +6,7 @@ package com.xu.xbasketball.model.bean;
  */
 
 public class GameBean {
+
+
+
 }
