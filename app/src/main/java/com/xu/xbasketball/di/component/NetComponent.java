@@ -4,6 +4,7 @@ import com.xu.xbasketball.di.module.NetModule;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
 
 import dagger.Component;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
@@ -15,4 +16,5 @@ import retrofit2.Retrofit;
 public interface NetComponent {
     IBasketballScoreApi getBasketballScoreApiService();
     Retrofit getRetrofit();
+    OkHttpClient getOkHttpClient();
 }
