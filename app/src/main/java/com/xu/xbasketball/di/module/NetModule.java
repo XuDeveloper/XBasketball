@@ -2,12 +2,13 @@ package com.xu.xbasketball.di.module;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.xu.xbasketball.BuildConfig;
-import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.app.Constants;
+import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
 import com.xu.xbasketball.utils.NetUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -29,6 +30,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class NetModule {
+
+    @Singleton
+    @Provides
+    Retrofit provideBasketballScoreRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, IBasketballScoreApi.HOST);
+    }
+
+    @Singleton
+    @Provides
+    IBasketballScoreApi provideBasketballScoreService(Retrofit retrofit) {
+        return retrofit.create(IBasketballScoreApi.class);
+    }
 
     @Provides
     @Singleton
@@ -89,6 +102,13 @@ public class NetModule {
         builder.addNetworkInterceptor(cacheInterceptor);
         builder.addInterceptor(cacheInterceptor);
 
+        builder.connectTimeout(10, TimeUnit.SECONDS);
+        builder.readTimeout(20, TimeUnit.SECONDS);
+        builder.writeTimeout(20, TimeUnit.SECONDS);
+
+        builder.retryOnConnectionFailure(true);
+
+        return builder.build();
     }
 
 }
