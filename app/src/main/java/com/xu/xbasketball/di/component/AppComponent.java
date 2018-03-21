@@ -1,7 +1,6 @@
 package com.xu.xbasketball.di.component;
 
 import com.xu.xbasketball.di.module.AppModule;
-import com.xu.xbasketball.di.module.NetModule;
 
 import javax.inject.Singleton;
 
@@ -13,6 +12,7 @@ import dagger.Component;
  * @author Xu
  */
 @Singleton
-@Component(modules = {AppModule.class, NetModule.class})
+@Component(modules = {AppModule.class})
 public interface AppComponent {
+
 }

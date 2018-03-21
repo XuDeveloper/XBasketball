@@ -33,6 +33,12 @@ public class NetModule {
 
     @Singleton
     @Provides
+    Retrofit.Builder provideRetrofitBuilder() {
+        return new Retrofit.Builder();
+    }
+
+    @Singleton
+    @Provides
     Retrofit provideBasketballScoreRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, IBasketballScoreApi.HOST);
     }
@@ -43,9 +49,7 @@ public class NetModule {
         return retrofit.create(IBasketballScoreApi.class);
     }
 
-    @Provides
-    @Singleton
-    Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
+    private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
         return builder
                 .baseUrl(url)
                 .client(client)
@@ -99,6 +103,7 @@ public class NetModule {
                 }
             }
         };
+        builder.cache(cache);
         builder.addNetworkInterceptor(cacheInterceptor);
         builder.addInterceptor(cacheInterceptor);
 
