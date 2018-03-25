@@ -1,6 +1,9 @@
 package com.xu.xbasketball.di.module;
 
 import com.xu.xbasketball.app.App;
+import com.xu.xbasketball.model.DataManager;
+import com.xu.xbasketball.model.http.HttpHelper;
+import com.xu.xbasketball.model.http.RetrofitHelper;
 
 import javax.inject.Singleton;
 
@@ -8,7 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by zhaoxuzhang on 2018/3/12.
+ * Created by Xu on 2018/3/12.
  */
 @Module
 public class AppModule {
@@ -23,6 +26,18 @@ public class AppModule {
     @Singleton
     App provideApplicationContext() {
         return application;
+    }
+
+    @Provides
+    @Singleton
+    HttpHelper provideHttpHelper(RetrofitHelper retrofitHelper) {
+        return retrofitHelper;
+    }
+
+    @Provides
+    @Singleton
+    DataManager provideDataManager(HttpHelper httpHelper) {
+        return new DataManager(httpHelper);
     }
 
 }

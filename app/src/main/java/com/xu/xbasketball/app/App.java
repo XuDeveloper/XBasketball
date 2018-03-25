@@ -2,10 +2,8 @@ package com.xu.xbasketball.app;
 
 import android.app.Application;
 
-import com.xu.xbasketball.di.component.NetComponent;
-
 /**
- * Created by zhaoxuzhang on 2018/3/12.
+ * Created by Xu on 2018/3/12.
  */
 
 public class App extends Application {
@@ -15,8 +13,6 @@ public class App extends Application {
     public static synchronized App getInstance() {
         return instance;
     }
-
-    private NetComponent netComponent;
 
     @Override
     public void onCreate() {

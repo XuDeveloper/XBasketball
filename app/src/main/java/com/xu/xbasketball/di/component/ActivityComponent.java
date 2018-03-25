@@ -11,6 +11,6 @@ import dagger.Component;
 
 @UserScope
 @Component(modules = DailyScoreModule.class)
-public interface DailyScoreComponent {
+public interface ActivityComponent {
 //    void inject();
 }

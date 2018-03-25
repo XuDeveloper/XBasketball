@@ -1,6 +1,10 @@
 package com.xu.xbasketball.di.component;
 
+import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.di.module.AppModule;
+import com.xu.xbasketball.di.module.NetModule;
+import com.xu.xbasketball.model.DataManager;
+import com.xu.xbasketball.model.http.RetrofitHelper;
 
 import javax.inject.Singleton;
 
@@ -12,7 +16,13 @@ import dagger.Component;
  * @author Xu
  */
 @Singleton
-@Component(modules = {AppModule.class})
+@Component(modules = {AppModule.class, NetModule.class})
 public interface AppComponent {
+
+    App getApplicationContext();
+
+    DataManager getDataManager();
+
+    RetrofitHelper retrofitHelper();
 
 }

@@ -3,7 +3,7 @@ package com.xu.xbasketball.app;
 import java.io.File;
 
 /**
- * Created by zhaoxuzhang on 2018/3/16.
+ * Created by Xu on 2018/3/16.
  */
 
 public class Constants {

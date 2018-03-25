@@ -40,8 +40,9 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
     // rxjava
+    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
     compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     // json转换器，方便将返回的数据转换为json格式
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
