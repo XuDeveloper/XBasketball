@@ -5,8 +5,13 @@ import com.xu.xbasketball.base.IBaseView;
 import com.xu.xbasketball.base.RxPresenter;
 import com.xu.xbasketball.base.contract.dailyscore.DailyScoreContract;
 import com.xu.xbasketball.model.DataManager;
+import com.xu.xbasketball.model.bean.GameBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
+import com.xu.xbasketball.utils.DateUtil;
 import com.xu.xbasketball.utils.RxUtil;
+
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,7 +35,9 @@ public class DailyScorePresenter extends RxPresenter<DailyScoreContract.View> im
                 .subscribeWith(new BaseSubscriber<ScoreBoardBean>() {
                     @Override
                     public void onNext(ScoreBoardBean scoreBoardBean) {
-                        mView.showDailyScore(scoreBoardBean);
+                        Map<String, List<GameBean>> data = scoreBoardBean.getData();
+                        List<GameBean> gameBeans = data.get(DateUtil.getTodayDate());
+                        mView.showDailyScore(gameBeans);
                     }
 
                     @Override
