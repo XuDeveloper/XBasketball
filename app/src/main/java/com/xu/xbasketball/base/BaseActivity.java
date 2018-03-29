@@ -36,7 +36,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract int getLayoutId();
 
-    public abstract void viewCreated();
+    public void viewCreated() {
+
+    }
 
     public abstract void initData();
 }
