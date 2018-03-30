@@ -15,14 +15,14 @@ import butterknife.ButterKnife;
  * Created by Xu on 2017/1/30.
  */
 
-public abstract class LazyLoadFragment extends Fragment {
+public abstract class BaseLazyLoadFragment extends Fragment {
     /**
      * 视图是否已经初初始化
      */
     protected boolean isInit = false;
     protected boolean isLoad = false;
     protected boolean isVisible = false;//标识fragment是否可见
-    protected final String TAG = "LazyLoadFragment";
+    protected final String TAG = "BaseLazyLoadFragment";
     private View view;
     protected LayoutInflater inflater;
 
