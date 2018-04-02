@@ -3,6 +3,11 @@ package com.xu.xbasketball.app;
 import android.app.Activity;
 import android.app.Application;
 
+import com.xu.xbasketball.di.component.AppComponent;
+import com.xu.xbasketball.di.component.DaggerAppComponent;
+import com.xu.xbasketball.di.module.AppModule;
+import com.xu.xbasketball.di.module.NetModule;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +18,7 @@ import java.util.Set;
 public class App extends Application {
 
     private static App instance;
+    public static AppComponent appComponent;
     private Set<Activity> allActivities;
 
     public static synchronized App getInstance() {
@@ -41,5 +47,15 @@ public class App extends Application {
         if (allActivities != null) {
             allActivities.remove(activity);
         }
+    }
+
+    public static AppComponent getAppComponent() {
+        if (appComponent == null) {
+            appComponent = DaggerAppComponent.builder()
+                    .appModule(new AppModule(instance))
+                    .netModule(new NetModule())
+                    .build();
+        }
+        return appComponent;
     }
 }

@@ -1,7 +1,7 @@
 package com.xu.xbasketball.di.component;
 
-import com.xu.xbasketball.di.module.DailyScoreModule;
-import com.xu.xbasketball.di.scope.UserScope;
+import com.xu.xbasketball.di.module.ActivityModule;
+import com.xu.xbasketball.di.scope.ActivityScope;
 
 import dagger.Component;
 
@@ -9,8 +9,8 @@ import dagger.Component;
  * Created by Xu on 2018/3/11.
  */
 
-@UserScope
-@Component(modules = DailyScoreModule.class)
+@ActivityScope
+@Component(dependencies = AppComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
 //    void inject();
 }
