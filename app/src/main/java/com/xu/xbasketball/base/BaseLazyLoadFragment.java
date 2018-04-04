@@ -3,11 +3,17 @@ package com.xu.xbasketball.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.xu.xbasketball.app.App;
+import com.xu.xbasketball.di.component.DaggerFragmentComponent;
+import com.xu.xbasketball.di.component.FragmentComponent;
+import com.xu.xbasketball.di.module.FragmentModule;
+import com.xu.xbasketball.utils.SnackBarUtil;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -15,13 +21,31 @@ import butterknife.ButterKnife;
  * Created by Xu on 2017/1/30.
  */
 
-public abstract class BaseLazyLoadFragment extends Fragment {
+public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fragment implements IBaseView{
+
+    @Inject
+    T mPresenter;
+
+    protected FragmentComponent getFragmentComponent() {
+        return DaggerFragmentComponent.builder()
+                .fragmentModule(getFragmentModule())
+                .appComponent(App.getAppComponent())
+                .build();
+    }
+
+    protected FragmentModule getFragmentModule(){
+        return new FragmentModule(this);
+    }
+
     /**
      * 视图是否已经初初始化
      */
     protected boolean isInit = false;
     protected boolean isLoad = false;
-    protected boolean isVisible = false;//标识fragment是否可见
+    /**
+     * 标识fragment是否可见
+     */
+    protected boolean isVisible = false;
     protected final String TAG = "BaseLazyLoadFragment";
     private View view;
     protected LayoutInflater inflater;
@@ -29,9 +53,8 @@ public abstract class BaseLazyLoadFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(setContentView(), container, false);
+        view = inflater.inflate(getLayoutId(), container, false);
         this.inflater = inflater;
-        initViews();
         isInit = true;
         ButterKnife.bind(this, view);
         /**初始化的时候去加载数据**/
@@ -80,10 +103,9 @@ public abstract class BaseLazyLoadFragment extends Fragment {
         isLoad = false;
     }
 
-    protected void showToast(String message) {
-        if (!TextUtils.isEmpty(message)) {
-            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    public void showLoadFailMsg(String msg) {
+        SnackBarUtil.show(view, msg);
     }
 
     /**
@@ -91,27 +113,7 @@ public abstract class BaseLazyLoadFragment extends Fragment {
      *
      * @return 布局的layoutId
      */
-    protected abstract int setContentView();
-
-    /**
-     * 获取设置的布局
-     *
-     * @return
-     */
-    protected View getContentView() {
-        return view;
-    }
-
-    /**
-     * 找出对应的控件
-     *
-     * @param id
-     * @param <T>
-     * @return
-     */
-    protected <T extends View> T findViewById(int id) {
-        return (T) getContentView().findViewById(id);
-    }
+    protected abstract int getLayoutId();
 
     /**
      * 当视图初始化并且对用户可见的时候去真正的加载数据
@@ -119,14 +121,11 @@ public abstract class BaseLazyLoadFragment extends Fragment {
     protected abstract void lazyLoad();
 
     /**
-     * 初始化控件
-     */
-    protected abstract void initViews();
-
-    /**
      * 当视图已经对用户不可见并且加载过数据，如果需要在切换到其他页面时停止加载数据，可以调用此方法
      */
     protected void stopLoad() {
     }
+
+    protected abstract void initInject();
 
 }
