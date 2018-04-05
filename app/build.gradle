@@ -55,7 +55,8 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-implementationr:2.0.2'
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
-
+    // circleimageview
+    implementation files('libs/circleimageview-2.1.0.aar')
 
 
 
