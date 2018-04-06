@@ -1,5 +1,6 @@
 package com.xu.xbasketball.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.xu.xbasketball.utils.SnackBarUtil;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by Xu on 2017/1/30.
@@ -24,7 +26,9 @@ import butterknife.ButterKnife;
 public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fragment implements IBaseView{
 
     @Inject
-    T mPresenter;
+    protected T mPresenter;
+
+    private Unbinder unbinder;
 
     protected FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()
@@ -49,18 +53,27 @@ public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fra
     protected final String TAG = "BaseLazyLoadFragment";
     private View view;
     protected LayoutInflater inflater;
+    protected Context mContext;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(getLayoutId(), container, false);
         this.inflater = inflater;
+        mContext = this.getContext();
         isInit = true;
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
+        initInject();
+        initDatas();
+        if (mPresenter != null) {
+            mPresenter.attach(this);
+        }
         /**初始化的时候去加载数据**/
         isCanLoadData();
         return view;
     }
+
+    protected abstract void initDatas();
 
     /**
      * 视图是否已经对用户可见，系统的方法
@@ -101,6 +114,10 @@ public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fra
         super.onDestroyView();
         isInit = false;
         isLoad = false;
+        if (mPresenter != null) {
+            mPresenter.detach();
+        }
+        unbinder.unbind();
     }
 
     @Override

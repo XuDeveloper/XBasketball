@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.model.bean.GameBean;
+import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.DateUtil;
 
 import java.util.List;
@@ -31,9 +32,14 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
         this.mContext = mContext;
     }
 
+    public void updateData(List<GameBean> list) {
+        this.list = list;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.module_recycle_item_dailyscore,
+        View v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_dailyscore,
                 parent, false);
         return new ViewHolder(v);
     }
@@ -46,14 +52,28 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
                 return;
             }
             holder.tvDate.setText(DateUtil.getTodayDate());
+            ImageLoader.load(mContext, gameBean.getLeftBadge(), holder.ivAwayPic);
             holder.tvAwayName.setText(gameBean.getLeftName());
-            
+            holder.tvAwayScore.setText(gameBean.getLeftGoal());
+            ImageLoader.load(mContext, gameBean.getRightBadge(), holder.ivHomePic);
+            holder.tvHomeName.setText(gameBean.getRightName());
+            holder.tvHomeScore.setText(gameBean.getRightGoal());
+            if (mContext.getString(R.string.quarter_four).equals(gameBean.getQuarter())
+                    && mContext.getString(R.string.quarter_time_end).equals(gameBean.getQuarterTime())) {
+                holder.tvStatus.setText(R.string.game_end);
+            } else {
+                StringBuilder sb = new StringBuilder();
+                sb.append(gameBean.getQuarter());
+                sb.append(" ");
+                sb.append(gameBean.getQuarterTime());
+                holder.tvStatus.setText(sb.toString());
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -78,6 +98,9 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
 
         @BindView(R.id.tv_dailyscore_home_score)
         TextView tvHomeScore;
+
+        @BindView(R.id.tv_dailyscore_status)
+        TextView tvStatus;
 
         public ViewHolder(View itemView) {
             super(itemView);

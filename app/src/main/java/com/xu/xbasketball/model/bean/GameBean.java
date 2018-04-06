@@ -11,7 +11,7 @@ public class GameBean {
      * matchType : 2
      * mid : 100000:1471301
      * leftId : 4
-     * leftName : 公牛
+     * leftName : 公牛(客)
      * leftBadge : http://mat1.gtimg.com/sports/nba/logo/1602/4.png
      * leftGoal : 83
      * leftHasUrl : 1
@@ -48,10 +48,28 @@ public class GameBean {
     private String startTime;
     private String matchPeriod;
     private String livePeriod;
+    private String quarter;
+    private String quarterTime;
     private String groupName;
     private String competitionId;
     private String ifHasPlayback;
     private LatestNewsBean latestNews;
+
+    public String getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(String quarter) {
+        this.quarter = quarter;
+    }
+
+    public String getQuarterTime() {
+        return quarterTime;
+    }
+
+    public void setQuarterTime(String quarterTime) {
+        this.quarterTime = quarterTime;
+    }
 
     public String getMatchType() {
         return matchType;

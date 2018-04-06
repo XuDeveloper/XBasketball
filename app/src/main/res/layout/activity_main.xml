@@ -7,13 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.xu.xbasketball.ui.main.MainActivity">
+    tools:context="com.xu.xbasketball.ui.main.activity.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/overview_coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -61,14 +60,13 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v4.view.ViewPager>
+            android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
 
     </android.support.design.widget.CoordinatorLayout>
 
     <!--导航菜单  设置 头部 和 菜单-->
     <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/navigation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

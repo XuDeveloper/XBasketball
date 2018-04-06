@@ -4,4 +4,8 @@
     <string name="open"></string>
     <string name="close"></string>
 
+    <string name="quarter_four">第4节</string>
+    <string name="quarter_time_end">00:00</string>
+    <string name="game_end">已结束</string>
+
 </resources>

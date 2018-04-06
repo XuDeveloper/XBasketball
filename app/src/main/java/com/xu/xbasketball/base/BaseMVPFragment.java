@@ -33,11 +33,12 @@ public abstract class BaseMVPFragment<T extends IBasePresenter> extends BaseFrag
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         this.view = ((ViewGroup) getActivity().findViewById(android.R.id.content)).getChildAt(0);
         if (mPresenter != null) {
             mPresenter.attach(this);
         }
+        initInject();
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.xu.xbasketball.model.bean.ScoreBoardBean;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Xu on 2018/3/11.
@@ -24,6 +24,6 @@ public interface IBasketballScoreApi {
      * @return
      */
     @GET("list?columnId=100000")
-    Flowable<ScoreBoardBean> getDailyScore(@Path("startTime") String startTime, @Path("endTime") String endTime);
+    Flowable<ScoreBoardBean> getDailyScore(@Query("startTime") String startTime, @Query("endTime") String endTime);
 
 }

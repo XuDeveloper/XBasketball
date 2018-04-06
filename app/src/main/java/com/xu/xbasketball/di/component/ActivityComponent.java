@@ -1,7 +1,10 @@
 package com.xu.xbasketball.di.component;
 
+import android.app.Activity;
+
 import com.xu.xbasketball.di.module.ActivityModule;
 import com.xu.xbasketball.di.scope.ActivityScope;
+import com.xu.xbasketball.ui.main.activity.MainActivity;
 
 import dagger.Component;
 
@@ -12,5 +15,8 @@ import dagger.Component;
 @ActivityScope
 @Component(dependencies = AppComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
-//    void inject();
+    Activity getActivity();
+
+    void inject(MainActivity mainActivity);
+
 }

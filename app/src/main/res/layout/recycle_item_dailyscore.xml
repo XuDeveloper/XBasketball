@@ -46,11 +46,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
-                style="@style/TextColorPrimary16sptv"
+                style="@style/TextColorPrimary20sptv"
                 android:text="vs" />
+
+            <TextView
+                android:id="@+id/tv_dailyscore_status"
+                style="@style/TextBlack14sptv"
+                android:gravity="center"
+                android:text="第四节 06:01" />
 
         </LinearLayout>
 

@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.xu.xbasketball.di.module.FragmentModule;
 import com.xu.xbasketball.di.scope.FragmentScope;
-import com.xu.xbasketball.ui.dailyscore.DailyScoreFragment;
+import com.xu.xbasketball.ui.dailyscore.fragment.DailyScoreFragment;
 
 import dagger.Component;
 
