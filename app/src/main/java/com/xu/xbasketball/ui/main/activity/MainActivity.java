@@ -2,7 +2,6 @@ package com.xu.xbasketball.ui.main.activity;
 
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,13 +10,15 @@ import android.view.View;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseActivity;
-import com.xu.xbasketball.ui.dailyscore.fragment.DailyScoreFragment;
 import com.xu.xbasketball.ui.main.adapter.MainFragmentPagerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
+
+/**
+ * Created by Xu on 2018/3/30.
+ *
+ * @author Xu
+ */
 
 public class MainActivity extends BaseActivity {
 
@@ -33,7 +34,6 @@ public class MainActivity extends BaseActivity {
     NavigationView navigation;
 
     private MainFragmentPagerAdapter mFragmentPagerAdapter;
-    private List<Fragment> mFragments;
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -43,9 +43,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mFragments = new ArrayList<>();
-        mFragments.add(new DailyScoreFragment());
-        mFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
+        mFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), mContext);
         viewpager.setAdapter(mFragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewpager);
 //        OkHttpClient client = new OkHttpClient();

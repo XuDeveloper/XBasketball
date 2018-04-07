@@ -1,10 +1,12 @@
 package com.xu.xbasketball.ui.main.adapter;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.List;
+import com.xu.xbasketball.R;
+import com.xu.xbasketball.ui.main.FragmentFactory;
 
 /**
  * Created by Xu on 2018/4/6.
@@ -13,20 +15,27 @@ import java.util.List;
  */
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private List<Fragment> mFragments;
+    private static final int COUNT = 3;
 
-    public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> mFragments) {
+    private String[] titles;
+
+    public MainFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        this.mFragments = mFragments;
+        titles = context.getResources().getStringArray(R.array.tab_title);
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titles[position];
     }
 
     @Override
     public Fragment getItem(int position) {
-        return mFragments.get(position);
+        return FragmentFactory.createFragment(position);
     }
 
     @Override
     public int getCount() {
-        return mFragments.size();
+        return COUNT;
     }
 }

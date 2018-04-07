@@ -1,6 +1,8 @@
 package com.xu.xbasketball.ui.dailyscore.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.xu.xbasketball.R;
@@ -10,6 +12,7 @@ import com.xu.xbasketball.model.bean.GameBean;
 import com.xu.xbasketball.presenter.dailyscore.DailyScorePresenter;
 import com.xu.xbasketball.ui.dailyscore.adapter.DailyscoreAdapter;
 import com.xu.xbasketball.utils.DateUtil;
+import com.xu.xbasketball.widget.DividerItemDecoration;
 
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class DailyScoreFragment extends BaseLazyLoadFragment<DailyScorePresenter
     SwipeRefreshLayout swipeRefresh;
 
     private DailyscoreAdapter adapter;
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected int getLayoutId() {
@@ -36,6 +40,12 @@ public class DailyScoreFragment extends BaseLazyLoadFragment<DailyScorePresenter
     protected void initDatas() {
         adapter = new DailyscoreAdapter(mContext);
         // todo recycleview初始化
+        mLayoutManager = new LinearLayoutManager(mContext);
+        rvDailyscore.addItemDecoration(new DividerItemDecoration(mContext,
+                DividerItemDecoration.VERTICAL_LIST));
+        rvDailyscore.setHasFixedSize(true);
+        rvDailyscore.setLayoutManager(mLayoutManager);
+        rvDailyscore.setItemAnimator(new DefaultItemAnimator());
         rvDailyscore.setAdapter(adapter);
     }
 

@@ -8,6 +8,7 @@
         android:id="@+id/tv_dailyscore_date"
         style="@style/TextBlack14sptv"
         android:layout_gravity="center"
+        android:layout_marginTop="3dp"
         android:text="2018.4.5" />
 
     <LinearLayout

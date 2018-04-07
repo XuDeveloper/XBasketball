@@ -12,6 +12,7 @@ import com.xu.xbasketball.model.bean.GameBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.DateUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,6 +31,7 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
 
     public DailyscoreAdapter(Context mContext) {
         this.mContext = mContext;
+        this.list = new ArrayList<>();
     }
 
     public void updateData(List<GameBean> list) {
@@ -58,10 +60,9 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
             ImageLoader.load(mContext, gameBean.getRightBadge(), holder.ivHomePic);
             holder.tvHomeName.setText(gameBean.getRightName());
             holder.tvHomeScore.setText(gameBean.getRightGoal());
-            if (mContext.getString(R.string.quarter_four).equals(gameBean.getQuarter())
-                    && mContext.getString(R.string.quarter_time_end).equals(gameBean.getQuarterTime())) {
+            if (mContext.getString(R.string.quarter_time_end).equals(gameBean.getQuarterTime())) {
                 holder.tvStatus.setText(R.string.game_end);
-            } else {
+            }  else {
                 StringBuilder sb = new StringBuilder();
                 sb.append(gameBean.getQuarter());
                 sb.append(" ");

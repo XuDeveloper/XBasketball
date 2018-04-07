@@ -15,6 +15,8 @@ import javax.inject.Inject;
 
 /**
  * Created by Xu on 2018/3/30.
+ *
+ * @author Xu
  */
 
 public abstract class BaseMVPFragment<T extends IBasePresenter> extends BaseFragment implements IBaseView {
