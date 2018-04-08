@@ -51,11 +51,11 @@ public abstract class BaseMVPFragment<T extends IBasePresenter> extends BaseFrag
         super.onDestroyView();
     }
 
+    protected abstract void initInject();
+
     @Override
     public void showLoadFailMsg(String msg) {
         SnackBarUtil.show(view, msg);
     }
-
-    protected abstract void initInject();
 
 }

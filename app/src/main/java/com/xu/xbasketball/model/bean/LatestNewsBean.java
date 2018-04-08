@@ -16,6 +16,7 @@ public class LatestNewsBean {
      * competitionId : 100000
      * matchId : 1471301
      * pushTime : 2018-03-10 11:34:56
+     * (在获取每日战报api里面)
      */
 
     private String newsId;

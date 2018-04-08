@@ -50,8 +50,8 @@ public abstract class BaseFragment extends Fragment {
         unbinder.unbind();
     }
 
-    public abstract int getLayoutId();
-
     public abstract void initData();
+
+    public abstract int getLayoutId();
 
 }

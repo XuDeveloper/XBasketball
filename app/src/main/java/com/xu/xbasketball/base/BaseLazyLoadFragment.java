@@ -23,24 +23,11 @@ import butterknife.Unbinder;
  * Created by Xu on 2017/1/30.
  */
 
-public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fragment implements IBaseView{
+public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fragment implements IBaseView {
 
+    protected final String TAG = "BaseLazyLoadFragment";
     @Inject
     protected T mPresenter;
-
-    private Unbinder unbinder;
-
-    protected FragmentComponent getFragmentComponent() {
-        return DaggerFragmentComponent.builder()
-                .fragmentModule(getFragmentModule())
-                .appComponent(App.getAppComponent())
-                .build();
-    }
-
-    protected FragmentModule getFragmentModule(){
-        return new FragmentModule(this);
-    }
-
     /**
      * 视图是否已经初初始化
      */
@@ -50,10 +37,21 @@ public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fra
      * 标识fragment是否可见
      */
     protected boolean isVisible = false;
-    protected final String TAG = "BaseLazyLoadFragment";
-    private View view;
     protected LayoutInflater inflater;
     protected Context mContext;
+    private Unbinder unbinder;
+    private View view;
+
+    protected FragmentComponent getFragmentComponent() {
+        return DaggerFragmentComponent.builder()
+                .fragmentModule(getFragmentModule())
+                .appComponent(App.getAppComponent())
+                .build();
+    }
+
+    protected FragmentModule getFragmentModule() {
+        return new FragmentModule(this);
+    }
 
     @Nullable
     @Override

@@ -42,6 +42,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    public void viewCreated() {
+        super.viewCreated();
+        initToolbar(toolbar);
+    }
+
+    @Override
     public void initData() {
         mFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), mContext);
         viewpager.setAdapter(mFragmentPagerAdapter);
@@ -67,12 +73,6 @@ public class MainActivity extends BaseActivity {
 //                Log.i("test", gameBeans.get(0).getLeftName());
 //            }
 //        });
-    }
-
-    @Override
-    public void viewCreated() {
-        super.viewCreated();
-        initToolbar(toolbar);
     }
 
     private void initToolbar(Toolbar toolbar) {
