@@ -1,4 +1,4 @@
-package com.xu.xbasketball.ui;
+package com.xu.xbasketball.ui.news.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.TextView;
  *
  * @author Xu
  */
-public class TestFragment extends Fragment {
+public class NewsFragment extends Fragment {
 
     @Nullable
     @Override

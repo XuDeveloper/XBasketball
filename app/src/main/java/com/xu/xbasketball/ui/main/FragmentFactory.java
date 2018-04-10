@@ -2,7 +2,7 @@ package com.xu.xbasketball.ui.main;
 
 import android.support.v4.app.Fragment;
 
-import com.xu.xbasketball.ui.TestFragment;
+import com.xu.xbasketball.ui.news.fragment.NewsFragment;
 import com.xu.xbasketball.ui.TestFragment2;
 import com.xu.xbasketball.ui.dailyscore.fragment.DailyScoreFragment;
 
@@ -26,7 +26,7 @@ public class FragmentFactory {
                     fragment = new DailyScoreFragment();
                     break;
                 case 1:
-                    fragment = new TestFragment();
+                    fragment = new NewsFragment();
                     break;
                 case 2:
                     fragment = new TestFragment2();

@@ -29,6 +29,20 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextBlack16sptv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextGray12sptv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTextGray</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="TextColorPrimary16sptv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
