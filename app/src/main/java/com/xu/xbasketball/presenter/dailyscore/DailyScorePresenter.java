@@ -17,6 +17,8 @@ import javax.inject.Inject;
 
 /**
  * Created by Xu on 2018/3/11.
+ *
+ * @author Xu
  */
 
 public class DailyScorePresenter extends RxPresenter<DailyScoreContract.View> implements DailyScoreContract.Presenter {

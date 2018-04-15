@@ -1,7 +1,10 @@
 package com.xu.xbasketball.model;
 
+import com.xu.xbasketball.model.bean.HupuNewsBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.http.HttpHelper;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 
@@ -21,4 +24,10 @@ public class DataManager implements HttpHelper {
     public Flowable<ScoreBoardBean> getDailyScore(String startTime, String endTime) {
         return mHttpHelper.getDailyScore(startTime, endTime);
     }
+
+    @Override
+    public Flowable<List<HupuNewsBean>> getNews(String client) {
+        return mHttpHelper.getNews(client);
+    }
+
 }

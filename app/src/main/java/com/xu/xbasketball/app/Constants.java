@@ -12,4 +12,6 @@ public class Constants {
 
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";
 
+    public static final String CLIENT = "358239057153472";
+
 }
