@@ -5,10 +5,8 @@ import com.xu.xbasketball.base.IBaseView;
 import com.xu.xbasketball.base.RxPresenter;
 import com.xu.xbasketball.base.contract.news.NewsContract;
 import com.xu.xbasketball.model.DataManager;
-import com.xu.xbasketball.model.bean.HupuNewsBean;
+import com.xu.xbasketball.model.bean.HupuResultBean;
 import com.xu.xbasketball.utils.RxUtil;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,11 +28,11 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
     @Override
     public void getNews(String client) {
         addSubscribe(mDataManager.getNews(client)
-            .compose(RxUtil.<List<HupuNewsBean>>rxSchedulerHelper())
-            .subscribeWith(new BaseSubscriber<List<HupuNewsBean>>() {
+            .compose(RxUtil.<HupuResultBean>rxSchedulerHelper())
+            .subscribeWith(new BaseSubscriber<HupuResultBean>() {
                 @Override
-                public void onNext(List<HupuNewsBean> hupuNewsBeans) {
-                    mView.showNews(hupuNewsBeans);
+                public void onNext(HupuResultBean hupuResultBean) {
+                    mView.showNews(hupuResultBean.getResult().getData());
                 }
 
                 @Override

@@ -19,6 +19,8 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
+ * Created by Xu on 2018/4/7.
+ *
  * @author Xu
  */
 public class DailyScoreFragment extends BaseLazyLoadFragment<DailyScorePresenter> implements DailyScoreContract.View {
@@ -32,14 +34,8 @@ public class DailyScoreFragment extends BaseLazyLoadFragment<DailyScorePresenter
     private LinearLayoutManager mLayoutManager;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_dailyscore;
-    }
-
-    @Override
     protected void initDatas() {
         adapter = new DailyscoreAdapter(mContext);
-        // todo recycleview初始化
         mLayoutManager = new LinearLayoutManager(mContext);
         rvDailyscore.addItemDecoration(new DividerItemDecoration(mContext,
                 DividerItemDecoration.VERTICAL_LIST));
@@ -47,6 +43,11 @@ public class DailyScoreFragment extends BaseLazyLoadFragment<DailyScorePresenter
         rvDailyscore.setLayoutManager(mLayoutManager);
         rvDailyscore.setItemAnimator(new DefaultItemAnimator());
         rvDailyscore.setAdapter(adapter);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_dailyscore;
     }
 
     @Override

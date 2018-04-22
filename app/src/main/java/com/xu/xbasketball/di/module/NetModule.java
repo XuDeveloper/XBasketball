@@ -3,7 +3,10 @@ package com.xu.xbasketball.di.module;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.xu.xbasketball.BuildConfig;
 import com.xu.xbasketball.app.Constants;
+import com.xu.xbasketball.di.qualifier.BasketballScoreUrl;
+import com.xu.xbasketball.di.qualifier.NewsUrl;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
+import com.xu.xbasketball.model.http.api.INewsApi;
 import com.xu.xbasketball.utils.NetUtil;
 
 import java.io.File;
@@ -39,14 +42,28 @@ public class NetModule {
 
     @Singleton
     @Provides
+    @BasketballScoreUrl
     Retrofit provideBasketballScoreRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, IBasketballScoreApi.HOST);
     }
 
     @Singleton
     @Provides
-    IBasketballScoreApi provideBasketballScoreService(Retrofit retrofit) {
+    @NewsUrl
+    Retrofit provideNewsRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, INewsApi.HOST);
+    }
+
+    @Singleton
+    @Provides
+    IBasketballScoreApi provideBasketballScoreService(@BasketballScoreUrl Retrofit retrofit) {
         return retrofit.create(IBasketballScoreApi.class);
+    }
+
+    @Singleton
+    @Provides
+    INewsApi provideNewsService(@NewsUrl Retrofit retrofit) {
+        return retrofit.create(INewsApi.class);
     }
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {

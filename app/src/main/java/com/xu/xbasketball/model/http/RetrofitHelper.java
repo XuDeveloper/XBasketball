@@ -1,7 +1,9 @@
 package com.xu.xbasketball.model.http;
 
+import com.xu.xbasketball.model.bean.HupuResultBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
+import com.xu.xbasketball.model.http.api.INewsApi;
 
 import javax.inject.Inject;
 
@@ -15,13 +17,21 @@ public class RetrofitHelper implements HttpHelper {
 
     private IBasketballScoreApi mBasketballScoreService;
 
+    private INewsApi mNewsService;
+
     @Inject
-    public RetrofitHelper(IBasketballScoreApi mBasketballScoreService) {
+    public RetrofitHelper(IBasketballScoreApi mBasketballScoreService, INewsApi mNewsService) {
         this.mBasketballScoreService = mBasketballScoreService;
+        this.mNewsService = mNewsService;
     }
 
     @Override
     public Flowable<ScoreBoardBean> getDailyScore(String startTime, String endTime) {
         return mBasketballScoreService.getDailyScore(startTime, endTime);
+    }
+
+    @Override
+    public Flowable<HupuResultBean> getNews(String client) {
+        return mNewsService.getNews(client);
     }
 }
