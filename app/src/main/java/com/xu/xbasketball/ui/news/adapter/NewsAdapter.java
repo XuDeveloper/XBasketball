@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.model.bean.HupuNewsBean;
 import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 return;
             }
             holder.tvNewsTitle.setText(newsBean.getTitle());
-            holder.tvNewsTime.setText(newsBean.getUptime());
+            holder.tvNewsTime.setText(DateUtil.getDate(newsBean.getUptime()));
             ImageLoader.load(mContext, newsBean.getImg(), holder.ivNewsPic);
         }
     }
