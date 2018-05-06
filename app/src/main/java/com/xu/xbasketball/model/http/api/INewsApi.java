@@ -24,7 +24,7 @@ public interface INewsApi {
      */
     @GET("nba/getNews?crt=1523456346025&channel=wandoujia" +
             "&sign=c7b787408a9c10a50713996c8566ac1b" +
-            "&time_zone=Asia%2FShanghai" +
+            "&time_zone=Asia%2FShanghai&night=0" +
             "&android_id=3a6d5d1eb7c4f376&entrance=-1")
     Flowable<HupuResultBean> getNews(@Query("client") String client);
 

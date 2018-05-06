@@ -1,5 +1,6 @@
 package com.xu.xbasketball.model.http;
 
+import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
 import com.xu.xbasketball.model.bean.HupuResultBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
@@ -33,5 +34,10 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<HupuResultBean> getNews(String client) {
         return mNewsService.getNews(client);
+    }
+
+    @Override
+    public Flowable<HupuNewsDetailBean> getNewsDetail(String client, String nid) {
+        return mNewsService.getNewsDetail(client, nid);
     }
 }

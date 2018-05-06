@@ -21,6 +21,9 @@ public class DateUtil {
     }
 
     public static String getDate(String second) {
+        if (second == null) {
+            return "";
+        }
         Long lt = Long.parseLong(second) * 1000;
         Date date = new Date(lt);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
