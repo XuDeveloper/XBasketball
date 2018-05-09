@@ -1,21 +1,40 @@
 package com.xu.xbasketball.ui.news.activity;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.base.BaseMVPActivity;
+import com.xu.xbasketball.base.contract.news.NewsDetailContract;
+import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
+import com.xu.xbasketball.presenter.news.NewsDetailPresenter;
 
 /**
  * Created by Xu on 2018/5/6.
  *
  * @author Xu
  */
-public class NewsDetailActivity extends Activity {
+public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> implements NewsDetailContract.View {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+    public int getLayoutId() {
+        return R.layout.activity_detail;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void showNewsDetail(HupuNewsDetailBean hupuNewsDetailBean) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 }
