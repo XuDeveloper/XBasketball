@@ -11,9 +11,11 @@ import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.contract.news.NewsContract;
 import com.xu.xbasketball.model.bean.HupuNewsBean;
 import com.xu.xbasketball.presenter.news.NewsPresenter;
+import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 import com.xu.xbasketball.ui.news.adapter.NewsAdapter;
 import com.xu.xbasketball.widget.DividerItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,9 +35,13 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
     private NewsAdapter adapter;
     private LinearLayoutManager mLayoutManager;
 
+    private List<HupuNewsBean> mList;
+
     @Override
     protected void initDatas() {
+        mList = new ArrayList<>();
         adapter = new NewsAdapter(mContext);
+        swipeRefresh.setColorSchemeResources(R.color.colorAccent);
         mLayoutManager = new LinearLayoutManager(mContext);
         rvNews.addItemDecoration(new DividerItemDecoration(mContext,
                 DividerItemDecoration.VERTICAL_LIST));
@@ -43,6 +49,13 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
         rvNews.setLayoutManager(mLayoutManager);
         rvNews.setItemAnimator(new DefaultItemAnimator());
         rvNews.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                NewsDetailActivity.launch(getContext(), mList.get(position).getNid());
+            }
+        });
     }
 
     @Override
@@ -68,7 +81,9 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
 
     @Override
     public void showNews(List<HupuNewsBean> news) {
-        adapter.updateData(news);
+        mList.clear();
+        mList.addAll(news);
+        adapter.updateData(mList);
     }
 
     @Override

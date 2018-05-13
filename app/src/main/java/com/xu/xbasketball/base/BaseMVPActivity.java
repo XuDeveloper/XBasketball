@@ -14,7 +14,7 @@ import javax.inject.Inject;
 public abstract class BaseMVPActivity<T extends IBasePresenter> extends BaseActivity implements IBaseView {
 
     @Inject
-    T mPresenter;
+    protected T mPresenter;
 
     View view;
 
@@ -33,6 +33,7 @@ public abstract class BaseMVPActivity<T extends IBasePresenter> extends BaseActi
     public void viewCreated() {
         super.viewCreated();
         view = ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
+
         if (mPresenter != null) {
             mPresenter.attach(this);
         }

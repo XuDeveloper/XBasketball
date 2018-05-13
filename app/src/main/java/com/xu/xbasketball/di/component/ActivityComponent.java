@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.xu.xbasketball.di.module.ActivityModule;
 import com.xu.xbasketball.di.scope.ActivityScope;
 import com.xu.xbasketball.ui.main.activity.MainActivity;
+import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 
 import dagger.Component;
 
@@ -18,5 +19,7 @@ public interface ActivityComponent {
     Activity getActivity();
 
     void inject(MainActivity mainActivity);
+
+    void inject(NewsDetailActivity newsDetailActivity);
 
 }

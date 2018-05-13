@@ -74,6 +74,9 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
 
     @Override
     public int getItemCount() {
+        if (list == null) {
+            return 0;
+        }
         return list.size();
     }
 

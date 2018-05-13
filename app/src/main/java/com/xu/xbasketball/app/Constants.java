@@ -14,4 +14,8 @@ public class Constants {
 
     public static final String CLIENT = "358239057153472";
 
+    // -----------------------------Intent-----------------------------
+
+    public static final String NEWS_NID = "news_nid";
+
 }

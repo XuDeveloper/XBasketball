@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xu.xbasketball.R;
@@ -28,6 +29,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private List<HupuNewsBean> list;
     private Context mContext;
+    private OnItemClickListener onItemClickListener;
 
     public NewsAdapter(Context mContext) {
         this.mContext = mContext;
@@ -47,7 +49,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             HupuNewsBean newsBean = list.get(position);
             if (newsBean == null) {
@@ -56,6 +58,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             holder.tvNewsTitle.setText(newsBean.getTitle());
             holder.tvNewsTime.setText(DateUtil.getDate(newsBean.getUptime()));
             ImageLoader.load(mContext, newsBean.getImg(), holder.ivNewsPic);
+            holder.llNews.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(position);
+                }
+            });
         }
     }
 
@@ -75,11 +83,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         @BindView(R.id.tv_news_time)
         TextView tvNewsTime;
 
+        @BindView(R.id.ll_news)
+        LinearLayout llNews;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
 }
