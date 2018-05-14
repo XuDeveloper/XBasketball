@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewStub;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
@@ -25,14 +23,16 @@ import butterknife.BindView;
  */
 public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> implements NewsDetailContract.View {
 
-    @BindView(R.id.btn_news_detail_back)
-    Button btnNewsDetailBack;
+//    @BindView(R.id.btn_news_detail_back)
+//    Button btnNewsDetailBack;
     @BindView(R.id.loading)
     ViewStub loading;
     @BindView(R.id.iv_news_detail_pic)
     ImageView ivNewsDetailPic;
-    @BindView(R.id.tv_news_detail)
-    TextView tvNewsDetail;
+//    @BindView(R.id.tv_news_detail_title)
+//    TextView tvNewsDetailTitle;
+//    @BindView(R.id.tv_news_detail)
+//    TextView tvNewsDetail;
 
     @Override
     public int getLayoutId() {
@@ -56,7 +56,7 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
     @Override
     public void showNewsDetail(HupuNewsDetailBean hupuNewsDetailBean) {
         ImageLoader.load(this, hupuNewsDetailBean.getImg_m(), ivNewsDetailPic);
-        tvNewsDetail.setText(hupuNewsDetailBean.getContent());
+//        tvNewsDetail.setText(hupuNewsDetailBean.getContent());
     }
 
     @Override
@@ -68,6 +68,11 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
     public void hideProgress() {
         loading.setVisibility(View.GONE);
     }
+
+//    @OnClick(R.id.btn_news_detail_back)
+//    public void btn_back() {
+//        finish();
+//    }
 
     public static void launch(Context context, String nid) {
         Intent intent = new Intent(context, NewsDetailActivity.class);

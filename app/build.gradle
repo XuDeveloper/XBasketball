@@ -22,10 +22,10 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:24.2.1'
+//    implementation 'com.android.support:appcompat-v7:24.2.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.android.support:support-v4:24.2.1'
-    implementation 'com.android.support:support-annotations:27.1.1'
+//    implementation 'com.android.support:support-v4:24.2.1'
+//    implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.android.support:design:24.2.1'
     // butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
@@ -47,10 +47,16 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.0.2'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.0.2'
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
+
+    // ------------------------- ui -------------------------
     // circleimageview
     implementation files('libs/circleimageview-2.1.0.aar')
     // materialloadingprogressbar
     implementation files('libs/materialloadingprogressbar-0.5.8.aar')
+    // multiline-collapsingtoolbar
+    implementation 'net.opacapp:multiline-collapsingtoolbar:1.3.1'
+
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support:support-annotations:24.2.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
