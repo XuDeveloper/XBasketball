@@ -9,7 +9,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
         <net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
@@ -17,9 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/news_detail_image_height"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="123456789"
+            app:title="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginEnd="10dp"
+            app:maxLines="3"
+            app:expandedTitleMarginStart="20dp"
+            app:expandedTitleMarginTop="10dp"
             app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -35,7 +37,8 @@
                     android:id="@+id/iv_news_detail_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher"/>
 
             </FrameLayout>
 
@@ -43,8 +46,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                app:layout_collapseMode="pin">
 
             </android.support.v7.widget.Toolbar>
         </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
