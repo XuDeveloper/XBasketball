@@ -6,10 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.contract.news.NewsContract;
 import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.presenter.news.NewsPresenter;
+import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 import com.xu.xbasketball.ui.news.adapter.NewsAdapter;
 import com.xu.xbasketball.widget.DividerItemDecoration;
 
@@ -48,12 +50,13 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
         rvNews.setItemAnimator(new DefaultItemAnimator());
         rvNews.setAdapter(adapter);
 
-//        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                NewsDetailActivity.launch(getContext(), mList.get(position).getNid());
-//            }
-//        });
+        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                NewsDetailActivity.launch(getContext(), mList.get(position).getUrl(),
+                        mList.get(position).getBigImage().get(0) + ".jpg");
+            }
+        });
     }
 
     @Override
@@ -63,11 +66,11 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
 
     @Override
     protected void lazyLoad() {
-        mPresenter.getNews((System.currentTimeMillis() + 30000) + "");
+        mPresenter.getNews(Constants.DEVID);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getNews((System.currentTimeMillis() + 30000) + "");
+                mPresenter.getNews(Constants.DEVID);
             }
         });
     }

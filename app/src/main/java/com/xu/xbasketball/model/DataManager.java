@@ -1,6 +1,5 @@
 package com.xu.xbasketball.model;
 
-import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 import com.xu.xbasketball.model.http.HttpHelper;
@@ -25,13 +24,13 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<TencentNewsResultBean> getNews(String time) {
-        return mHttpHelper.getNews(time);
+    public Flowable<TencentNewsResultBean> getNews(String devid) {
+        return mHttpHelper.getNews(devid);
     }
 
-    @Override
-    public Flowable<HupuNewsDetailBean> getNewsDetail(String client, String nid) {
-        return mHttpHelper.getNewsDetail(client, nid);
-    }
+//    @Override
+//    public Flowable<HupuNewsDetailBean> getNewsDetail(String client, String nid) {
+//        return mHttpHelper.getNewsDetail(client, nid);
+//    }
 
 }

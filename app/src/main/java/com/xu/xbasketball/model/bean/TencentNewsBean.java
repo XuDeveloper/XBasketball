@@ -1,45 +1,104 @@
 package com.xu.xbasketball.model.bean;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
- * Created by zhaoxuzhang on 2018/5/28.
+ * Created by Xu on 2018/5/28.
  *
- * @author zhaoxuzhang
+ * @author Xu
  */
 public class TencentNewsBean {
 
     /**
-     * article_id : 20180528028077
-     * title : 红黑榜：新皇登基？怕是在做梦 格林必获总冠军
-     * pub_time : 2018-05-28T15:28:56+08:00
-     * image : http://inews.gtimg.com/newsapp_bt/0/3743784685/641
-     * tags : ["詹姆斯","骑士队","凯尔特人队","NBA"]
-     * abstract : 腾讯体育讯 北京时间5月28日，詹姆斯在2018年NBA季后赛东部决赛抢七大战中打满48分钟，拿到35分15篮板9助攻2盖帽，帮助骑士87比79击败凯尔特人。这是詹姆斯连续第...
-     * meta : {"source":"腾讯体育","url":"http://sports.qq.com/a/20180528/028077.htm","platform":"web"}
-     * site : sports
-     * timestamp : 1527492536
-     * url : http://sports.qq.com/a/20180528/028077.htm
+     * id : NBA2018052802448400
+     * uinnick : 腾讯新闻
+     * uinname : qqnews
+     * title : 独行侠多种方式提升球队实力 内部挖掘亦成选择
+     * longtitle : 独行侠多种方式提升球队实力 内部挖掘亦成选择
+     * surl : https://view.inews.qq.com/a/NBA2018052802448405?uid=280745397
+     * short_url : https://view.inews.qq.com/a/NBA2018052802448405?uid=280745397
+     * weiboid :
+     * commentid : 2703311249
+     * url : https://view.inews.qq.com/a/NBA2018052802448405?uid=280745397
+     * time : 2018-05-28 13:48:58
+     * timestamp : 1527487790
+     * articletype : 0
+     * media_id :
+     * showType_video : normal
+     * thumbnails_big : []
+     * thumbnails : ["http://inews.gtimg.com/newsapp_ls/0/3743576988_150120/0"]
+     * qishu :
+     * source : 腾讯体育
+     * imagecount : 0
+     * comment :
+     * flag : 3
+     * tag : ["芬利","独行侠队","NBA"]
+     * thumbnails_qqnews : ["http://inews.gtimg.com/newsapp_ls/0/3743576988_150120/0"]
+     * voteId :
+     * voteNum :
+     * abstract :
+     * pushCommentCount : 0
+     * thumbnails_qqnews_photo : ["http://inews.gtimg.com/newsapp_ls/0/3743576988_640330/0"]
+     * showType : three
+     * show_expr : 1
+     * openAds : 1
+     * openAdsText : 1
+     * openAdsComment : 1
+     * openAdsPhotos : 0
+     * adTitle :
+     * gesture : 1
+     * smallWindow : 1
+     * openBigImage : 0
+     * commentPlacementId :
+     * showBigPicStyle : 0
+     * bigPicStyleImg :
+     * FadCid : c18woviomk0mhzx
+     * disableDelete : 0
+     * enableCoverGifForAuto : 0
+     * enableCoverGifForNonAuto : 0
+     * picShowType : 0
+     * show_source : 1
+     * forbidCommentUpDown : 0
+     * disableDeclare : 0
+     * forbidExpr : 1
+     * emojiRelatedSwitch : 1
+     * emojiSwitch : 1
+     * isSensitive : 0
+     * forbidRedPacket : 0
+     * toneScore : 3
+     * qualityScore : 3
+     * bigImage : ["http://inews.gtimg.com/newsapp_ls/0/3743576988_640330/0"]
+     * realChlName :
+     * commentGifSwitch : 1
+     * forbidShowCommentNum : 0
+     * forbidShowReadCount : 0
+     * a_ver : 05
+     * alg_version : 6
+     * up_labelList : []
+     * labelList : [{"type":1,"color":"#ff848e98","nightColor":"#ff93989f","border":0,"displayMode":0,"focusDisplayMode":0,"word":"腾讯体育"}]
+     * comments : 32
+     * likeInfo : 0
+     * readCount : 12083
+     * reasonInfo :
+     * seq_no : 4646487838602481006$$$3-3---0-0-0-0-99-99-0--
+     * article_pos : 4
+     * is_focused : 0
      */
 
-    private String article_id;
+    private String id;
     private String title;
-    private String pub_time;
-    @SerializedName("abstract")
-    private String abstractX;
-    private String image;
-    private int timestamp;
     private String url;
-    private List<String> tags;
+    private String time;
+    private int timestamp;
+    private int readCount;
+    private List<String> bigImage;
 
-    public String getArticle_id() {
-        return article_id;
+    public String getId() {
+        return id;
     }
 
-    public void setArticle_id(String article_id) {
-        this.article_id = article_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -50,28 +109,20 @@ public class TencentNewsBean {
         this.title = title;
     }
 
-    public String getPub_time() {
-        return pub_time;
+    public String getUrl() {
+        return url;
     }
 
-    public void setPub_time(String pub_time) {
-        this.pub_time = pub_time;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getAbstractX() {
-        return abstractX;
+    public String getTime() {
+        return time;
     }
 
-    public void setAbstractX(String abstractX) {
-        this.abstractX = abstractX;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public int getTimestamp() {
@@ -82,19 +133,19 @@ public class TencentNewsBean {
         this.timestamp = timestamp;
     }
 
-    public String getUrl() {
-        return url;
+    public int getReadCount() {
+        return readCount;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setReadCount(int readCount) {
+        this.readCount = readCount;
     }
 
-    public List<String> getTags() {
-        return tags;
+    public List<String> getBigImage() {
+        return bigImage;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setBigImage(List<String> bigImage) {
+        this.bigImage = bigImage;
     }
 }

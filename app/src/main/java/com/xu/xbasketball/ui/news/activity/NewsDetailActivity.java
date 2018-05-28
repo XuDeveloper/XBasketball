@@ -10,7 +10,6 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.news.NewsDetailContract;
-import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.news.NewsDetailPresenter;
 
@@ -47,15 +46,19 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
     @Override
     public void initData() {
         loading.inflate();
-        String nid = getIntent().getStringExtra(Constants.NEWS_NID);
-        if (nid != null) {
-            mPresenter.getNewsDetail(Constants.CLIENT, nid);
+        String url = getIntent().getStringExtra(Constants.NEWS_URL);
+        if (url != null) {
+//            mPresenter.getNewsDetail(Constants.CLIENT, nid);
+        }
+        String img = getIntent().getStringExtra(Constants.NEWS_IMG);
+        if (img != null) {
+            ImageLoader.load(this, img, ivNewsDetailPic);
         }
     }
 
     @Override
-    public void showNewsDetail(HupuNewsDetailBean hupuNewsDetailBean) {
-        ImageLoader.load(this, hupuNewsDetailBean.getImg_m(), ivNewsDetailPic);
+    public void showNewsDetail() {
+//        ImageLoader.load(this, hupuNewsDetailBean.getImg_m(), ivNewsDetailPic);
 //        tvNewsDetail.setText(hupuNewsDetailBean.getContent());
     }
 
@@ -74,9 +77,10 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
 //        finish();
 //    }
 
-    public static void launch(Context context, String nid) {
+    public static void launch(Context context, String url, String img) {
         Intent intent = new Intent(context, NewsDetailActivity.class);
-        intent.putExtra(Constants.NEWS_NID, nid);
+        intent.putExtra(Constants.NEWS_URL, url);
+        intent.putExtra(Constants.NEWS_IMG, img);
         context.startActivity(intent);
     }
 }

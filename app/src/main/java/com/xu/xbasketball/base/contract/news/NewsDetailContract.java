@@ -2,7 +2,6 @@ package com.xu.xbasketball.base.contract.news;
 
 import com.xu.xbasketball.base.IBasePresenter;
 import com.xu.xbasketball.base.IBaseView;
-import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
 
 /**
  * Created by Xu on 2018/5/6.
@@ -14,9 +13,9 @@ public interface NewsDetailContract {
     interface View extends IBaseView {
         /**
          * 显示新闻详情
-         * @param hupuNewsDetailBean
+         * @param
          */
-        void showNewsDetail(HupuNewsDetailBean hupuNewsDetailBean);
+        void showNewsDetail();
     }
 
     interface Presenter extends IBasePresenter<View> {

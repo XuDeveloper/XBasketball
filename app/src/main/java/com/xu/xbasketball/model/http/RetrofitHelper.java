@@ -1,6 +1,5 @@
 package com.xu.xbasketball.model.http;
 
-import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
@@ -33,12 +32,12 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<TencentNewsResultBean> getNews(String time) {
-        return mNewsService.getNews(time);
+    public Flowable<TencentNewsResultBean> getNews(String devid) {
+        return mNewsService.getNews(devid);
     }
 
-    @Override
-    public Flowable<HupuNewsDetailBean> getNewsDetail(String client, String nid) {
-        return null;
-    }
+//    @Override
+//    public Flowable<HupuNewsDetailBean> getNewsDetail(String client, String nid) {
+//        return null;
+//    }
 }

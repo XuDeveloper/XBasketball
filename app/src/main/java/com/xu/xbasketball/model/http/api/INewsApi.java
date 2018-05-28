@@ -7,17 +7,16 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Created by zhaoxuzhang on 2018/5/28.
+ * Created by Xu on 2018/5/28.
  *
- * @author zhaoxuzhang
+ * @author Xu
  */
 public interface INewsApi {
 
-    String HOST = "http://tags.open.qq.com/interface/";
+    String HOST = "https://r.inews.qq.com/";
 
-    @GET("tag/articles.php?callback=tagListCb&p=1&l=20" +
-            "&tag=NBA&oe=gbk&ie=utf-8" +
-            "&source=web&site=sports")
-    Flowable<TencentNewsResultBean> getNews(@Query("_") String time);
+    @GET("getQQNewsUnreadList?last_id=NBA2018052802215600" +
+            "&chlid=news_news_nba")
+    Flowable<TencentNewsResultBean> getNews(@Query("devid") String devid);
 
 }

@@ -1,24 +1,24 @@
 package com.xu.xbasketball.model.bean;
 
+import java.util.List;
+
 /**
- * Created by zhaoxuzhang on 2018/5/28.
+ * Created by Xu on 2018/5/28.
  *
- * @author zhaoxuzhang
+ * @author Xu
  */
 public class TencentNewsResultBean {
 
     /**
-     * response: TencentNewsInnerResponseBean
-     * data: TencentNewsInnerDataBean
+     * newslist: List<TencentNewsBean>
      */
-    private TencentNewsInnerDataBean data;
+    private List<TencentNewsBean> newslist;
 
-    public TencentNewsInnerDataBean getData() {
-        return data;
+    public List<TencentNewsBean> getData() {
+        return newslist;
     }
 
-    public void setData(TencentNewsInnerDataBean data) {
-        this.data = data;
+    public void setData(List<TencentNewsBean> newslist) {
+        this.newslist = newslist;
     }
-
 }

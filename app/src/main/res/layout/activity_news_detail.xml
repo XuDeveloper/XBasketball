@@ -12,14 +12,13 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
+        <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/clp_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/news_detail_image_height"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
+            app:title="题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
             app:contentScrim="?attr/colorPrimary"
-            app:maxLines="3"
             app:expandedTitleMarginStart="20dp"
             app:expandedTitleMarginTop="10dp"
             app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
@@ -49,7 +48,7 @@
                 app:layout_collapseMode="pin">
 
             </android.support.v7.widget.Toolbar>
-        </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
     <ViewStub

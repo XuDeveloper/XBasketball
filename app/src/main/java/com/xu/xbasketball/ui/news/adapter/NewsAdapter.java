@@ -10,10 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xu.xbasketball.R;
-import com.xu.xbasketball.model.bean.HupuNewsBean;
 import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.model.img.ImageLoader;
-import com.xu.xbasketball.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +55,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 return;
             }
             holder.tvNewsTitle.setText(newsBean.getTitle());
-            holder.tvNewsTime.setText(newsBean.getPub_time().split("T")[0]);
-            ImageLoader.load(mContext, newsBean.getImage(), holder.ivNewsPic);
+            holder.tvNewsTime.setText(newsBean.getTime());
+            ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
             holder.llNews.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

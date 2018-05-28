@@ -12,10 +12,12 @@ public class Constants {
 
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";
 
-    public static final String CLIENT = "358239057153472";
+    public static final String DEVID = "3a6d5d1eb7c4f376";
 
     // -----------------------------Intent-----------------------------
 
-    public static final String NEWS_NID = "news_nid";
+    public static final String NEWS_URL = "news_url";
+
+    public static final String NEWS_IMG = "news_img";
 
 }

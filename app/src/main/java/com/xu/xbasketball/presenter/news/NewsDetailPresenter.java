@@ -1,12 +1,8 @@
 package com.xu.xbasketball.presenter.news;
 
-import com.xu.xbasketball.base.BaseSubscriber;
-import com.xu.xbasketball.base.IBaseView;
 import com.xu.xbasketball.base.RxPresenter;
 import com.xu.xbasketball.base.contract.news.NewsDetailContract;
 import com.xu.xbasketball.model.DataManager;
-import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
-import com.xu.xbasketball.utils.RxUtil;
 
 import javax.inject.Inject;
 
@@ -26,19 +22,19 @@ public class NewsDetailPresenter extends RxPresenter<NewsDetailContract.View> im
 
     @Override
     public void getNewsDetail(String client, String nid) {
-        addSubscribe(mDataManager.getNewsDetail(client, nid)
-                .compose(RxUtil.<HupuNewsDetailBean>rxSchedulerHelper())
-                .subscribeWith(new BaseSubscriber<HupuNewsDetailBean>() {
-                    @Override
-                    public void onNext(HupuNewsDetailBean hupuNewsDetailBean) {
-                        mView.showNewsDetail(hupuNewsDetailBean);
-                    }
-
-                    @Override
-                    public IBaseView getBaseView() {
-                        return mView;
-                    }
-                }));
+//        addSubscribe(mDataManager.getNewsDetail(client, nid)
+//                .compose(RxUtil.<HupuNewsDetailBean>rxSchedulerHelper())
+//                .subscribeWith(new BaseSubscriber<HupuNewsDetailBean>() {
+//                    @Override
+//                    public void onNext(HupuNewsDetailBean hupuNewsDetailBean) {
+//                        mView.showNewsDetail(hupuNewsDetailBean);
+//                    }
+//
+//                    @Override
+//                    public IBaseView getBaseView() {
+//                        return mView;
+//                    }
+//                }));
     }
 
 }

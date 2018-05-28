@@ -9,7 +9,6 @@ import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 import com.xu.xbasketball.utils.RxUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,21 +29,16 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
     }
 
     @Override
-    public void getNews(String time) {
-        addSubscribe(mDataManager.getNews(time)
+    public void getNews(String devid) {
+        addSubscribe(mDataManager.getNews(devid)
             .compose(RxUtil.<TencentNewsResultBean>rxSchedulerHelper())
             .subscribeWith(new BaseSubscriber<TencentNewsResultBean>() {
                 @Override
                 public void onNext(TencentNewsResultBean tencentNewsResultBean) {
-                    TencentNewsBean tencentNewsBean = new TencentNewsBean();
-                    tencentNewsBean.setTitle("123333");
-                    tencentNewsBean.setPub_time("2018-05-28T");
-                    List<TencentNewsBean> news = new ArrayList<>();
-                    news.add(tencentNewsBean);
-                    if (tencentNewsResultBean.getData() != null) {
-                        news = tencentNewsResultBean.getData().getArticles();
+                    List<TencentNewsBean> news = tencentNewsResultBean.getData();
+                    if (news != null) {
+                        mView.showNews(news);
                     }
-                    mView.showNews(news);
                 }
 
                 @Override
