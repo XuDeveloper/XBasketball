@@ -1,8 +1,8 @@
 package com.xu.xbasketball.model.http;
 
 import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
-import com.xu.xbasketball.model.bean.HupuResultBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
+import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 
 import io.reactivex.Flowable;
 
@@ -14,7 +14,7 @@ public interface HttpHelper {
 
     Flowable<ScoreBoardBean> getDailyScore(String startTime, String endTime);
 
-    Flowable<HupuResultBean> getNews(String client);
+    Flowable<TencentNewsResultBean> getNews(String time);
 
     Flowable<HupuNewsDetailBean> getNewsDetail(String client, String nid);
 

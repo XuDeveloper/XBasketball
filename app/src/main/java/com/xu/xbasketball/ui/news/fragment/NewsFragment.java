@@ -6,12 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.xu.xbasketball.R;
-import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.contract.news.NewsContract;
-import com.xu.xbasketball.model.bean.HupuNewsBean;
+import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.presenter.news.NewsPresenter;
-import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 import com.xu.xbasketball.ui.news.adapter.NewsAdapter;
 import com.xu.xbasketball.widget.DividerItemDecoration;
 
@@ -35,7 +33,7 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
     private NewsAdapter adapter;
     private LinearLayoutManager mLayoutManager;
 
-    private List<HupuNewsBean> mList;
+    private List<TencentNewsBean> mList;
 
     @Override
     protected void initDatas() {
@@ -50,12 +48,12 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
         rvNews.setItemAnimator(new DefaultItemAnimator());
         rvNews.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                NewsDetailActivity.launch(getContext(), mList.get(position).getNid());
-            }
-        });
+//        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+//                NewsDetailActivity.launch(getContext(), mList.get(position).getNid());
+//            }
+//        });
     }
 
     @Override
@@ -65,11 +63,11 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
 
     @Override
     protected void lazyLoad() {
-        mPresenter.getNews(Constants.CLIENT);
+        mPresenter.getNews((System.currentTimeMillis() + 30000) + "");
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getNews(Constants.CLIENT);
+                mPresenter.getNews((System.currentTimeMillis() + 30000) + "");
             }
         });
     }
@@ -80,7 +78,7 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
     }
 
     @Override
-    public void showNews(List<HupuNewsBean> news) {
+    public void showNews(List<TencentNewsBean> news) {
         mList.clear();
         mList.addAll(news);
         adapter.updateData(mList);

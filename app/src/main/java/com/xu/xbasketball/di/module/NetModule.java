@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.xu.xbasketball.BuildConfig;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.di.qualifier.BasketballScoreUrl;
-import com.xu.xbasketball.di.qualifier.NewsUrl;
+import com.xu.xbasketball.di.qualifier.TencentNewsUrl;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
 import com.xu.xbasketball.model.http.api.INewsApi;
 import com.xu.xbasketball.utils.NetUtil;
@@ -49,8 +49,8 @@ public class NetModule {
 
     @Singleton
     @Provides
-    @NewsUrl
-    Retrofit provideNewsRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+    @TencentNewsUrl
+    Retrofit provideTencentNewsRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, INewsApi.HOST);
     }
 
@@ -62,7 +62,7 @@ public class NetModule {
 
     @Singleton
     @Provides
-    INewsApi provideNewsService(@NewsUrl Retrofit retrofit) {
+    INewsApi provideTencentNewsService(@TencentNewsUrl Retrofit retrofit) {
         return retrofit.create(INewsApi.class);
     }
 

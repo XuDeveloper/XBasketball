@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.model.bean.HupuNewsBean;
+import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.DateUtil;
 
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
  */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
-    private List<HupuNewsBean> list;
+    private List<TencentNewsBean> list;
     private Context mContext;
     private OnItemClickListener onItemClickListener;
 
@@ -36,7 +37,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         this.list = new ArrayList<>();
     }
 
-    public void updateData(List<HupuNewsBean> list) {
+    public void updateData(List<TencentNewsBean> list) {
         this.list = list;
         this.notifyDataSetChanged();
     }
@@ -51,13 +52,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
-            HupuNewsBean newsBean = list.get(position);
+            TencentNewsBean newsBean = list.get(position);
             if (newsBean == null) {
                 return;
             }
             holder.tvNewsTitle.setText(newsBean.getTitle());
-            holder.tvNewsTime.setText(DateUtil.getDate(newsBean.getUptime()));
-            ImageLoader.load(mContext, newsBean.getImg(), holder.ivNewsPic);
+            holder.tvNewsTime.setText(newsBean.getPub_time().split("T")[0]);
+            ImageLoader.load(mContext, newsBean.getImage(), holder.ivNewsPic);
             holder.llNews.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

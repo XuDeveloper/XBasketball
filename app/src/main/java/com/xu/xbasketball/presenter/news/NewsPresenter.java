@@ -5,8 +5,12 @@ import com.xu.xbasketball.base.IBaseView;
 import com.xu.xbasketball.base.RxPresenter;
 import com.xu.xbasketball.base.contract.news.NewsContract;
 import com.xu.xbasketball.model.DataManager;
-import com.xu.xbasketball.model.bean.HupuResultBean;
+import com.xu.xbasketball.model.bean.TencentNewsBean;
+import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 import com.xu.xbasketball.utils.RxUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -26,13 +30,21 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
     }
 
     @Override
-    public void getNews(String client) {
-        addSubscribe(mDataManager.getNews(client)
-            .compose(RxUtil.<HupuResultBean>rxSchedulerHelper())
-            .subscribeWith(new BaseSubscriber<HupuResultBean>() {
+    public void getNews(String time) {
+        addSubscribe(mDataManager.getNews(time)
+            .compose(RxUtil.<TencentNewsResultBean>rxSchedulerHelper())
+            .subscribeWith(new BaseSubscriber<TencentNewsResultBean>() {
                 @Override
-                public void onNext(HupuResultBean hupuResultBean) {
-                    mView.showNews(hupuResultBean.getResult().getData());
+                public void onNext(TencentNewsResultBean tencentNewsResultBean) {
+                    TencentNewsBean tencentNewsBean = new TencentNewsBean();
+                    tencentNewsBean.setTitle("123333");
+                    tencentNewsBean.setPub_time("2018-05-28T");
+                    List<TencentNewsBean> news = new ArrayList<>();
+                    news.add(tencentNewsBean);
+                    if (tencentNewsResultBean.getData() != null) {
+                        news = tencentNewsResultBean.getData().getArticles();
+                    }
+                    mView.showNews(news);
                 }
 
                 @Override

@@ -1,8 +1,8 @@
 package com.xu.xbasketball.model;
 
 import com.xu.xbasketball.model.bean.HupuNewsDetailBean;
-import com.xu.xbasketball.model.bean.HupuResultBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
+import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 import com.xu.xbasketball.model.http.HttpHelper;
 
 import io.reactivex.Flowable;
@@ -25,8 +25,8 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<HupuResultBean> getNews(String client) {
-        return mHttpHelper.getNews(client);
+    public Flowable<TencentNewsResultBean> getNews(String time) {
+        return mHttpHelper.getNews(time);
     }
 
     @Override
