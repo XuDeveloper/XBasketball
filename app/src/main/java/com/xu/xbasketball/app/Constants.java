@@ -20,4 +20,6 @@ public class Constants {
 
     public static final String NEWS_IMG = "news_img";
 
+    public static final String NEWS_TITLE = "news_title";
+
 }

@@ -54,7 +54,8 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
             @Override
             public void onItemClick(int position) {
                 NewsDetailActivity.launch(getContext(), mList.get(position).getUrl(),
-                        mList.get(position).getBigImage().get(0) + ".jpg");
+                        mList.get(position).getBigImage().get(0) + ".jpg",
+                        mList.get(position).getTitle());
             }
         });
     }

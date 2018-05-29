@@ -2,6 +2,8 @@ package com.xu.xbasketball.ui.news.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -28,10 +30,10 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
     ViewStub loading;
     @BindView(R.id.iv_news_detail_pic)
     ImageView ivNewsDetailPic;
-//    @BindView(R.id.tv_news_detail_title)
-//    TextView tvNewsDetailTitle;
-//    @BindView(R.id.tv_news_detail)
-//    TextView tvNewsDetail;
+    @BindView(R.id.clp_toolbar)
+    CollapsingToolbarLayout clpToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     public int getLayoutId() {
@@ -45,7 +47,6 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
 
     @Override
     public void initData() {
-        loading.inflate();
         String url = getIntent().getStringExtra(Constants.NEWS_URL);
         if (url != null) {
 //            mPresenter.getNewsDetail(Constants.CLIENT, nid);
@@ -54,6 +55,16 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
         if (img != null) {
             ImageLoader.load(this, img, ivNewsDetailPic);
         }
+        String title = getIntent().getStringExtra(Constants.NEWS_TITLE);
+        if (title != null) {
+            clpToolbar.setTitle(title);
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -77,10 +88,11 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
 //        finish();
 //    }
 
-    public static void launch(Context context, String url, String img) {
+    public static void launch(Context context, String url, String img, String title) {
         Intent intent = new Intent(context, NewsDetailActivity.class);
         intent.putExtra(Constants.NEWS_URL, url);
         intent.putExtra(Constants.NEWS_IMG, img);
+        intent.putExtra(Constants.NEWS_TITLE, title);
         context.startActivity(intent);
     }
 }
