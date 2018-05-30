@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseMVPActivity;
@@ -24,8 +27,8 @@ import butterknife.BindView;
  */
 public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> implements NewsDetailContract.View {
 
-//    @BindView(R.id.btn_news_detail_back)
-//    Button btnNewsDetailBack;
+    @BindView(R.id.wv_news_detail)
+    WebView wvNewsDetail;
     @BindView(R.id.loading)
     ViewStub loading;
     @BindView(R.id.iv_news_detail_pic)
@@ -65,6 +68,20 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
                 finish();
             }
         });
+
+        WebSettings settings = wvNewsDetail.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setSupportZoom(true);
+        wvNewsDetail.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        wvNewsDetail.loadUrl(url);
     }
 
     @Override

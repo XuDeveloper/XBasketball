@@ -17,12 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/news_detail_image_height"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="20dp"
             app:expandedTitleMarginTop="10dp"
             app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/ic_launcher" />
 
             </FrameLayout>
 
@@ -45,7 +45,9 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin">
+                app:contentInsetStartWithNavigation="0dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@mipmap/btn_back">
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -65,15 +67,26 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nsv_scroller"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:overScrollMode="never"
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="123" />
+            android:layout_height="match_parent">
+
+            <com.tencent.smtt.sdk.WebView
+                android:id="@+id/wv_news_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:isScrollContainer="false"
+                android:overScrollMode="never"
+                android:scrollbars="vertical">
+
+            </com.tencent.smtt.sdk.WebView>
+        </FrameLayout>
+
 
     </android.support.v4.widget.NestedScrollView>
 
