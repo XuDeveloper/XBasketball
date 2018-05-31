@@ -1,8 +1,5 @@
 package com.xu.xbasketball.base;
 
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.xu.xbasketball.utils.SnackBarUtil;
 
 import javax.inject.Inject;
@@ -16,7 +13,7 @@ public abstract class BaseMVPActivity<T extends IBasePresenter> extends BaseActi
     @Inject
     protected T mPresenter;
 
-    View view;
+
 
 //    protected ActivityComponent getActivityComponent(){
 //        return  DaggerActivityComponent.builder()
@@ -32,7 +29,6 @@ public abstract class BaseMVPActivity<T extends IBasePresenter> extends BaseActi
     @Override
     public void viewCreated() {
         super.viewCreated();
-        view = ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
 
         if (mPresenter != null) {
             mPresenter.attach(this);

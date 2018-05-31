@@ -2,7 +2,6 @@ package com.xu.xbasketball.ui.news.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewStub;
@@ -17,6 +16,8 @@ import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.news.NewsDetailContract;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.news.NewsDetailPresenter;
+
+import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
 import butterknife.BindView;
 

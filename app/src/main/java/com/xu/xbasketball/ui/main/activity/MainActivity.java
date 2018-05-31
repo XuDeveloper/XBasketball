@@ -6,21 +6,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.ui.main.adapter.MainFragmentPagerAdapter;
 
-import java.io.IOException;
-
 import butterknife.BindView;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by Xu on 2018/3/30.
@@ -65,25 +57,25 @@ public class MainActivity extends BaseActivity {
         mFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), mContext);
         viewpager.setAdapter(mFragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewpager);
-        OkHttpClient client = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .url("http://tags.open.qq.com/interface/tag/articles.php?callback=tagListCb&p=1&l=20&tag=NBA&oe=gbk&ie=utf-8&source=web&site=sports&_=1527505381421")
-                .get()
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.i("test", e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Log.i("test", "success");
-                String result = response.body().string();
-//                TencentNewsResultBean resultBean = new Gson().fromJson(result, TencentNewsResultBean.class);
-                Log.i("test", result);
-            }
-        });
+//        OkHttpClient client = new OkHttpClient();
+//        final Request request = new Request.Builder()
+//                .url("http://tags.open.qq.com/interface/tag/articles.php?callback=tagListCb&p=1&l=20&tag=NBA&oe=gbk&ie=utf-8&source=web&site=sports&_=1527505381421")
+//                .get()
+//                .build();
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.i("test", e.getMessage());
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                Log.i("test", "success");
+//                String result = response.body().string();
+////                TencentNewsResultBean resultBean = new Gson().fromJson(result, TencentNewsResultBean.class);
+//                Log.i("test", result);
+//            }
+//        });
     }
 
     private void initToolbar(Toolbar toolbar) {

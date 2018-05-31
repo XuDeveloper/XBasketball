@@ -22,9 +22,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.news.activity.NewsDetailActivity">
-
-        </activity>
+        <activity
+            android:name=".ui.news.activity.NewsDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 
 </manifest>
