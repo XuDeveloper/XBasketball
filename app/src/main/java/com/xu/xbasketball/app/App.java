@@ -1,10 +1,8 @@
 package com.xu.xbasketball.app;
 
-import android.app.Activity;
 import android.app.Application;
-import android.util.Log;
 
-import com.tencent.smtt.sdk.QbSdk;
+import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.di.component.AppComponent;
 import com.xu.xbasketball.di.component.DaggerAppComponent;
 import com.xu.xbasketball.di.module.AppModule;
@@ -21,7 +19,7 @@ public class App extends Application {
 
     public static AppComponent appComponent;
     private static App instance;
-    private Set<Activity> allActivities;
+    private Set<BaseActivity> allActivities;
 
     public static synchronized App getInstance() {
         return instance;
@@ -45,27 +43,16 @@ public class App extends Application {
     }
 
     private void init() {
-        QbSdk.initX5Environment(getApplicationContext(), new QbSdk.PreInitCallback() {
-            @Override
-            public void onCoreInitFinished() {
-                Log.i("app", "init finished");
-            }
-
-            @Override
-            public void onViewInitFinished(boolean b) {
-                Log.i("app", "init:" + b);
-            }
-        });
     }
 
-    public void addActivity(Activity activity) {
+    public void addActivity(BaseActivity activity) {
         if (allActivities == null) {
             allActivities = new HashSet<>();
         }
         allActivities.add(activity);
     }
 
-    public void removeActivity(Activity activity) {
+    public void removeActivity(BaseActivity activity) {
         if (allActivities != null) {
             allActivities.remove(activity);
         }

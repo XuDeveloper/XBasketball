@@ -3,19 +3,18 @@ package com.xu.xbasketball.ui.news.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
-import com.tencent.smtt.sdk.WebSettings;
-import com.tencent.smtt.sdk.WebView;
-import com.tencent.smtt.sdk.WebViewClient;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
-import com.xu.xbasketball.base.BaseMVPActivity;
-import com.xu.xbasketball.base.contract.news.NewsDetailContract;
+import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.model.img.ImageLoader;
-import com.xu.xbasketball.presenter.news.NewsDetailPresenter;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
@@ -26,7 +25,7 @@ import butterknife.BindView;
  *
  * @author Xu
  */
-public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> implements NewsDetailContract.View {
+public class NewsDetailActivity extends BaseActivity {
 
     @BindView(R.id.wv_news_detail)
     WebView wvNewsDetail;
@@ -53,7 +52,7 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
     public void initData() {
         String url = getIntent().getStringExtra(Constants.NEWS_URL);
         if (url != null) {
-//            mPresenter.getNewsDetail(Constants.CLIENT, nid);
+            Log.i("Test", url);
         }
         String img = getIntent().getStringExtra(Constants.NEWS_IMG);
         if (img != null) {
@@ -75,6 +74,7 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
         settings.setLoadWithOverviewMode(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
+        settings.setDomStorageEnabled(true);
         wvNewsDetail.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -84,27 +84,6 @@ public class NewsDetailActivity extends BaseMVPActivity<NewsDetailPresenter> imp
         });
         wvNewsDetail.loadUrl(url);
     }
-
-    @Override
-    public void showNewsDetail() {
-//        ImageLoader.load(this, hupuNewsDetailBean.getImg_m(), ivNewsDetailPic);
-//        tvNewsDetail.setText(hupuNewsDetailBean.getContent());
-    }
-
-    @Override
-    public void showProgress() {
-        loading.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        loading.setVisibility(View.GONE);
-    }
-
-//    @OnClick(R.id.btn_news_detail_back)
-//    public void btn_back() {
-//        finish();
-//    }
 
     public static void launch(Context context, String url, String img, String title) {
         Intent intent = new Intent(context, NewsDetailActivity.class);

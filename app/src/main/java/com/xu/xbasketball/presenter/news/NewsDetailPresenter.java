@@ -22,19 +22,7 @@ public class NewsDetailPresenter extends RxPresenter<NewsDetailContract.View> im
 
     @Override
     public void getNewsDetail(String client, String nid) {
-//        addSubscribe(mDataManager.getNewsDetail(client, nid)
-//                .compose(RxUtil.<HupuNewsDetailBean>rxSchedulerHelper())
-//                .subscribeWith(new BaseSubscriber<HupuNewsDetailBean>() {
-//                    @Override
-//                    public void onNext(HupuNewsDetailBean hupuNewsDetailBean) {
-//                        mView.showNewsDetail(hupuNewsDetailBean);
-//                    }
-//
-//                    @Override
-//                    public IBaseView getBaseView() {
-//                        return mView;
-//                    }
-//                }));
+
     }
 
 }
