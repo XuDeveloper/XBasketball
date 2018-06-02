@@ -1,6 +1,7 @@
 package com.xu.xbasketball.model.http;
 
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
+import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 
 import io.reactivex.Flowable;
@@ -15,6 +16,6 @@ public interface HttpHelper {
 
     Flowable<TencentNewsResultBean> getNews(String devid);
 
-//    Flowable<HupuNewsDetailBean> getNewsDetail(String client, String nid);
+    Flowable<SinaPicResultBean> getPics(int page, int num);
 
 }

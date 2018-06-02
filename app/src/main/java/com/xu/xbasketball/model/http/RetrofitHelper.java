@@ -1,9 +1,11 @@
 package com.xu.xbasketball.model.http;
 
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
+import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
 import com.xu.xbasketball.model.http.api.INewsApi;
+import com.xu.xbasketball.model.http.api.IPicApi;
 
 import javax.inject.Inject;
 
@@ -19,11 +21,14 @@ public class RetrofitHelper implements HttpHelper {
 
     private INewsApi mNewsService;
 
+    private IPicApi mPicService;
+
     @Inject
     public RetrofitHelper(IBasketballScoreApi mBasketballScoreService,
-                          INewsApi mNewsService) {
+                          INewsApi mNewsService, IPicApi mPicService) {
         this.mBasketballScoreService = mBasketballScoreService;
         this.mNewsService = mNewsService;
+        this.mPicService = mPicService;
     }
 
     @Override
@@ -36,8 +41,8 @@ public class RetrofitHelper implements HttpHelper {
         return mNewsService.getNews(devid);
     }
 
-//    @Override
-//    public Flowable<HupuNewsDetailBean> getNewsDetail(String client, String nid) {
-//        return null;
-//    }
+    @Override
+    public Flowable<SinaPicResultBean> getPics(int page, int num) {
+        return mPicService.getPics(page, num);
+    }
 }
