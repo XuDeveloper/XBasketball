@@ -15,7 +15,7 @@ public interface IPicApi {
 
     // http://api.slide.news.sina.com.cn/interface/api_album.php?size=img&ch_id=2&sub_ch=k&page=1&num=50
 
-    String host = "http://api.slide.news.sina.com.cn/";
+    String HOST = "http://api.slide.news.sina.com.cn/";
 
     @GET("interface/api_album.php?size=img&ch_id=2&sub_ch=k")
     Flowable<SinaPicResultBean> getPics(@Query("page") int page, @Query("num") int num);
