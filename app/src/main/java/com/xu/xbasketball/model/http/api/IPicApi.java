@@ -7,9 +7,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Created by zhaoxuzhang on 2018/6/2.
+ * Created by Xu on 2018/6/2.
  *
- * @author zhaoxuzhang
+ * @author Xu
  */
 public interface IPicApi {
 

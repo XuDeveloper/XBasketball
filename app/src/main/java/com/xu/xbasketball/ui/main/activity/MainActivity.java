@@ -60,6 +60,8 @@ public class MainActivity extends BaseActivity {
         viewpager.setAdapter(mFragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewpager);
 
+        navigation.getMenu().findItem(R.id.navigation_basketball).setChecked(true);
+
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
