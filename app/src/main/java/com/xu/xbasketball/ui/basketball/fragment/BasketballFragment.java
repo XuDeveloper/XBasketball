@@ -2,11 +2,10 @@ package com.xu.xbasketball.ui.basketball.fragment;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseFragment;
+import com.xu.xbasketball.ui.main.adapter.MainFragmentPagerAdapter;
 
 import butterknife.BindView;
 
@@ -17,17 +16,19 @@ import butterknife.BindView;
  */
 public class BasketballFragment extends BaseFragment {
 
-
-    @BindView(R.id.tb_basketball)
-    Toolbar tbBasketball;
     @BindView(R.id.tl_basketball)
     TabLayout tlBasketball;
     @BindView(R.id.vp_basketball)
     ViewPager vpBasketball;
 
+    private MainFragmentPagerAdapter mFragmentPagerAdapter;
+
     @Override
     public void initData() {
-
+        mFragmentPagerAdapter = new MainFragmentPagerAdapter(
+                getChildFragmentManager(), mContext);
+        vpBasketball.setAdapter(mFragmentPagerAdapter);
+        tlBasketball.setupWithViewPager(vpBasketball);
     }
 
     @Override
@@ -35,22 +36,6 @@ public class BasketballFragment extends BaseFragment {
         return R.layout.fragment_basketball_main;
     }
 
-    private void initToolbar(Toolbar toolbar) {
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-        };
-//        mDrawerToggle.syncState();
-    }
 
 }

@@ -2,17 +2,15 @@ package com.xu.xbasketball.ui.main.activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseActivity;
-import com.xu.xbasketball.ui.main.adapter.MainFragmentPagerAdapter;
+import com.xu.xbasketball.ui.basketball.fragment.BasketballFragment;
 
 import butterknife.BindView;
 
@@ -28,14 +26,11 @@ public class MainActivity extends BaseActivity {
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    @BindView(R.id.tabLayout)
-    TabLayout tabLayout;
-    @BindView(R.id.viewpager)
-    ViewPager viewpager;
     @BindView(R.id.navigation)
     NavigationView navigation;
 
-    private MainFragmentPagerAdapter mFragmentPagerAdapter;
+    private BasketballFragment basketballFragment;
+
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -52,25 +47,30 @@ public class MainActivity extends BaseActivity {
     public void viewCreated() {
         super.viewCreated();
         initToolbar(toolbar);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
+        mDrawerToggle.syncState();
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
     }
 
     @Override
     public void initData() {
-        mFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), mContext);
-        viewpager.setAdapter(mFragmentPagerAdapter);
-        tabLayout.setupWithViewPager(viewpager);
-
         navigation.getMenu().findItem(R.id.navigation_basketball).setChecked(true);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    
+
                 }
                 return false;
             }
         });
+
+        basketballFragment = new BasketballFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fl_main_container, basketballFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
 //        OkHttpClient client = new OkHttpClient();
 //        final Request request = new Request.Builder()
 //                .url("http://tags.open.qq.com/interface/tag/articles.php?callback=tagListCb&p=1&l=20&tag=NBA&oe=gbk&ie=utf-8&source=web&site=sports&_=1527505381421")
@@ -95,19 +95,6 @@ public class MainActivity extends BaseActivity {
     private void initToolbar(Toolbar toolbar) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-        };
-//        mDrawerToggle.syncState();
     }
 
 }

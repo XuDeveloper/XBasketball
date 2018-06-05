@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:toolbarStyle">@style/myToolbarNavigationButtonStyle</item>
+        // ActionBarDrawerToggle设置颜色
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
     <style name="myToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">

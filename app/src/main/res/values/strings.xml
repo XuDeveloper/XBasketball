@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">XBasketball</string>
 
-    <string name="open"></string>
-    <string name="close"></string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
 
     <string name="quarter_four">第4节</string>
     <string name="quarter_time_end">00:00</string>
