@@ -6,15 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:toolbarStyle">@style/myToolbarNavigationButtonStyle</item>
         // ActionBarDrawerToggle设置颜色
         <item name="colorControlNormal">@color/white</item>
-    </style>
-
-    <style name="myToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
-        <item name="android:minWidth">0dp</item>
-        <item name="android:navigationIcon">@mipmap/toolbar_menu</item>
-        <item name="android:scaleType">centerInside</item>
     </style>
 
     <style name="TextAppearance.ExpandedTitle"

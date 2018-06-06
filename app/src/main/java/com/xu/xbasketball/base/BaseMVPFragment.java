@@ -22,7 +22,7 @@ import javax.inject.Inject;
 public abstract class BaseMVPFragment<T extends IBasePresenter> extends BaseFragment implements IBaseView {
 
     @Inject
-    T mPresenter;
+    protected T mPresenter;
 
     View view;
 
