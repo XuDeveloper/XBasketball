@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.model.bean.SinaPicBean;
+import com.xu.xbasketball.model.img.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_news,
+        View v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_pic,
                 parent, false);
         return new ViewHolder(v);
     }
@@ -51,12 +53,21 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
             if (picBean == null) {
                 return;
             }
+            ImageLoader.load(mContext, picBean.getImg_url(), holder.ivNewsPic, R.mipmap.pic_placeholder);
         }
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -69,14 +80,6 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
             ButterKnife.bind(this, itemView);
         }
 
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
     }
 
 }

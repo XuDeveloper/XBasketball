@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:foreground="?attr/selectableItemBackground"
-        app:cardElevation="3dp"
-        app:cardCornerRadius="2dp">
+        app:cardElevation="4dp"
+        app:cardCornerRadius="3dp">
         <ImageView
             android:id="@+id/iv_pic"
             android:scaleType="centerCrop"

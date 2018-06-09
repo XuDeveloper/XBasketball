@@ -10,7 +10,9 @@ import android.view.MenuItem;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseActivity;
+import com.xu.xbasketball.base.BaseFragment;
 import com.xu.xbasketball.ui.basketball.fragment.BasketballFragment;
+import com.xu.xbasketball.ui.pic.fragment.PicFragment;
 
 import butterknife.BindView;
 
@@ -30,6 +32,7 @@ public class MainActivity extends BaseActivity {
     NavigationView navigation;
 
     private BasketballFragment basketballFragment;
+    private PicFragment picFragment;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -54,23 +57,22 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        basketballFragment = new BasketballFragment();
+        picFragment = new PicFragment();
         navigation.getMenu().findItem(R.id.navigation_basketball).setChecked(true);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-
+                    case R.id.navigation_pic:
+                        setTargetFragment(picFragment);
                 }
                 return false;
             }
         });
 
-        basketballFragment = new BasketballFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fl_main_container, basketballFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        setTargetFragment(basketballFragment);
 //        OkHttpClient client = new OkHttpClient();
 //        final Request request = new Request.Builder()
 //                .url("http://tags.open.qq.com/interface/tag/articles.php?callback=tagListCb&p=1&l=20&tag=NBA&oe=gbk&ie=utf-8&source=web&site=sports&_=1527505381421")
@@ -95,6 +97,13 @@ public class MainActivity extends BaseActivity {
     private void initToolbar(Toolbar toolbar) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void setTargetFragment(BaseFragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fl_main_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }
