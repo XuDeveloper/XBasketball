@@ -1,12 +1,15 @@
 package com.xu.xbasketball.ui.pic.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.model.bean.SinaPicBean;
@@ -47,14 +50,47 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         if (holder instanceof ViewHolder) {
             SinaPicBean picBean = list.get(position);
             if (picBean == null) {
                 return;
             }
-            ImageLoader.load(mContext, picBean.getImg_url(), holder.ivNewsPic, R.mipmap.pic_placeholder);
+            if (list.get(holder.getAdapterPosition()).getHeight() > 0) {
+                ViewGroup.LayoutParams lp = holder.ivNewsPic.getLayoutParams();
+                lp.height = list.get(holder.getAdapterPosition()).getHeight();
+            }
+
+            ImageLoader.load(mContext, picBean.getImg_url(), R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_WIDTH / 2) {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        if (list.get(holder.getAdapterPosition()).getHeight() <= 0) {
+                            int width = resource.getWidth();
+                            int height = resource.getHeight();
+                            int realHeight = (App.SCREEN_WIDTH / 2) * height / width;
+                            list.get(holder.getAdapterPosition()).setHeight(realHeight);
+                            ViewGroup.LayoutParams lp = holder.ivNewsPic.getLayoutParams();
+                            lp.height = realHeight;
+                        }
+                    }
+                    holder.ivNewsPic.setImageBitmap(resource);
+                }
+            });
         }
+    }
+
+    /**
+     * 在StaggeredGridLayoutManager瀑布流中,当需要依据图片实际相对高度,不断动态设置ImageView的LayoutParams时,
+     * 会导致快速滑动状态下产生重新排列,重写getItemViewType并设置StaggeredGridLayoutManager.GAP_HANDLING_NONE解决了这个问题，原因目前未知
+     * https://github.com/oxoooo/mr-mantou-android/blob/master/app/src/main/java/ooo/oxo/mr/MainAdapter.java
+     *
+     * @param position
+     * @return
+     */
+    @Override
+    public int getItemViewType(int position) {
+        return Math.round((float) App.SCREEN_WIDTH / (float) list.get(position).getHeight() * 10f);
     }
 
     @Override

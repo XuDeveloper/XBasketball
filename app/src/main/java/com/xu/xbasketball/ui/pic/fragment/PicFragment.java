@@ -36,6 +36,7 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
 
     private int page;
     private int num;
+    private boolean isLoadingMore = false;
 
     @Override
     protected void initInject() {
@@ -50,7 +51,6 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
         num = 40;
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL);
         mStaggeredGridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        //fix issue #52 https://github.com/codeestX/GeekNews/issues/52
         mStaggeredGridLayoutManager.setItemPrefetchEnabled(false);
         rvPic.setLayoutManager(mStaggeredGridLayoutManager);
         rvPic.setAdapter(adapter);
@@ -60,7 +60,22 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                page = 1;
                 mPresenter.getPics(page, num);
+            }
+        });
+
+        rvPic.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int[] visibleItems = mStaggeredGridLayoutManager.findLastVisibleItemPositions(null);
+                int lastItem = Math.max(visibleItems[0],visibleItems[1]);
+                if (lastItem >= adapter.getItemCount() - 1 && !isLoadingMore && dy > 0) {
+                    isLoadingMore = true;
+                    page++;
+                    mPresenter.getPics(page, num);
+                }
             }
         });
     }

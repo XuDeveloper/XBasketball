@@ -14,6 +14,7 @@ public class SinaPicBean {
 
     private int id;
     private String img_url;
+    private int height;
 
     public int getId() {
         return id;
@@ -29,5 +30,13 @@ public class SinaPicBean {
 
     public void setImg_url(String img_url) {
         this.img_url = img_url;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

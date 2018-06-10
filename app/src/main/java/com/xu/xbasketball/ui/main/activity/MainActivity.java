@@ -67,7 +67,18 @@ public class MainActivity extends BaseActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_pic:
                         setTargetFragment(picFragment);
+                        break;
+                    case R.id.navigation_basketball:
+                        setTargetFragment(basketballFragment);
+                        break;
                 }
+                item.setChecked(true);
+                if (item.getTitle().equals("首页")) {
+                    toolbar.setTitle("XBasketball");
+                } else {
+                    toolbar.setTitle("篮球" + item.getTitle());
+                }
+                mDrawerLayout.closeDrawers();
                 return false;
             }
         });
