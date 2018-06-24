@@ -5,6 +5,7 @@ import com.xu.xbasketball.di.module.AppModule;
 import com.xu.xbasketball.di.module.NetModule;
 import com.xu.xbasketball.model.DataManager;
 import com.xu.xbasketball.model.http.RetrofitHelper;
+import com.xu.xbasketball.model.prefs.PreferencesHelperImpl;
 
 import javax.inject.Singleton;
 
@@ -24,5 +25,7 @@ public interface AppComponent {
     DataManager getDataManager();
 
     RetrofitHelper retrofitHelper();
+
+    PreferencesHelperImpl preferencesHelper();
 
 }

@@ -4,6 +4,8 @@ import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.model.DataManager;
 import com.xu.xbasketball.model.http.HttpHelper;
 import com.xu.xbasketball.model.http.RetrofitHelper;
+import com.xu.xbasketball.model.prefs.PreferencesHelper;
+import com.xu.xbasketball.model.prefs.PreferencesHelperImpl;
 
 import javax.inject.Singleton;
 
@@ -40,4 +42,9 @@ public class AppModule {
         return new DataManager(httpHelper);
     }
 
+    @Provides
+    @Singleton
+    PreferencesHelper providePreferencesHelper(PreferencesHelperImpl preferencesHelperImpl) {
+        return preferencesHelperImpl;
+    }
 }
