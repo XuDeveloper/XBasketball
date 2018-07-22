@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.xu.xbasketball.app.App;
 
 /**
  * Created by Xu on 2018/4/6.
@@ -22,15 +23,31 @@ public class ImageLoader {
     }
 
     public static void load(Context context, String url, ImageView iv) {
-        Glide.with(context).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
+        if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
+            Glide.with(context).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
+        }
     }
 
     public static void load(Context context, String url, ImageView iv, int placeholder) {
-        Glide.with(context).load(url).placeholder(placeholder).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
+        if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
+            Glide.with(context).load(url).placeholder(placeholder).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
+        }
     }
 
     public static void load(Context context, String url, int placeholder, SimpleTarget simpleTarget) {
-        Glide.with(context).load(url).asBitmap().placeholder(placeholder).fitCenter().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(simpleTarget);
+        if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
+            Glide.with(context).load(url).asBitmap().placeholder(placeholder).fitCenter().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(simpleTarget);
+        }
+    }
+
+    /**
+     * 不缓存，直接加载图片
+     * @param context
+     * @param url
+     * @param iv
+     */
+    public static void loadNoCache(Context context, String url, ImageView iv) {
+        Glide.with(context).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.NONE).into(iv);
     }
 
 }

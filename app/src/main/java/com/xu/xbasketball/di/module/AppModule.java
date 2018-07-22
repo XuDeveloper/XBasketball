@@ -38,13 +38,14 @@ public class AppModule {
 
     @Provides
     @Singleton
-    DataManager provideDataManager(HttpHelper httpHelper) {
-        return new DataManager(httpHelper);
+    PreferencesHelper providePreferencesHelper(PreferencesHelperImpl preferencesHelperImpl) {
+        return preferencesHelperImpl;
     }
 
     @Provides
     @Singleton
-    PreferencesHelper providePreferencesHelper(PreferencesHelperImpl preferencesHelperImpl) {
-        return preferencesHelperImpl;
+    DataManager provideDataManager(HttpHelper httpHelper, PreferencesHelper preferencesHelper) {
+        return new DataManager(httpHelper, preferencesHelper);
     }
+
 }

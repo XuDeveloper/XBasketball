@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.xu.xbasketball.di.module.FragmentModule;
 import com.xu.xbasketball.di.scope.FragmentScope;
 import com.xu.xbasketball.ui.dailyscore.fragment.DailyScoreFragment;
+import com.xu.xbasketball.ui.main.fragment.SettingFragment;
 import com.xu.xbasketball.ui.news.fragment.NewsFragment;
 import com.xu.xbasketball.ui.pic.fragment.PicFragment;
 
@@ -25,5 +26,7 @@ public interface FragmentComponent {
     void inject(NewsFragment newsFragment);
 
     void inject(PicFragment picFragment);
+
+    void inject(SettingFragment settingFragment);
 
 }

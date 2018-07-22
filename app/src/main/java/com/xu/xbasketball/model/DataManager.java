@@ -4,6 +4,7 @@ import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 import com.xu.xbasketball.model.http.HttpHelper;
+import com.xu.xbasketball.model.prefs.PreferencesHelper;
 
 import io.reactivex.Flowable;
 
@@ -11,12 +12,14 @@ import io.reactivex.Flowable;
  * Created by Xu on 2018/3/25.
  */
 
-public class DataManager implements HttpHelper {
+public class DataManager implements HttpHelper, PreferencesHelper {
 
     HttpHelper mHttpHelper;
+    PreferencesHelper mPreferencesHelper;
 
-    public DataManager(HttpHelper mHttpHelper) {
+    public DataManager(HttpHelper mHttpHelper, PreferencesHelper mPreferencesHelper) {
         this.mHttpHelper = mHttpHelper;
+        this.mPreferencesHelper = mPreferencesHelper;
     }
 
     @Override
@@ -34,4 +37,13 @@ public class DataManager implements HttpHelper {
         return mHttpHelper.getPics(page, num);
     }
 
+    @Override
+    public boolean getNoImageState() {
+        return mPreferencesHelper.getNoImageState();
+    }
+
+    @Override
+    public void setNoImageState(boolean state) {
+        mPreferencesHelper.setNoImageState(state);
+    }
 }
