@@ -12,7 +12,10 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.base.BaseFragment;
 import com.xu.xbasketball.ui.basketball.fragment.BasketballFragment;
+import com.xu.xbasketball.ui.main.fragment.SettingFragment;
 import com.xu.xbasketball.ui.pic.fragment.PicFragment;
+
+import java.util.Set;
 
 import butterknife.BindView;
 
@@ -33,6 +36,7 @@ public class MainActivity extends BaseActivity {
 
     private BasketballFragment basketballFragment;
     private PicFragment picFragment;
+    private SettingFragment settingFragment;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -59,6 +63,7 @@ public class MainActivity extends BaseActivity {
     public void initData() {
         basketballFragment = new BasketballFragment();
         picFragment = new PicFragment();
+        settingFragment = new SettingFragment();
         navigation.getMenu().findItem(R.id.navigation_basketball).setChecked(true);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -70,6 +75,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.navigation_basketball:
                         setTargetFragment(basketballFragment);
+                        break;
+                    case R.id.navigation_setting:
+                        setTargetFragment(settingFragment);
                         break;
                 }
                 item.setChecked(true);
