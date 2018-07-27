@@ -64,6 +64,7 @@ public class MainActivity extends BaseActivity {
         basketballFragment = new BasketballFragment();
         picFragment = new PicFragment();
         settingFragment = new SettingFragment();
+
         navigation.getMenu().findItem(R.id.navigation_basketball).setChecked(true);
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -83,6 +84,8 @@ public class MainActivity extends BaseActivity {
                 item.setChecked(true);
                 if (item.getTitle().equals("首页")) {
                     toolbar.setTitle("XBasketball");
+                } else if (item.getTitle().equals("设置")) {
+                    toolbar.setTitle("系统设置");
                 } else {
                     toolbar.setTitle("篮球" + item.getTitle());
                 }

@@ -10,7 +10,6 @@ import com.xu.xbasketball.presenter.main.SettingPresenter;
  */
 public class SettingFragment extends BaseMVPFragment<SettingPresenter> implements SettingContract.View {
 
-
     @Override
     protected void initInject() {
         getFragmentComponent().inject(this);

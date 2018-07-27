@@ -23,8 +23,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:padding="12dp"
                 android:src="@mipmap/ic_cache" />
 
@@ -34,9 +34,10 @@
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:text="自动缓存"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
 
-            <android.support.v7.widget.AppCompatCheckBox
+            <android.support.v7.widget.SwitchCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
