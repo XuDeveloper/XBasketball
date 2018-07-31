@@ -34,6 +34,7 @@ public class ImageLoader {
         }
     }
 
+    // todo 加载图片优化
     public static void load(Context context, String url, int placeholder, SimpleTarget simpleTarget) {
         if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
             Glide.with(context).load(url).asBitmap().placeholder(placeholder).fitCenter().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(simpleTarget);
