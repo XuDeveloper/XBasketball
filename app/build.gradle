@@ -40,6 +40,7 @@ dependencies {
     implementation rootProject.ext.dependencies["retrofit"]
     implementation rootProject.ext.dependencies["okhttp"]
     implementation rootProject.ext.dependencies["okhttp3:logging-interceptor"]
+    implementation rootProject.ext.dependencies["jsoup"]
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxjava2-adapter"]
     implementation rootProject.ext.dependencies["rxandroid"]
