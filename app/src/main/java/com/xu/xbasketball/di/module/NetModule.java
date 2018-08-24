@@ -4,9 +4,11 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.xu.xbasketball.BuildConfig;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.di.qualifier.BasketballScoreUrl;
+import com.xu.xbasketball.di.qualifier.CourtUrl;
 import com.xu.xbasketball.di.qualifier.NewsUrl;
 import com.xu.xbasketball.di.qualifier.PicUrl;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
+import com.xu.xbasketball.model.http.api.ICourtApi;
 import com.xu.xbasketball.model.http.api.INewsApi;
 import com.xu.xbasketball.model.http.api.IPicApi;
 import com.xu.xbasketball.utils.NetUtil;
@@ -65,6 +67,13 @@ public class NetModule {
 
     @Singleton
     @Provides
+    @CourtUrl
+    Retrofit provideCourtArticlesRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, ICourtApi.HOST);
+    }
+
+    @Singleton
+    @Provides
     IBasketballScoreApi provideBasketballScoreService(@BasketballScoreUrl Retrofit retrofit) {
         return retrofit.create(IBasketballScoreApi.class);
     }
@@ -79,6 +88,12 @@ public class NetModule {
     @Provides
     IPicApi providePicService(@PicUrl Retrofit retrofit) {
         return retrofit.create(IPicApi.class);
+    }
+
+    @Singleton
+    @Provides
+    ICourtApi provideCourtArticlesService(@PicUrl Retrofit retrofit) {
+        return retrofit.create(ICourtApi.class);
     }
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {

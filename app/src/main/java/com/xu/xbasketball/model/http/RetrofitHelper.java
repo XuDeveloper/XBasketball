@@ -4,12 +4,14 @@ import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
+import com.xu.xbasketball.model.http.api.ICourtApi;
 import com.xu.xbasketball.model.http.api.INewsApi;
 import com.xu.xbasketball.model.http.api.IPicApi;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import okhttp3.ResponseBody;
 
 /**
  * Created by Xu on 2018/3/25.
@@ -23,12 +25,15 @@ public class RetrofitHelper implements HttpHelper {
 
     private IPicApi mPicService;
 
+    private ICourtApi mCourtArticlesService;
+
     @Inject
     public RetrofitHelper(IBasketballScoreApi mBasketballScoreService,
-                          INewsApi mNewsService, IPicApi mPicService) {
+                          INewsApi mNewsService, IPicApi mPicService, ICourtApi mCourtArticlesService) {
         this.mBasketballScoreService = mBasketballScoreService;
         this.mNewsService = mNewsService;
         this.mPicService = mPicService;
+        this.mCourtArticlesService = mCourtArticlesService;
     }
 
     @Override
@@ -44,5 +49,10 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<SinaPicResultBean> getPics(int page, int num) {
         return mPicService.getPics(page, num);
+    }
+
+    @Override
+    public Flowable<ResponseBody> getCourtArticles(int page) {
+        return mCourtArticlesService.getCourtArticles(page);
     }
 }

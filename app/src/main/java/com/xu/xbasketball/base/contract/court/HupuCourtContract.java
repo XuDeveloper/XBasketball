@@ -12,10 +12,10 @@ import java.util.List;
 public interface HupuCourtContract {
 
     interface View extends IBaseView {
-        void showContent(List<HupuCourtBean> data);
+        void showCourtArticles(List<HupuCourtBean> data);
     }
 
     interface Presenter extends IBasePresenter<View> {
-        void getContent(int page);
+        void getCourtArticles(int page);
     }
 }

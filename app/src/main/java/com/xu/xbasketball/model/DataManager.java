@@ -7,6 +7,7 @@ import com.xu.xbasketball.model.http.HttpHelper;
 import com.xu.xbasketball.model.prefs.PreferencesHelper;
 
 import io.reactivex.Flowable;
+import okhttp3.ResponseBody;
 
 /**
  * Created by Xu on 2018/3/25.
@@ -35,6 +36,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<SinaPicResultBean> getPics(int page, int num) {
         return mHttpHelper.getPics(page, num);
+    }
+
+    @Override
+    public Flowable<ResponseBody> getCourtArticles(int page) {
+        return mHttpHelper.getCourtArticles(page);
     }
 
     @Override

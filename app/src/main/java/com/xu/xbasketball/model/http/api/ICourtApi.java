@@ -10,9 +10,9 @@ import retrofit2.http.Path;
  */
 public interface ICourtApi {
 
-    String HOST = "https://bbs.hupu.com/";
+    String HOST = "https://m.hupu.com/bbs/";
 
-    @GET("nba-{page}")
-    Flowable<ResponseBody> getContent(@Path("page") int page);
+    @GET("130-{page}")
+    Flowable<ResponseBody> getCourtArticles(@Path("page") int page);
 
 }
