@@ -6,7 +6,8 @@ package com.xu.xbasketball.model.bean;
 public class HupuCourtBean {
 
     private String title;
-    private String name;
+    private String source;
+    private String url;
     private String time;
 
     public String getTitle() {
@@ -17,12 +18,20 @@ public class HupuCourtBean {
         this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public String getSource() {
+        return source;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTime() {

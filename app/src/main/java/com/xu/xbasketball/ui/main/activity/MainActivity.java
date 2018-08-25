@@ -13,6 +13,7 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.base.BaseFragment;
 import com.xu.xbasketball.ui.basketball.fragment.BasketballFragment;
+import com.xu.xbasketball.ui.court.fragment.CourtFragment;
 import com.xu.xbasketball.ui.main.fragment.SettingFragment;
 import com.xu.xbasketball.ui.pic.fragment.PicFragment;
 
@@ -107,37 +108,29 @@ public class MainActivity extends BaseActivity {
         });
 
         setTargetFragment(basketballFragment);
-        OkHttpClient client = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .url("https://m.hupu.com/bbs/130")
-                .get()
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.i("test", e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Log.i("test", "success1");
-                String result = response.body().string();
-//                Log.i("test", result);
-//                TencentNewsResultBean resultBean = new Gson().fromJson(result, TencentNewsResultBean.class);
-                Document document = Jsoup.parse(result);
-//                Log.i("test", "document: " + document);
-                Element parent = document.select("div.common-list.news-list").select("ul").first();
-                Elements list = parent.children();
-//                Elements data = list.children();
-                Log.i("test", "" + list.size());
-                for (Element e: list) {
-//                    Log.i("test", "result: " + e.text() + "\n");
-                }
-//                for (Element e : elements) {
-//                    Log.i("test", e.data());
-//                }
-            }
-        });
+//        OkHttpClient client = new OkHttpClient();
+//        final Request request = new Request.Builder()
+//                .url("https://m.hupu.com/bbs/130")
+//                .get()
+//                .build();
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.i("test", e.getMessage());
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                Log.i("test", "success1");
+//                String result = response.body().string();
+////                Log.i("test", result);
+////                TencentNewsResultBean resultBean = new Gson().fromJson(result, TencentNewsResultBean.class);
+//
+////                for (Element e : elements) {
+////                    Log.i("test", e.data());
+////                }
+//            }
+//        });
     }
 
     private void initToolbar(Toolbar toolbar) {

@@ -92,7 +92,7 @@ public class NetModule {
 
     @Singleton
     @Provides
-    ICourtApi provideCourtArticlesService(@PicUrl Retrofit retrofit) {
+    ICourtApi provideCourtArticlesService(@CourtUrl Retrofit retrofit) {
         return retrofit.create(ICourtApi.class);
     }
 
