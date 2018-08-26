@@ -61,6 +61,8 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
             @Override
             public void onRefresh() {
                 page = 1;
+                isLoadingMore = false;
+                mList.clear();
                 mPresenter.getPics(page, num);
             }
         });
@@ -87,9 +89,9 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
 
     @Override
     public void showPics(List<SinaPicBean> pics) {
-        mList.clear();
         mList.addAll(pics);
         adapter.updateData(mList);
+        isLoadingMore = false;
     }
 
     @Override

@@ -5,14 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.model.bean.HupuCourtBean;
-import com.xu.xbasketball.model.bean.TencentNewsBean;
-import com.xu.xbasketball.model.img.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +34,10 @@ public class CourtAdapter extends RecyclerView.Adapter<CourtAdapter.ViewHolder> 
     }
 
     public void updateData(List<HupuCourtBean> list) {
+        // RecyclerView遇到Inconsistency detected崩溃
+        notifyItemRangeRemoved(0, this.list.size());
         this.list = list;
+        notifyItemRangeInserted(0, this.list.size());
         this.notifyDataSetChanged();
     }
 
