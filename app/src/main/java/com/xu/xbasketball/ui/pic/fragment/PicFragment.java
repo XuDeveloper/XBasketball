@@ -8,6 +8,7 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseMVPFragment;
 import com.xu.xbasketball.base.contract.pic.PicContract;
 import com.xu.xbasketball.model.bean.SinaPicBean;
+import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.pic.PicPresenter;
 import com.xu.xbasketball.ui.pic.adapter.PicAdapter;
 
@@ -77,6 +78,20 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
                     isLoadingMore = true;
                     page++;
                     mPresenter.getPics(page, num);
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                switch (newState) {
+                    case RecyclerView.SCROLL_STATE_IDLE:
+                        ImageLoader.resumeImageRequests(mContext);
+                        break;
+                    case RecyclerView.SCROLL_STATE_DRAGGING:
+                    case RecyclerView.SCROLL_STATE_SETTLING:
+                        ImageLoader.pauseImageRequests(mContext);
+                        break;
                 }
             }
         });

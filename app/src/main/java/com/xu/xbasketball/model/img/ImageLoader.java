@@ -51,4 +51,12 @@ public class ImageLoader {
         Glide.with(context).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.NONE).into(iv);
     }
 
+    public static void pauseImageRequests(Context context) {
+        Glide.with(context).pauseRequests();
+    }
+
+    public static void resumeImageRequests(Context context) {
+        Glide.with(context).resumeRequests();
+    }
+
 }

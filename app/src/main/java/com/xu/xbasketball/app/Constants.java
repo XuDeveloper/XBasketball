@@ -22,6 +22,10 @@ public class Constants {
 
     public static final String NEWS_TITLE = "news_title";
 
+    public static final String COURT_URL = "court_url";
+
+    public static final String COURT_TITLE = "court_title";
+
     // -----------------------------Preferences-----------------------------
 
     public static final String SP_NO_IMAGE = "no_image";

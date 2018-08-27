@@ -34,10 +34,7 @@ public class CourtAdapter extends RecyclerView.Adapter<CourtAdapter.ViewHolder> 
     }
 
     public void updateData(List<HupuCourtBean> list) {
-        // RecyclerView遇到Inconsistency detected崩溃
-        notifyItemRangeRemoved(0, this.list.size());
         this.list = list;
-        notifyItemRangeInserted(0, this.list.size());
         this.notifyDataSetChanged();
     }
 

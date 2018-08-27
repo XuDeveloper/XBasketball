@@ -10,7 +10,9 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.contract.court.HupuCourtContract;
 import com.xu.xbasketball.model.bean.HupuCourtBean;
+import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.court.HupuCourtPresenter;
+import com.xu.xbasketball.ui.court.activity.CourtDetailActivity;
 import com.xu.xbasketball.ui.court.adapter.CourtAdapter;
 import com.xu.xbasketball.widget.DividerItemDecoration;
 
@@ -59,9 +61,8 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
         adapter.setOnItemClickListener(new CourtAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-//                NewsDetailActivity.launch(getContext(), mList.get(position).getUrl(),
-//                        mList.get(position).getBigImage().get(0) + ".jpg",
-//                        mList.get(position).getTitle());
+                CourtDetailActivity.launch(getContext(), "https:" + mList.get(position).getUrl(),
+                        mList.get(position).getTitle());
             }
         });
     }
@@ -89,13 +90,7 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int lastItem = mLayoutManager.findLastCompletelyVisibleItemPosition();
-//                Log.i("test", "lastItem: " + lastItem);
-//                Log.i("test", "itemcount:" + adapter.getItemCount());
-//                Log.i("test", "dy: " + dy);
-                Log.i("test", "isLoadingMore: " + isLoadingMore);
-                Log.i("test", "result: " + (lastItem >= adapter.getItemCount() - 1));
                 if (lastItem >= adapter.getItemCount() - 1 && !isLoadingMore) {
-                    Log.i("test", "loading more");
                     isLoadingMore = true;
                     page++;
                     mPresenter.getCourtArticles(page);
