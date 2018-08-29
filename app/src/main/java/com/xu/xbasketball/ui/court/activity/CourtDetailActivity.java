@@ -10,11 +10,19 @@ import android.view.ViewStub;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
-import com.xu.xbasketball.base.BaseActivity;
+import com.xu.xbasketball.base.BaseMVPActivity;
+import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
+import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
+import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
 
+
+import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
+import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import butterknife.BindView;
 
@@ -23,14 +31,16 @@ import butterknife.BindView;
  *
  * @author Xu
  */
-public class CourtDetailActivity extends BaseActivity {
+public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresenter> implements HupuCourtDetailContract.View {
 
-    @BindView(R.id.wv_court_detail)
-    WebView wvCourtDetail;
+    @BindView(R.id.htv_court_detail_content)
+    HtmlTextView htvCourtDetail;
     @BindView(R.id.loading)
     ViewStub loading;
     @BindView(R.id.clp_toolbar)
     CollapsingToolbarLayout clpToolbar;
+    @BindView(R.id.iv_court_detail_pic)
+    ImageView ivCourtDetailPic;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -47,10 +57,10 @@ public class CourtDetailActivity extends BaseActivity {
     @Override
     public void initData() {
         String url = getIntent().getStringExtra(Constants.COURT_URL);
-        String title = getIntent().getStringExtra(Constants.COURT_TITLE);
-        if (title != null) {
-            clpToolbar.setTitle(title);
-        }
+
+        String detail = url.split("/")[url.split("/").length - 1];
+//        Log.i("test", "url:" + url + ", detail: " + detail);
+        mPresenter.getCourtArticleDetail(detail);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,28 +68,28 @@ public class CourtDetailActivity extends BaseActivity {
             }
         });
 
-        WebSettings settings = wvCourtDetail.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setSupportZoom(true);
-        settings.setDomStorageEnabled(true);
-        wvCourtDetail.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
-        if (url != null) {
-            wvCourtDetail.loadUrl(url);
-        }
     }
 
-    public static void launch(Context context, String url, String title) {
+    @Override
+    public void showCourtArticleDetail(HupuCourtDetailBean data) {
+        clpToolbar.setTitle(data.getTitle());
+        htvCourtDetail.setHtml(data.getContent(), new HtmlHttpImageGetter(htvCourtDetail));
+        ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
+    }
+
+    @Override
+    public void showProgress() {
+        loading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        loading.setVisibility(View.GONE);
+    }
+
+    public static void launch(Context context, String url) {
         Intent intent = new Intent(context, CourtDetailActivity.class);
         intent.putExtra(Constants.COURT_URL, url);
-        intent.putExtra(Constants.COURT_TITLE, title);
         context.startActivity(intent);
     }
 }

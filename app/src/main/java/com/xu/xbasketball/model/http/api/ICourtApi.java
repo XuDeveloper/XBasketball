@@ -1,5 +1,7 @@
 package com.xu.xbasketball.model.http.api;
 
+import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
+
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
@@ -14,5 +16,8 @@ public interface ICourtApi {
 
     @GET("130-{page}")
     Flowable<ResponseBody> getCourtArticles(@Path("page") int page);
+
+    @GET("{detail}")
+    Flowable<ResponseBody> getCourtArticleDetail(@Path("detail") String detail);
 
 }

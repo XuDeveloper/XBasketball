@@ -21,4 +21,6 @@ public interface HttpHelper {
 
     Flowable<ResponseBody> getCourtArticles(int page);
 
+    Flowable<ResponseBody> getCourtArticleDetail(String detail);
+
 }

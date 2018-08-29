@@ -108,9 +108,10 @@ public class MainActivity extends BaseActivity {
         });
 
         setTargetFragment(basketballFragment);
+
 //        OkHttpClient client = new OkHttpClient();
 //        final Request request = new Request.Builder()
-//                .url("https://m.hupu.com/bbs/130")
+//                .url("https://m.hupu.com/bbs/23371913.html")
 //                .get()
 //                .build();
 //        client.newCall(request).enqueue(new Callback() {
@@ -123,12 +124,7 @@ public class MainActivity extends BaseActivity {
 //            public void onResponse(Call call, Response response) throws IOException {
 //                Log.i("test", "success1");
 //                String result = response.body().string();
-////                Log.i("test", result);
-////                TencentNewsResultBean resultBean = new Gson().fromJson(result, TencentNewsResultBean.class);
 //
-////                for (Element e : elements) {
-////                    Log.i("test", e.data());
-////                }
 //            }
 //        });
     }

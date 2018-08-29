@@ -61,8 +61,7 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
         adapter.setOnItemClickListener(new CourtAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                CourtDetailActivity.launch(getContext(), "https:" + mList.get(position).getUrl(),
-                        mList.get(position).getTitle());
+                CourtDetailActivity.launch(getContext(), "https:" + mList.get(position).getUrl());
             }
         });
     }

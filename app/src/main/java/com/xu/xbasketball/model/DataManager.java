@@ -44,6 +44,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
+    public Flowable<ResponseBody> getCourtArticleDetail(String detail) {
+        return mHttpHelper.getCourtArticleDetail(detail);
+    }
+
+    @Override
     public boolean getNoImageState() {
         return mPreferencesHelper.getNoImageState();
     }

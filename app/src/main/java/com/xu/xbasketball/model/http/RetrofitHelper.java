@@ -55,4 +55,9 @@ public class RetrofitHelper implements HttpHelper {
     public Flowable<ResponseBody> getCourtArticles(int page) {
         return mCourtArticlesService.getCourtArticles(page);
     }
+
+    @Override
+    public Flowable<ResponseBody> getCourtArticleDetail(String detail) {
+        return mCourtArticlesService.getCourtArticleDetail(detail);
+    }
 }

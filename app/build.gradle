@@ -51,6 +51,7 @@ dependencies {
     compileOnly rootProject.ext.dependencies["annotation"]
     implementation files(rootProject.ext.dependencies["circleimageview"])
     implementation files(rootProject.ext.dependencies["materialloadingprogressbar"])
+    implementation rootProject.ext.dependencies["html-textview"]
     implementation(rootProject.ext.dependencies["multiline-collapsingtoolbar"]) {
         exclude group: 'com.android.support'
     }

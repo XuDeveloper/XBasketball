@@ -46,7 +46,6 @@ public class HupuCourtPresenter extends RxPresenter<HupuCourtContract.View> impl
                             Document document = Jsoup.parse(responseBody.string());
                             Element parent = document.select("div.common-list.news-list").select("ul").first();
                             Elements children = parent.children();
-                            Log.i("test", "" + list.size());
                             for (Element e : children) {
                                 Elements a = e.getElementsByTag("a");
                                 String url = a.attr("href");
