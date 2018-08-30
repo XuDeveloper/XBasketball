@@ -7,7 +7,6 @@ public class HupuCourtDetailBean {
 
     private String img;
     private String title;
-    private String content;
 
     public String getImg() {
         return img;
@@ -25,11 +24,4 @@ public class HupuCourtDetailBean {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }

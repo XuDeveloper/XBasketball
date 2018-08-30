@@ -36,8 +36,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="0.8"
-                    android:scaleType="centerCrop"
-                    android:background="@mipmap/ic_launcher" />
+                    android:background="@mipmap/ic_launcher"
+                    android:scaleType="centerCrop" />
 
             </FrameLayout>
 
@@ -76,12 +76,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <org.sufficientlysecure.htmltextview.HtmlTextView
-                android:id="@+id/htv_court_detail_content"
+            <!--<org.sufficientlysecure.htmltextview.HtmlTextView-->
+                <!--android:id="@+id/htv_court_detail_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_margin="8dp"-->
+                <!--android:textAppearance="@android:style/TextAppearance.Small" />-->
+
+            <WebView
+                android:id="@+id/wv_court_detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:lineSpacingExtra="4dp" />
+                android:isScrollContainer="false"
+                android:overScrollMode="never"
+                android:scrollbars="vertical"></WebView>
+
         </FrameLayout>
     </android.support.v4.widget.NestedScrollView>
 

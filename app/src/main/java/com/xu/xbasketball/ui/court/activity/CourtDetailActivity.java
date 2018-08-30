@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -19,10 +20,7 @@ import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
-
-
-import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
-import org.sufficientlysecure.htmltextview.HtmlTextView;
+import com.xu.xbasketball.utils.JavascriptUtil;
 
 import butterknife.BindView;
 
@@ -33,8 +31,8 @@ import butterknife.BindView;
  */
 public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresenter> implements HupuCourtDetailContract.View {
 
-    @BindView(R.id.htv_court_detail_content)
-    HtmlTextView htvCourtDetail;
+    @BindView(R.id.wv_court_detail)
+    WebView wvCourtDetail;
     @BindView(R.id.loading)
     ViewStub loading;
     @BindView(R.id.clp_toolbar)
@@ -59,7 +57,7 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         String url = getIntent().getStringExtra(Constants.COURT_URL);
 
         String detail = url.split("/")[url.split("/").length - 1];
-//        Log.i("test", "url:" + url + ", detail: " + detail);
+
         mPresenter.getCourtArticleDetail(detail);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,12 +66,39 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             }
         });
 
+        WebSettings settings = wvCourtDetail.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setSupportZoom(true);
+        settings.setDomStorageEnabled(true);
+        wvCourtDetail.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        wvCourtDetail.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                showProgress();
+                if (newProgress > 90) {
+                    view.loadUrl(JavascriptUtil.getCourtDetailJsCode()[0]);
+                    view.loadUrl(JavascriptUtil.getCourtDetailJsCode()[1]);
+                }
+                if (newProgress == 100) {
+                    hideProgress();
+                }
+                super.onProgressChanged(view, newProgress);
+            }
+        });
+        wvCourtDetail.loadUrl(url);
     }
 
     @Override
     public void showCourtArticleDetail(HupuCourtDetailBean data) {
         clpToolbar.setTitle(data.getTitle());
-        htvCourtDetail.setHtml(data.getContent(), new HtmlHttpImageGetter(htvCourtDetail));
         ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
     }
 

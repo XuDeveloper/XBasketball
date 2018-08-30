@@ -22,7 +22,6 @@ ext {
             "circleimageview"            : 'libs/circleimageview-2.1.0.aar',
             "materialloadingprogressbar" : 'libs/materialloadingprogressbar-0.5.8.aar',
             "multiline-collapsingtoolbar": "net.opacapp:multiline-collapsingtoolbar:27.1.1",
-            "html-textview"              : "org.sufficientlysecure:html-textview:3.6",
 
             // net
             "retrofit"                   : "com.squareup.retrofit2:retrofit:2.3.0",

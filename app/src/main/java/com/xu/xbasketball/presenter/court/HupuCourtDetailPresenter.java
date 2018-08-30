@@ -1,24 +1,18 @@
 package com.xu.xbasketball.presenter.court;
 
-import android.util.Log;
-
 import com.xu.xbasketball.base.BaseSubscriber;
 import com.xu.xbasketball.base.IBaseView;
 import com.xu.xbasketball.base.RxPresenter;
-import com.xu.xbasketball.base.contract.court.HupuCourtContract;
 import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.DataManager;
-import com.xu.xbasketball.model.bean.HupuCourtBean;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
 import com.xu.xbasketball.utils.RxUtil;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -54,10 +48,14 @@ public class HupuCourtDetailPresenter extends RxPresenter<HupuCourtDetailContrac
                                     .select("center")
                                     .select("img")
                                     .first();
-                            Element content = document.select(".detail-wrap").select(".detail-content").first();
+//                            Element content = document.select(".detail-wrap")
+//                                    .select(".detail-content")
+//                                    .select(".article-content")
+//                                    .first();
+
                             bean.setImg(img.attr("src"));
                             bean.setTitle(title.text());
-                            bean.setContent(content.outerHtml());
+//                            bean.setContent(content.toString());
 
                             mView.showCourtArticleDetail(bean);
                         } catch (IOException e) {

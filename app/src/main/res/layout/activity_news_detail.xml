@@ -35,9 +35,9 @@
                     android:id="@+id/iv_news_detail_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:alpha="0.8"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher"
-                    android:alpha="0.8"/>
+                    android:src="@mipmap/ic_launcher" />
 
             </FrameLayout>
 
@@ -82,11 +82,8 @@
                 android:layout_height="match_parent"
                 android:isScrollContainer="false"
                 android:overScrollMode="never"
-                android:scrollbars="vertical">
-
-            </WebView>
+                android:scrollbars="vertical"></WebView>
         </FrameLayout>
-
 
     </android.support.v4.widget.NestedScrollView>
 
