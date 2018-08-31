@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -78,12 +79,13 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
                 view.loadUrl(url);
                 return true;
             }
+
         });
         wvCourtDetail.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 showProgress();
-                if (newProgress > 90) {
+                if (newProgress > 80) {
                     view.loadUrl(JavascriptUtil.getCourtDetailJsCode()[0]);
                     view.loadUrl(JavascriptUtil.getCourtDetailJsCode()[1]);
                 }
@@ -117,4 +119,5 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         intent.putExtra(Constants.COURT_URL, url);
         context.startActivity(intent);
     }
+
 }
