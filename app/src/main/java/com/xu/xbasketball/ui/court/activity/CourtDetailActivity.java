@@ -22,6 +22,10 @@ import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
 import com.xu.xbasketball.utils.JavascriptUtil;
+import com.xu.xbasketball.utils.SnackBarUtil;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 
@@ -85,7 +89,7 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 showProgress();
-                if (newProgress > 80) {
+                if (newProgress > 70) {
                     view.loadUrl(JavascriptUtil.getCourtDetailJsCode()[0]);
                     view.loadUrl(JavascriptUtil.getCourtDetailJsCode()[1]);
                 }
@@ -100,8 +104,25 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
     @Override
     public void showCourtArticleDetail(HupuCourtDetailBean data) {
-        clpToolbar.setTitle(data.getTitle());
-        ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
+        if (!data.getTitle().equals("")) {
+            clpToolbar.setTitle(data.getTitle());
+        } else {
+            clpToolbar.setTitle("无标题");
+            SnackBarUtil.show(view, "文章错误，2s后退出!");
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(timerTask, 2000);
+        }
+        if (!data.getImg().equals("")) {
+            ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
+        } else {
+            ImageLoader.loadMipmap(this, R.mipmap.ic_launcher, ivCourtDetailPic);
+        }
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
 
 /**
@@ -49,6 +50,10 @@ public class ImageLoader {
      */
     public static void loadNoCache(Context context, String url, ImageView iv) {
         Glide.with(context).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.NONE).into(iv);
+    }
+
+    public static void loadMipmap(Context context, int mipmapId, ImageView iv) {
+        Glide.with(context).load(mipmapId).fitCenter().diskCacheStrategy(DiskCacheStrategy.ALL).into(iv);
     }
 
     public static void pauseImageRequests(Context context) {

@@ -24,9 +24,13 @@ public class Constants {
 
     public static final String COURT_URL = "court_url";
 
-    public static final String COURT_TITLE = "court_title";
 
     // -----------------------------Preferences-----------------------------
 
     public static final String SP_NO_IMAGE = "no_image";
+
+    // -----------------------------RecyclerView Adapter-----------------------------
+    public static final int TYPE_ITEM = 0;
+
+    public static final int TYPE_FOOTER = 1;
 }

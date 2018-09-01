@@ -95,6 +95,13 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
                 }
             }
         });
+
+        adapter.setOnItemClickListener(new PicAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // todo 图片detailactivity
+            }
+        });
     }
 
     @Override

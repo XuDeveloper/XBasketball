@@ -37,6 +37,8 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
 
     private List<TencentNewsBean> mList;
 
+    private boolean isLoadingMore = false;
+
     @Override
     protected void initDatas() {
         mList = new ArrayList<>();
@@ -71,6 +73,26 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mList.clear();
+                mPresenter.getNews(Constants.DEVID);
+            }
+        });
+
+        rvNews.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItem = mLayoutManager.findLastCompletelyVisibleItemPosition();
+                if (lastItem >= adapter.getItemCount() - 1 && !isLoadingMore) {
+                    isLoadingMore = true;
+                    mPresenter.getNews(Constants.DEVID);
+                }
+            }
+        });
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
                 mPresenter.getNews(Constants.DEVID);
             }
         });
@@ -83,9 +105,9 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
 
     @Override
     public void showNews(List<TencentNewsBean> news) {
-        mList.clear();
         mList.addAll(news);
         adapter.updateData(mList);
+        isLoadingMore = false;
     }
 
     @Override

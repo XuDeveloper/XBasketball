@@ -7,6 +7,7 @@ import com.xu.xbasketball.di.scope.ActivityScope;
 import com.xu.xbasketball.ui.court.activity.CourtDetailActivity;
 import com.xu.xbasketball.ui.main.activity.MainActivity;
 import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
+import com.xu.xbasketball.ui.pic.activity.PicDetailActivity;
 
 import dagger.Component;
 
@@ -24,5 +25,7 @@ public interface ActivityComponent {
     void inject(NewsDetailActivity newsDetailActivity);
 
     void inject(CourtDetailActivity courtDetailActivity);
+
+    void inject(PicDetailActivity picDetailActivity);
 
 }

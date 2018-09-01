@@ -38,6 +38,8 @@ public class HupuCourtDetailPresenter extends RxPresenter<HupuCourtDetailContrac
                     @Override
                     public void onNext(ResponseBody responseBody) {
                         HupuCourtDetailBean bean = new HupuCourtDetailBean();
+                        bean.setTitle("");
+                        bean.setImg("");
                         try {
                             Document document = Jsoup.parse(responseBody.string());
                             Element title = document.select("h1.headline").first();
@@ -48,14 +50,13 @@ public class HupuCourtDetailPresenter extends RxPresenter<HupuCourtDetailContrac
                                     .select("center")
                                     .select("img")
                                     .first();
-//                            Element content = document.select(".detail-wrap")
-//                                    .select(".detail-content")
-//                                    .select(".article-content")
-//                                    .first();
 
-                            bean.setImg(img.attr("src"));
-                            bean.setTitle(title.text());
-//                            bean.setContent(content.toString());
+                            if (img != null) {
+                                bean.setImg(img.attr("src"));
+                            }
+                            if (title != null) {
+                                bean.setTitle(title.text());
+                            }
 
                             mView.showCourtArticleDetail(bean);
                         } catch (IOException e) {

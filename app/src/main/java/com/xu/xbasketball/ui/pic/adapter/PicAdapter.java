@@ -2,7 +2,9 @@ package com.xu.xbasketball.ui.pic.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,17 +52,20 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if (holder instanceof ViewHolder) {
-            SinaPicBean picBean = list.get(position);
-            if (picBean == null) {
-                return;
-            }
-            if (list.get(holder.getAdapterPosition()).getHeight() > 0) {
-                ViewGroup.LayoutParams lp = holder.ivNewsPic.getLayoutParams();
-                lp.height = list.get(holder.getAdapterPosition()).getHeight();
-            }
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        final SinaPicBean picBean = list.get(position);
+        if (picBean == null) {
+            return;
+        }
+        if (list.get(holder.getAdapterPosition()).getHeight() > 0) {
+            ViewGroup.LayoutParams lp = holder.ivNewsPic.getLayoutParams();
+            lp.height = list.get(holder.getAdapterPosition()).getHeight();
+        }
 
+        holder.ivNewsPic.setImageResource(R.mipmap.pic_placeholder);
+        holder.ivNewsPic.setTag(picBean.getImg_url());
+
+        if (picBean.getImg_url().equals(holder.ivNewsPic.getTag())) {
             ImageLoader.load(mContext, picBean.getImg_url(), R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_WIDTH / 2) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
