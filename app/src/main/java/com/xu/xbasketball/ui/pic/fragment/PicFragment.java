@@ -10,6 +10,7 @@ import com.xu.xbasketball.base.contract.pic.PicContract;
 import com.xu.xbasketball.model.bean.SinaPicBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.pic.PicPresenter;
+import com.xu.xbasketball.ui.pic.activity.PicDetailActivity;
 import com.xu.xbasketball.ui.pic.adapter.PicAdapter;
 
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
         adapter.setOnItemClickListener(new PicAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                // todo 图片detailactivity
+                PicDetailActivity.launch(mContext, mList.get(position).getImg_url());
             }
         });
     }

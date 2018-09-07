@@ -2,8 +2,11 @@ package com.xu.xbasketball.ui.pic.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 import android.webkit.WebSettings;
@@ -11,6 +14,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
@@ -27,15 +32,11 @@ import butterknife.BindView;
  */
 public class PicDetailActivity extends BaseActivity {
 
-    @BindView(R.id.wv_news_detail)
-    WebView wvNewsDetail;
     @BindView(R.id.loading)
     ViewStub loading;
-    @BindView(R.id.iv_news_detail_pic)
-    ImageView ivNewsDetailPic;
-    @BindView(R.id.clp_toolbar)
-    CollapsingToolbarLayout clpToolbar;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.iv_pic_detail)
+    ImageView ivPicDetail;
+    @BindView(R.id.tb_basketball)
     Toolbar toolbar;
 
     @Override
@@ -49,47 +50,35 @@ public class PicDetailActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
-        String url = getIntent().getStringExtra(Constants.NEWS_URL);
-        if (url != null) {
-            Log.i("Test", url);
-        }
-        String img = getIntent().getStringExtra(Constants.NEWS_IMG);
-        if (img != null) {
-            ImageLoader.load(this, img, ivNewsDetailPic);
-        }
-        String title = getIntent().getStringExtra(Constants.NEWS_TITLE);
-        if (title != null) {
-            clpToolbar.setTitle(title);
-        }
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        WebSettings settings = wvNewsDetail.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setSupportZoom(true);
-        settings.setDomStorageEnabled(true);
-        wvNewsDetail.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
-        wvNewsDetail.loadUrl(url);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.pic_menu, menu);
+        return true;
     }
 
-    public static void launch(Context context, String url, String img, String title) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void initData() {
+        setToolBar(toolbar, "");
+        loading.setVisibility(View.VISIBLE);
+        String img = getIntent().getStringExtra(Constants.PIC_URL);
+        if (img != null) {
+            ImageLoader.load(this, img, R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+                    ivPicDetail.setImageBitmap(resource);
+                    loading.setVisibility(View.GONE);
+                }
+            });
+        }
+    }
+
+    public static void launch(Context context, String url) {
         Intent intent = new Intent(context, PicDetailActivity.class);
-        intent.putExtra(Constants.NEWS_URL, url);
-        intent.putExtra(Constants.NEWS_IMG, img);
-        intent.putExtra(Constants.NEWS_TITLE, title);
+        intent.putExtra(Constants.PIC_URL, url);
         context.startActivity(intent);
     }
 }

@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void viewCreated() {
         super.viewCreated();
-        initToolbar(toolbar);
+        setToolBar(toolbar, "XBasketball");
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
         mDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -129,11 +129,6 @@ public class MainActivity extends BaseActivity {
 //        });
     }
 
-    private void initToolbar(Toolbar toolbar) {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
     private void setTargetFragment(BaseFragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_main_container, fragment);
@@ -141,4 +136,8 @@ public class MainActivity extends BaseActivity {
         transaction.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

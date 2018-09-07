@@ -7,4 +7,7 @@
     <string name="quarter_time_end">00:00</string>
     <string name="game_end">已结束</string>
 
+    <string name="action_share">分享链接</string>
+    <string name="action_save">保存到本地</string>
+
 </resources>

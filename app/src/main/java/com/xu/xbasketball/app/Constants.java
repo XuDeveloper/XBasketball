@@ -24,6 +24,7 @@ public class Constants {
 
     public static final String COURT_URL = "court_url";
 
+    public static final String PIC_URL = "pic_url";
 
     // -----------------------------Preferences-----------------------------
 

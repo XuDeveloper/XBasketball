@@ -64,6 +64,12 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
 
         holder.ivNewsPic.setImageResource(R.mipmap.pic_placeholder);
         holder.ivNewsPic.setTag(picBean.getImg_url());
+        holder.ivNewsPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickListener.onItemClick(position);
+            }
+        });
 
         if (picBean.getImg_url().equals(holder.ivNewsPic.getTag())) {
             ImageLoader.load(mContext, picBean.getImg_url(), R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_WIDTH / 2) {

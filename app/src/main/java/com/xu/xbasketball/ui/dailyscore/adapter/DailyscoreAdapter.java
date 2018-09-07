@@ -1,6 +1,7 @@
 package com.xu.xbasketball.ui.dailyscore.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.ViewHolder> {
 
+    private static final int TYPE_EMPTY = 1;
+
     private List<GameBean> list;
     private Context mContext;
 
@@ -39,16 +42,26 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
         this.notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_dailyscore,
-                parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v;
+        switch (viewType) {
+            case TYPE_EMPTY:
+                v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_dailyscore_nodata,
+                        parent, false);
+                break;
+            default:
+                v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_dailyscore,
+                        parent, false);
+                break;
+        }
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (holder instanceof ViewHolder) {
+        if (getItemViewType(position) != TYPE_EMPTY) {
             GameBean gameBean = list.get(position);
             if (gameBean == null) {
                 return;
@@ -62,7 +75,7 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
             holder.tvHomeScore.setText(gameBean.getRightGoal());
             if (mContext.getString(R.string.quarter_time_end).equals(gameBean.getQuarterTime())) {
                 holder.tvStatus.setText(R.string.game_end);
-            }  else {
+            } else {
                 StringBuilder sb = new StringBuilder();
                 sb.append(gameBean.getQuarter());
                 sb.append(" ");
@@ -73,11 +86,20 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
     }
 
     @Override
-    public int getItemCount() {
-        if (list == null) {
-            return 0;
+    public int getItemViewType(int position) {
+        if (getCount() == 0) {
+            return TYPE_EMPTY;
         }
-        return list.size();
+        return super.getItemViewType(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return getCount() == 0 ? 1 : getCount();
+    }
+
+    private int getCount() {
+        return list == null ? 0 : list.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
