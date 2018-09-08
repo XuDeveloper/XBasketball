@@ -25,7 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  *
  * @author Xu
  */
-public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.ViewHolder> {
+public class DailyscoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_EMPTY = 1;
 
@@ -44,43 +44,43 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         switch (viewType) {
             case TYPE_EMPTY:
                 v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_dailyscore_nodata,
                         parent, false);
-                break;
+                return new EmptyViewHolder(v);
             default:
                 v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_dailyscore,
                         parent, false);
-                break;
+                return new ViewHolder(v);
         }
-        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        if (getItemViewType(position) != TYPE_EMPTY) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ViewHolder) {
             GameBean gameBean = list.get(position);
             if (gameBean == null) {
                 return;
             }
-            holder.tvDate.setText(DateUtil.getTodayDate());
-            ImageLoader.load(mContext, gameBean.getLeftBadge(), holder.ivAwayPic);
-            holder.tvAwayName.setText(gameBean.getLeftName());
-            holder.tvAwayScore.setText(gameBean.getLeftGoal());
-            ImageLoader.load(mContext, gameBean.getRightBadge(), holder.ivHomePic);
-            holder.tvHomeName.setText(gameBean.getRightName());
-            holder.tvHomeScore.setText(gameBean.getRightGoal());
+            ViewHolder viewHolder = (ViewHolder) holder;
+            viewHolder.tvDate.setText(DateUtil.getTodayDate());
+            ImageLoader.load(mContext, gameBean.getLeftBadge(), viewHolder.ivAwayPic);
+            viewHolder.tvAwayName.setText(gameBean.getLeftName());
+            viewHolder.tvAwayScore.setText(gameBean.getLeftGoal());
+            ImageLoader.load(mContext, gameBean.getRightBadge(), viewHolder.ivHomePic);
+            viewHolder.tvHomeName.setText(gameBean.getRightName());
+            viewHolder.tvHomeScore.setText(gameBean.getRightGoal());
             if (mContext.getString(R.string.quarter_time_end).equals(gameBean.getQuarterTime())) {
-                holder.tvStatus.setText(R.string.game_end);
+                viewHolder.tvStatus.setText(R.string.game_end);
             } else {
                 StringBuilder sb = new StringBuilder();
                 sb.append(gameBean.getQuarter());
                 sb.append(" ");
                 sb.append(gameBean.getQuarterTime());
-                holder.tvStatus.setText(sb.toString());
+                viewHolder.tvStatus.setText(sb.toString());
             }
         }
     }
@@ -131,6 +131,13 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<DailyscoreAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+    }
+
+    public static class EmptyViewHolder extends RecyclerView.ViewHolder {
+
+        EmptyViewHolder(View itemView) {
+            super(itemView);
         }
     }
 

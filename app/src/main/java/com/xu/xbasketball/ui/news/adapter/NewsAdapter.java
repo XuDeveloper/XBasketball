@@ -16,7 +16,14 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,33 +47,52 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     public void updateData(List<TencentNewsBean> list) {
         this.list = list;
+        Collections.sort(this.list, new Comparator<TencentNewsBean>() {
+            @Override
+            public int compare(TencentNewsBean o1, TencentNewsBean o2) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    Date date1 = format.parse(o1.getTime());
+                    Date date2 = format.parse(o2.getTime());
+                    if (date1.getTime() > date2.getTime()) {
+                        return -1;
+                    } else if (date1.getTime() < date2.getTime()) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
         this.notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_news,
                 parent, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        if (holder instanceof ViewHolder) {
-            TencentNewsBean newsBean = list.get(position);
-            if (newsBean == null) {
-                return;
-            }
-            holder.tvNewsTitle.setText(newsBean.getTitle());
-            holder.tvNewsTime.setText(newsBean.getTime());
-            ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
-            holder.llNews.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onItemClick(position);
-                }
-            });
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        TencentNewsBean newsBean = list.get(position);
+        if (newsBean == null) {
+            return;
         }
+        holder.tvNewsTitle.setText(newsBean.getTitle());
+        holder.tvNewsTime.setText(newsBean.getTime());
+        ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
+        holder.llNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(position);
+            }
+        });
     }
 
     @Override

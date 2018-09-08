@@ -10,14 +10,29 @@ public class JavascriptUtil {
 
     public static String[] getCourtDetailJsCode() {
         String[] result = new String[2];
-        result[0] = "javascript:function courtDetailJsCode() {\n" +
+        result[0] = "javascript:function clearUnused() {\n" +
                 "$('#J-nav-wrap').remove();\n" +
                 "$('.m-row').remove();\n" +
+                "$('.m-app').remove();\n" +
                 "$('.m-reply').remove();\n" +
                 "$('.reply-box').remove();\n" +
                 "$('.guess-like').remove();\n" +
                 "$('.ui-page-tools').remove();\n}";
-        result[1] = "javascript:courtDetailJsCode()";
+        result[1] = "javascript:clearUnused()";
+        return result;
+    }
+
+    public static String[] getNewsDetailJsCode() {
+        String[] result = new String[2];
+        result[0] = "javascript:function clearUnused() {\n" +
+                "$('#J-nav-wrap').remove();\n" +
+                "$('.m-row').remove();\n" +
+                "$('.m-app').remove();\n" +
+                "$('.m-reply').remove();\n" +
+                "$('.reply-box').remove();\n" +
+                "$('.guess-like').remove();\n" +
+                "$('.ui-page-tools').remove();\n}";
+        result[1] = "javascript:clearUnused()";
         return result;
     }
 
