@@ -2,10 +2,12 @@ package com.xu.xbasketball.ui.news.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,6 +17,7 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.utils.JavascriptUtil;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
@@ -29,14 +32,14 @@ public class NewsDetailActivity extends BaseActivity {
 
     @BindView(R.id.wv_news_detail)
     WebView wvNewsDetail;
-    @BindView(R.id.loading)
-    ViewStub loading;
     @BindView(R.id.iv_news_detail_pic)
     ImageView ivNewsDetailPic;
     @BindView(R.id.clp_toolbar)
     CollapsingToolbarLayout clpToolbar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    private boolean isJsCodeLoaded = false;
 
     @Override
     public int getLayoutId() {
@@ -51,9 +54,6 @@ public class NewsDetailActivity extends BaseActivity {
     @Override
     public void initData() {
         String url = getIntent().getStringExtra(Constants.NEWS_URL);
-        if (url != null) {
-            Log.i("Test", url);
-        }
         String img = getIntent().getStringExtra(Constants.NEWS_IMG);
         if (img != null) {
             ImageLoader.load(this, img, ivNewsDetailPic);
@@ -80,6 +80,22 @@ public class NewsDetailActivity extends BaseActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+            }
+        });
+        wvNewsDetail.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (!isJsCodeLoaded) {
+                    view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[0]);
+                    view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[1]);
+                    isJsCodeLoaded = true;
+                }
+                super.onProgressChanged(view, newProgress);
             }
         });
         wvNewsDetail.loadUrl(url);

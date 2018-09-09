@@ -38,14 +38,14 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
     @BindView(R.id.wv_court_detail)
     WebView wvCourtDetail;
-    @BindView(R.id.loading)
-    ViewStub loading;
     @BindView(R.id.clp_toolbar)
     CollapsingToolbarLayout clpToolbar;
     @BindView(R.id.iv_court_detail_pic)
     ImageView ivCourtDetailPic;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    private boolean isJsCodeLoaded = false;
 
     @Override
     public int getLayoutId() {
@@ -84,17 +84,20 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
                 return true;
             }
 
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                hideProgress();
+            }
         });
         wvCourtDetail.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 showProgress();
-                if (newProgress > 70) {
+                if (newProgress > 70 && !isJsCodeLoaded) {
                     view.loadUrl(JavascriptUtil.getCourtDetailJsCode()[0]);
                     view.loadUrl(JavascriptUtil.getCourtDetailJsCode()[1]);
-                }
-                if (newProgress == 100) {
-                    hideProgress();
+                    isJsCodeLoaded = true;
                 }
                 super.onProgressChanged(view, newProgress);
             }
@@ -127,12 +130,12 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
     @Override
     public void showProgress() {
-        loading.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     public void hideProgress() {
-        loading.setVisibility(View.GONE);
+
     }
 
     public static void launch(Context context, String url) {
