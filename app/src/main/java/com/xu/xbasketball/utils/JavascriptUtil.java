@@ -25,14 +25,16 @@ public class JavascriptUtil {
     public static String[] getNewsDetailJsCode() {
         String[] result = new String[2];
         result[0] = "javascript:function clearNewsDetailUnused() {\n" +
-                "var title = document.querySelector(\"div#root>div:nth-child(1)>div:nth-child(1)\");\n" +
-                "var content = document.querySelector(\"div#root>div:nth-child(1)>div:nth-child(2)\");\n" +
-                "var click = document.querySelector(\"div#root>div:nth-child(1)>div:nth-child(2)>div:nth-child(1)>div:nth-child(2)\");\n" +
+//                "var click = document.querySelector('div#root>div:nth-child(1)>div:nth-child(2)>div:nth-child(1)>div:nth-child(2)');\n" +
+//                "click.click();\n" +
+                "alert('123, ' + document.body);\n" +
+                "$($x('//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div[2]')).click();\n" +
+                "var title = document.querySelector('div#root>div:nth-child(1)>div:nth-child(1)');\n" +
+                "var content = document.querySelector('div#root>div:nth-child(1)>div:nth-child(2)');\n" +
                 "if (title.textContent != null && content.textContent != null) {\n" +
-                "document.querySelector(\"div#root\").style.display = 'none';\n" +
+                "document.querySelector('div#root').style.display = 'none';\n" +
                 "document.body.appendChild(title);\n" +
-                "document.body.appendChild(content);\n" +
-                "click.click();\n}}";
+                "document.body.appendChild(content);\n}}";
         result[1] = "javascript:clearNewsDetailUnused()";
         return result;
     }
