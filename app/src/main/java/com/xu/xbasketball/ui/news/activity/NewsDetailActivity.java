@@ -7,8 +7,11 @@ import android.os.Build;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.webkit.JavascriptInterface;
 import android.webkit.SslErrorHandler;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -59,6 +62,7 @@ public class NewsDetailActivity extends BaseActivity {
     @Override
     public void initData() {
         String url = getIntent().getStringExtra(Constants.NEWS_URL);
+        url = url.split("\\?")[0];
         String img = getIntent().getStringExtra(Constants.NEWS_IMG);
         if (img != null) {
             ImageLoader.load(this, img, ivNewsDetailPic);
@@ -75,7 +79,6 @@ public class NewsDetailActivity extends BaseActivity {
         });
 
         WebView.setWebContentsDebuggingEnabled(true);
-
         WebSettings settings = wvNewsDetail.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
@@ -94,23 +97,48 @@ public class NewsDetailActivity extends BaseActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                Log.i("test", "finished");
                 view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[0]);
                 view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[1]);
                 super.onPageFinished(view, url);
             }
         });
-        wvNewsDetail.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress > 70 && !isJsCodeLoaded) {
-                    Log.i("test", "onProgressChanged");
-                    isJsCodeLoaded = true;
-                }
-                super.onProgressChanged(view, newProgress);
-            }
-        });
+//        wvNewsDetail.setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public void onProgressChanged(WebView view, int newProgress) {
+//                if (newProgress == 100) {
+//                    view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[0]);
+//                    view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[1]);
+//                }
+//                super.onProgressChanged(view, newProgress);
+//            }
+//        });
         wvNewsDetail.loadUrl(url);
+    }
+
+    @Override
+    protected void onPause() {
+        wvNewsDetail.onPause();
+        wvNewsDetail.pauseTimers();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        wvNewsDetail.onResume();
+        wvNewsDetail.resumeTimers();
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (wvNewsDetail != null) {
+            wvNewsDetail.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            wvNewsDetail.clearHistory();
+            ((ViewGroup) wvNewsDetail.getParent()).removeView(wvNewsDetail);
+            wvNewsDetail.destroy();
+            wvNewsDetail = null;
+        }
+        super.onDestroy();
     }
 
     public static void launch(Context context, String url, String img, String title) {
@@ -120,4 +148,5 @@ public class NewsDetailActivity extends BaseActivity {
         intent.putExtra(Constants.NEWS_TITLE, title);
         context.startActivity(intent);
     }
+
 }
