@@ -2,6 +2,7 @@ package com.xu.xbasketball.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Process;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -82,5 +83,17 @@ public class App extends Application {
         if (allActivities != null) {
             allActivities.remove(activity);
         }
+    }
+
+    public void exitApp() {
+        if (allActivities != null) {
+            synchronized (allActivities) {
+                for (BaseActivity baseActivity: allActivities) {
+                    baseActivity.finish();
+                }
+            }
+        }
+        Process.killProcess(Process.myPid());
+        System.exit(0);
     }
 }

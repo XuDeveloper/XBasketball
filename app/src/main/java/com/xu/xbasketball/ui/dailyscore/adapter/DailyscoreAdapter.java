@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.model.bean.GameBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.DateUtil;
@@ -26,8 +27,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author Xu
  */
 public class DailyscoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private static final int TYPE_EMPTY = 1;
 
     private List<GameBean> list;
     private Context mContext;
@@ -47,7 +46,7 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         switch (viewType) {
-            case TYPE_EMPTY:
+            case Constants.TYPE_EMPTY:
                 v = LayoutInflater.from(mContext).inflate(R.layout.recycle_item_dailyscore_nodata,
                         parent, false);
                 return new EmptyViewHolder(v);
@@ -88,7 +87,7 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemViewType(int position) {
         if (getCount() == 0) {
-            return TYPE_EMPTY;
+            return Constants.TYPE_EMPTY;
         }
         return super.getItemViewType(position);
     }

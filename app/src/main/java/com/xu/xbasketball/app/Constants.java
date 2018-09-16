@@ -31,7 +31,6 @@ public class Constants {
     public static final String SP_NO_IMAGE = "no_image";
 
     // -----------------------------RecyclerView Adapter-----------------------------
-    public static final int TYPE_ITEM = 0;
+    public static final int TYPE_EMPTY = 1;
 
-    public static final int TYPE_FOOTER = 1;
 }
