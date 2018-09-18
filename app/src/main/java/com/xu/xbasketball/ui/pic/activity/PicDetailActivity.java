@@ -3,6 +3,7 @@ package com.xu.xbasketball.ui.pic.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -76,9 +77,13 @@ public class PicDetailActivity extends BaseActivity {
         }
     }
 
-    public static void launch(Context context, String url) {
+    public static void launch(Context context, String url, Bundle bundle) {
         Intent intent = new Intent(context, PicDetailActivity.class);
         intent.putExtra(Constants.PIC_URL, url);
-        context.startActivity(intent);
+        if (bundle != null) {
+            context.startActivity(intent, bundle);
+        } else {
+            context.startActivity(intent);
+        }
     }
 }

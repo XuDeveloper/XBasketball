@@ -58,20 +58,23 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
             return;
         }
         if (list.get(holder.getAdapterPosition()).getHeight() > 0) {
-            ViewGroup.LayoutParams lp = holder.ivNewsPic.getLayoutParams();
+            ViewGroup.LayoutParams lp = holder.ivPic.getLayoutParams();
             lp.height = list.get(holder.getAdapterPosition()).getHeight();
         }
 
-        holder.ivNewsPic.setImageResource(R.mipmap.pic_placeholder);
-        holder.ivNewsPic.setTag(picBean.getImg_url());
-        holder.ivNewsPic.setOnClickListener(new View.OnClickListener() {
+        holder.ivPic.setImageResource(R.mipmap.pic_placeholder);
+        holder.ivPic.setTag(picBean.getImg_url());
+        holder.ivPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemClickListener.onItemClick(position);
+                if (onItemClickListener != null) {
+                    View shareView = view.findViewById(R.id.iv_pic);
+                    onItemClickListener.onItemClick(position, shareView);
+                }
             }
         });
 
-        if (picBean.getImg_url().equals(holder.ivNewsPic.getTag())) {
+        if (picBean.getImg_url().equals(holder.ivPic.getTag())) {
             ImageLoader.load(mContext, picBean.getImg_url(), R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_WIDTH / 2) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -81,11 +84,11 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
                             int height = resource.getHeight();
                             int realHeight = (App.SCREEN_WIDTH / 2) * height / width;
                             list.get(holder.getAdapterPosition()).setHeight(realHeight);
-                            ViewGroup.LayoutParams lp = holder.ivNewsPic.getLayoutParams();
+                            ViewGroup.LayoutParams lp = holder.ivPic.getLayoutParams();
                             lp.height = realHeight;
                         }
                     }
-                    holder.ivNewsPic.setImageBitmap(resource);
+                    holder.ivPic.setImageBitmap(resource);
                 }
             });
         }
@@ -114,13 +117,13 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position, View shareView);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.iv_pic)
-        ImageView ivNewsPic;
+        ImageView ivPic;
 
         public ViewHolder(View itemView) {
             super(itemView);

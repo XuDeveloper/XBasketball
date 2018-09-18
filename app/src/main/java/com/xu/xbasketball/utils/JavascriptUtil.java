@@ -33,10 +33,11 @@ public class JavascriptUtil {
                 "document.querySelector('div#root').style.display = 'none';\n" +
                 "document.body.appendChild(title);\n" +
                 "document.body.appendChild(content);\n}}";
-        result[1] = "javascript:var timer = setInterval(() => {\n" +
-                    "var click = document.querySelector('div#root>div:nth-child(1)>div:nth-child(2)>div:nth-child(1)>div:nth-child(2)');\n" +
-                    "if (click != null) {\n" +
-                    "clearNewsDetailUnused();}}, 50)\n";
+        result[1] = "javascript:let timer = setInterval(() => {\n" +
+                "var click = document.querySelector('div#root>div:nth-child(1)>div:nth-child(2)>div:nth-child(1)>div:nth-child(2)');\n" +
+                "if (click != null) {\n" +
+                "clearInterval(timer);\n" +
+                "clearNewsDetailUnused();}}, 150);\n";
         return result;
     }
 

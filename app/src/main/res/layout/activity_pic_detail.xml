@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical">
 
     <ViewStub
@@ -17,8 +18,11 @@
         android:id="@+id/iv_pic_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:scaleType="fitXY"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitCenter"
         android:transitionName="shareView" />
 
 </LinearLayout>

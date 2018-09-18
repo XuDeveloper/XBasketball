@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -78,13 +79,9 @@ public class NewsDetailActivity extends BaseActivity {
             }
         });
 
-        WebView.setWebContentsDebuggingEnabled(true);
         WebSettings settings = wvNewsDetail.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
         settings.setDomStorageEnabled(true);
@@ -102,16 +99,6 @@ public class NewsDetailActivity extends BaseActivity {
                 super.onPageFinished(view, url);
             }
         });
-//        wvNewsDetail.setWebChromeClient(new WebChromeClient() {
-//            @Override
-//            public void onProgressChanged(WebView view, int newProgress) {
-//                if (newProgress == 100) {
-//                    view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[0]);
-//                    view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[1]);
-//                }
-//                super.onProgressChanged(view, newProgress);
-//            }
-//        });
         wvNewsDetail.loadUrl(url);
     }
 
@@ -141,12 +128,17 @@ public class NewsDetailActivity extends BaseActivity {
         super.onDestroy();
     }
 
-    public static void launch(Context context, String url, String img, String title) {
+    public static void launch(Context context, String url, String img, String title, Bundle bundle) {
+        //todo shareview相关！！！
         Intent intent = new Intent(context, NewsDetailActivity.class);
         intent.putExtra(Constants.NEWS_URL, url);
         intent.putExtra(Constants.NEWS_IMG, img);
         intent.putExtra(Constants.NEWS_TITLE, title);
-        context.startActivity(intent);
+        if (bundle != null) {
+            context.startActivity(intent, bundle);
+        } else {
+            context.startActivity(intent);
+        }
     }
 
 }

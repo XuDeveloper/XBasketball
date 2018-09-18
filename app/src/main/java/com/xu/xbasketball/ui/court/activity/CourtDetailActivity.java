@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -136,6 +137,32 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
     @Override
     public void hideProgress() {
 
+    }
+
+    @Override
+    protected void onPause() {
+        wvCourtDetail.onPause();
+        wvCourtDetail.pauseTimers();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        wvCourtDetail.onResume();
+        wvCourtDetail.resumeTimers();
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (wvCourtDetail != null) {
+            wvCourtDetail.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            wvCourtDetail.clearHistory();
+            ((ViewGroup) wvCourtDetail.getParent()).removeView(wvCourtDetail);
+            wvCourtDetail.destroy();
+            wvCourtDetail = null;
+        }
+        super.onDestroy();
     }
 
     public static void launch(Context context, String url) {

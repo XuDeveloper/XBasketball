@@ -1,8 +1,12 @@
 package com.xu.xbasketball.ui.pic.fragment;
 
+import android.app.ActivityOptions;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseMVPFragment;
@@ -99,8 +103,13 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
 
         adapter.setOnItemClickListener(new PicAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-                PicDetailActivity.launch(mContext, mList.get(position).getImg_url());
+            public void onItemClick(int position, View shareView) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
+                    PicDetailActivity.launch(mContext, mList.get(position).getImg_url(), options.toBundle());
+                } else {
+                    PicDetailActivity.launch(mContext, mList.get(position).getImg_url(), null);
+                }
             }
         });
     }
