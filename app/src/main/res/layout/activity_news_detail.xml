@@ -37,7 +37,8 @@
                     android:layout_height="match_parent"
                     android:alpha="0.8"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/ic_launcher"
+                    android:transitionName="shareView" />
 
             </FrameLayout>
 

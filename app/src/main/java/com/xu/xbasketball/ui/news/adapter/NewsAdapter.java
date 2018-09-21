@@ -79,7 +79,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         TencentNewsBean newsBean = list.get(position);
         if (newsBean == null) {
             return;
@@ -90,7 +90,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.llNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickListener.onItemClick(position);
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(position, holder.ivNewsPic);
+                }
             }
         });
     }
@@ -126,7 +128,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position, View shareView);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.xu.xbasketball.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,6 +40,7 @@ public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fra
     protected boolean isVisible = false;
     protected LayoutInflater inflater;
     protected Context mContext;
+    protected Activity mActivity;
     private Unbinder unbinder;
     private View view;
 
@@ -53,12 +55,19 @@ public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fra
         return new FragmentModule(this);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        mContext = context;
+        mActivity = (Activity) context;
+        super.onAttach(context);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(getLayoutId(), container, false);
         this.inflater = inflater;
-        mContext = this.getContext();
+//        mContext = this.getContext();
         isInit = true;
         unbinder = ButterKnife.bind(this, view);
         initInject();

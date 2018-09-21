@@ -48,8 +48,6 @@ public class NewsDetailActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private boolean isJsCodeLoaded = false;
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_news_detail;
@@ -129,7 +127,6 @@ public class NewsDetailActivity extends BaseActivity {
     }
 
     public static void launch(Context context, String url, String img, String title, Bundle bundle) {
-        //todo shareview相关！！！
         Intent intent = new Intent(context, NewsDetailActivity.class);
         intent.putExtra(Constants.NEWS_URL, url);
         intent.putExtra(Constants.NEWS_IMG, img);
