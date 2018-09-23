@@ -58,6 +58,14 @@ public class PicDetailActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_save:
+
+                break;
+            case R.id.action_share:
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
