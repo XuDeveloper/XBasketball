@@ -1,11 +1,13 @@
 package com.xu.xbasketball.ui.news.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
+import android.transition.Visibility;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,6 +126,10 @@ public class NewsDetailActivity extends BaseActivity {
             wvNewsDetail = null;
         }
         super.onDestroy();
+
+//        Visibility returnTransition = buildReturnTransition();
+//        getWindow().setReturnTransition(returnTransition);
+        finishAfterTransition();
     }
 
     public static void launch(Context context, String url, String img, String title, Bundle bundle) {

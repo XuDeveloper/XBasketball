@@ -3,6 +3,7 @@ package com.xu.xbasketball.ui.pic.fragment;
 import android.app.ActivityOptions;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -78,7 +79,7 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int[] visibleItems = mStaggeredGridLayoutManager.findLastVisibleItemPositions(null);
-                int lastItem = Math.max(visibleItems[0],visibleItems[1]);
+                int lastItem = Math.max(visibleItems[0], visibleItems[1]);
                 if (lastItem >= adapter.getItemCount() - 1 && !isLoadingMore && dy > 0) {
                     isLoadingMore = true;
                     page++;
@@ -104,12 +105,8 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
         adapter.setOnItemClickListener(new PicAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View shareView) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
-                    PicDetailActivity.launch(mContext, mList.get(position).getImg_url(), options.toBundle());
-                } else {
-                    PicDetailActivity.launch(mContext, mList.get(position).getImg_url(), null);
-                }
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
+                PicDetailActivity.launch(mContext, mList.get(position).getImg_url(), options.toBundle());
             }
         });
     }

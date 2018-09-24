@@ -38,7 +38,7 @@
                     android:alpha="0.8"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/ic_launcher"
-                    android:transitionName="shareView" />
+                    android:transitionName="shareImg" />
 
             </FrameLayout>
 
@@ -60,6 +60,7 @@
         android:layout_height="match_parent"
         android:overScrollMode="never"
         android:scrollbars="vertical"
+        android:transitionName="shareContent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout

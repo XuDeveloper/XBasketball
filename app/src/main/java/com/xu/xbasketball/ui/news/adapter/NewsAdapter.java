@@ -91,7 +91,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(position, holder.ivNewsPic);
+                    onItemClickListener.onItemClick(position, holder.ivNewsPic, holder.llNews);
                 }
             }
         });
@@ -128,7 +128,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position, View shareView);
+        void onItemClick(int position, View shareImg, View shareContent);
     }
 
 }

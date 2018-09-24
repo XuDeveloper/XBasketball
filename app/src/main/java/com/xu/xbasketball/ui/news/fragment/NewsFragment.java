@@ -2,6 +2,8 @@ package com.xu.xbasketball.ui.news.fragment;
 
 import android.app.ActivityOptions;
 import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -58,17 +60,13 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
 
         adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position, View shareView) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
-                    NewsDetailActivity.launch(getContext(), mList.get(position).getUrl(),
-                            mList.get(position).getBigImage().get(0) + ".jpg",
-                            mList.get(position).getTitle(), options.toBundle());
-                } else {
-                    NewsDetailActivity.launch(getContext(), mList.get(position).getUrl(),
-                            mList.get(position).getBigImage().get(0) + ".jpg",
-                            mList.get(position).getTitle(), null);
-                }
+            public void onItemClick(int position, View shareImg, View shareContent) {
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,
+                        Pair.create(shareImg, "shareImg"),
+                        Pair.create(shareContent, "shareContent"));
+                NewsDetailActivity.launch(getContext(), mList.get(position).getUrl(),
+                        mList.get(position).getBigImage().get(0) + ".jpg",
+                        mList.get(position).getTitle(), options.toBundle());
             }
         });
     }

@@ -2,7 +2,7 @@ ext {
     android = [
             compileSdkVersion        : 27,
             applicationId            : "com.xu.xbasketball",
-            minSdkVersion            : 19,
+            minSdkVersion            : 21,
             targetSdkVersion         : 26,
             versionCode              : 1,
             versionName              : "1.0",
