@@ -96,4 +96,5 @@ public class App extends Application {
         Process.killProcess(Process.myPid());
         System.exit(0);
     }
+    
 }
