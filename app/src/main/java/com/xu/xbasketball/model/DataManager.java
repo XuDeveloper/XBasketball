@@ -3,6 +3,7 @@ package com.xu.xbasketball.model;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
+import com.xu.xbasketball.model.bean.TencentVideoResultBean;
 import com.xu.xbasketball.model.http.HttpHelper;
 import com.xu.xbasketball.model.prefs.PreferencesHelper;
 
@@ -46,6 +47,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<ResponseBody> getCourtArticleDetail(String detail) {
         return mHttpHelper.getCourtArticleDetail(detail);
+    }
+
+    @Override
+    public Flowable<TencentVideoResultBean> getVideos(int page) {
+        return mHttpHelper.getVideos(page);
     }
 
     @Override

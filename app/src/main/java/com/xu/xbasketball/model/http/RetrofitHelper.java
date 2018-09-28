@@ -3,10 +3,12 @@ package com.xu.xbasketball.model.http;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
+import com.xu.xbasketball.model.bean.TencentVideoResultBean;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
 import com.xu.xbasketball.model.http.api.ICourtApi;
 import com.xu.xbasketball.model.http.api.INewsApi;
 import com.xu.xbasketball.model.http.api.IPicApi;
+import com.xu.xbasketball.model.http.api.IVideoApi;
 
 import javax.inject.Inject;
 
@@ -27,13 +29,17 @@ public class RetrofitHelper implements HttpHelper {
 
     private ICourtApi mCourtArticlesService;
 
+    private IVideoApi mVideoService;
+
     @Inject
-    public RetrofitHelper(IBasketballScoreApi mBasketballScoreService,
-                          INewsApi mNewsService, IPicApi mPicService, ICourtApi mCourtArticlesService) {
+    public RetrofitHelper(IBasketballScoreApi mBasketballScoreService, INewsApi mNewsService,
+                          IPicApi mPicService, ICourtApi mCourtArticlesService,
+                          IVideoApi mVideoService) {
         this.mBasketballScoreService = mBasketballScoreService;
         this.mNewsService = mNewsService;
         this.mPicService = mPicService;
         this.mCourtArticlesService = mCourtArticlesService;
+        this.mVideoService = mVideoService;
     }
 
     @Override
@@ -60,4 +66,11 @@ public class RetrofitHelper implements HttpHelper {
     public Flowable<ResponseBody> getCourtArticleDetail(String detail) {
         return mCourtArticlesService.getCourtArticleDetail(detail);
     }
+
+    @Override
+    public Flowable<TencentVideoResultBean> getVideos(int page) {
+        return mVideoService.getVideos(page);
+    }
+
+
 }

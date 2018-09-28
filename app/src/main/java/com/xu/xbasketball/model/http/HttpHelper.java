@@ -3,6 +3,7 @@ package com.xu.xbasketball.model.http;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
+import com.xu.xbasketball.model.bean.TencentVideoResultBean;
 
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
@@ -22,5 +23,7 @@ public interface HttpHelper {
     Flowable<ResponseBody> getCourtArticles(int page);
 
     Flowable<ResponseBody> getCourtArticleDetail(String detail);
+
+    Flowable<TencentVideoResultBean> getVideos(int page);
 
 }

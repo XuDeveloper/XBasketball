@@ -7,10 +7,12 @@ import com.xu.xbasketball.di.qualifier.BasketballScoreUrl;
 import com.xu.xbasketball.di.qualifier.CourtUrl;
 import com.xu.xbasketball.di.qualifier.NewsUrl;
 import com.xu.xbasketball.di.qualifier.PicUrl;
+import com.xu.xbasketball.di.qualifier.VideoUrl;
 import com.xu.xbasketball.model.http.api.IBasketballScoreApi;
 import com.xu.xbasketball.model.http.api.ICourtApi;
 import com.xu.xbasketball.model.http.api.INewsApi;
 import com.xu.xbasketball.model.http.api.IPicApi;
+import com.xu.xbasketball.model.http.api.IVideoApi;
 import com.xu.xbasketball.utils.NetUtil;
 
 import java.io.File;
@@ -74,6 +76,13 @@ public class NetModule {
 
     @Singleton
     @Provides
+    @VideoUrl
+    Retrofit provideVideoRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, IVideoApi.HOST);
+    }
+
+    @Singleton
+    @Provides
     IBasketballScoreApi provideBasketballScoreService(@BasketballScoreUrl Retrofit retrofit) {
         return retrofit.create(IBasketballScoreApi.class);
     }
@@ -94,6 +103,12 @@ public class NetModule {
     @Provides
     ICourtApi provideCourtArticlesService(@CourtUrl Retrofit retrofit) {
         return retrofit.create(ICourtApi.class);
+    }
+
+    @Singleton
+    @Provides
+    IVideoApi provideVideoService(@VideoUrl Retrofit retrofit) {
+        return retrofit.create(IVideoApi.class);
     }
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {
