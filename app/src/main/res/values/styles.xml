@@ -43,11 +43,32 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="TextGray10sptv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTextGray</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
     <style name="TextColorPrimary20sptv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextWhite12sptv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextWhite8sptv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">8sp</item>
     </style>
 
 </resources>

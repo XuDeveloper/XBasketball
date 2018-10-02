@@ -2,7 +2,6 @@ package com.xu.xbasketball.base.contract.video;
 
 import com.xu.xbasketball.base.IBasePresenter;
 import com.xu.xbasketball.base.IBaseView;
-import com.xu.xbasketball.base.contract.news.NewsContract;
 import com.xu.xbasketball.model.bean.TencentVideoBean;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public interface VideoContract {
         void showVideos(List<TencentVideoBean> videos);
     }
 
-    interface Presenter extends IBasePresenter<NewsContract.View> {
+    interface Presenter extends IBasePresenter<View> {
         /**
          * 获取视频
          * @param page
