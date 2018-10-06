@@ -120,7 +120,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

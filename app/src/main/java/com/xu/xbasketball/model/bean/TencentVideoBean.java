@@ -13,6 +13,7 @@ public class TencentVideoBean {
      * vurl: http://new.qq.com/omv/video/i0716r7bhs6
      * source: 单位看门大爷爱看球
      * duration: 22
+     * update_name: 2018-10-04 14:27:08
      */
 
     private String img;
@@ -20,6 +21,7 @@ public class TencentVideoBean {
     private String vurl;
     private String source;
     private int duration;
+    private String update_time;
 
     public String getImg() {
         return img;
@@ -59,5 +61,13 @@ public class TencentVideoBean {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public String getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
     }
 }

@@ -9,6 +9,7 @@ import com.xu.xbasketball.ui.dailyscore.fragment.DailyScoreFragment;
 import com.xu.xbasketball.ui.main.fragment.SettingFragment;
 import com.xu.xbasketball.ui.news.fragment.NewsFragment;
 import com.xu.xbasketball.ui.pic.fragment.PicFragment;
+import com.xu.xbasketball.ui.video.fragment.VideoFragment;
 
 import dagger.Component;
 
@@ -32,4 +33,5 @@ public interface FragmentComponent {
 
     void inject(CourtFragment courtFragment);
 
+    void inject(VideoFragment videoFragment);
 }

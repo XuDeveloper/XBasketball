@@ -30,4 +30,11 @@ public class DateUtil {
         return dateFormat.format(date);
     }
 
+    public static String millisToMinute(int time) {
+        long lt = time * 1000;
+        Date date = new Date(lt);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss");
+        return dateFormat.format(date);
+    }
+
 }
