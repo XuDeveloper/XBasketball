@@ -1,6 +1,7 @@
 package com.xu.xbasketball.ui.video.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.model.bean.TencentVideoBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.DateUtil;
@@ -60,7 +64,28 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         holder.tvVideoSource.setText(videoBean.getSource());
         holder.tvVideoTitle.setText(videoBean.getTitle());
         holder.tvVideoUpdateTime.setText(videoBean.getUpdate_time());
-        ImageLoader.load(mContext, videoBean.getImg(), holder.ivVideoBimg);
+        holder.ivVideoBimg.setTag(videoBean.getImg());
+        if (videoBean.getImg().equals(holder.ivVideoBimg.getTag())) {
+            ImageLoader.load(mContext, videoBean.getImg() + ".jpg", R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+                    if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        if (list.get(holder.getAdapterPosition()).getImgHeight() <= 0) {
+                            int width = resource.getWidth();
+                            int height = resource.getHeight();
+                            int realHeight = App.SCREEN_WIDTH * height / width;
+                            list.get(holder.getAdapterPosition()).setImgHeight(realHeight);
+                            ViewGroup.LayoutParams lp = holder.ivVideoBimg.getLayoutParams();
+                            lp.height = realHeight;
+                        } else {
+                            ViewGroup.LayoutParams lp = holder.ivVideoBimg.getLayoutParams();
+                            lp.height = list.get(holder.getAdapterPosition()).getImgHeight();
+                        }
+                    }
+                    holder.ivVideoBimg.setImageBitmap(resource);
+                }
+            });
+        }
         holder.cvVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

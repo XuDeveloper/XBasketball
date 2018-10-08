@@ -53,7 +53,7 @@ public class GameBean {
     private String groupName;
     private String competitionId;
     private String ifHasPlayback;
-    private LatestNewsBean latestNews;
+//    private LatestNewsBean latestNews;
 
     public String getQuarter() {
         return quarter;
@@ -223,13 +223,13 @@ public class GameBean {
         this.ifHasPlayback = ifHasPlayback;
     }
 
-    public LatestNewsBean getLatestNews() {
-        return latestNews;
-    }
-
-    public void setLatestNews(LatestNewsBean latestNews) {
-        this.latestNews = latestNews;
-    }
+//    public LatestNewsBean getLatestNews() {
+//        return latestNews;
+//    }
+//
+//    public void setLatestNews(LatestNewsBean latestNews) {
+//        this.latestNews = latestNews;
+//    }
 
 
 }

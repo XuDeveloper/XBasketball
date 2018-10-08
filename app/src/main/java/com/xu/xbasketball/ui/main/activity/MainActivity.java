@@ -19,6 +19,7 @@ import com.xu.xbasketball.ui.basketball.fragment.BasketballFragment;
 import com.xu.xbasketball.ui.court.fragment.CourtFragment;
 import com.xu.xbasketball.ui.main.fragment.SettingFragment;
 import com.xu.xbasketball.ui.pic.fragment.PicFragment;
+import com.xu.xbasketball.ui.video.fragment.VideoFragment;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity {
 
     private BasketballFragment basketballFragment;
     private PicFragment picFragment;
+    private VideoFragment videoFragment;
     private SettingFragment settingFragment;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -79,6 +81,7 @@ public class MainActivity extends BaseActivity {
     public void initData() {
         basketballFragment = new BasketballFragment();
         picFragment = new PicFragment();
+        videoFragment = new VideoFragment();
         settingFragment = new SettingFragment();
 
         navigation.getMenu().findItem(R.id.navigation_basketball).setChecked(true);
@@ -89,6 +92,9 @@ public class MainActivity extends BaseActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_pic:
                         setTargetFragment(picFragment);
+                        break;
+                    case R.id.navigation_video:
+                        setTargetFragment(videoFragment);
                         break;
                     case R.id.navigation_basketball:
                         setTargetFragment(basketballFragment);

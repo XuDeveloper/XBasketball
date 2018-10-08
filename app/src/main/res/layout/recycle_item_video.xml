@@ -4,9 +4,9 @@
     android:id="@+id/cv_video"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp"
+    android:layout_margin="8dp"
     android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="3dp"
+    app:cardCornerRadius="5dp"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -24,6 +24,7 @@
             android:id="@+id/tv_video_title"
             style="@style/TextBlack16sptv"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="标题标题标题标题" />
 
         <FrameLayout
@@ -35,7 +36,7 @@
                 android:id="@+id/iv_video_bimg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:alpha="0.8"
                 android:src="@mipmap/ic_launcher" />
 
@@ -50,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/colorGray"
                 app:cardCornerRadius="3dp"
@@ -57,7 +59,7 @@
 
                 <TextView
                     android:id="@+id/tv_video_duration"
-                    style="@style/TextWhite8sptv"
+                    style="@style/TextWhite10sptv"
                     android:layout_gravity="center"
                     android:layout_marginStart="7dp"
                     android:layout_marginTop="2dp"
@@ -78,7 +80,7 @@
                 style="@style/TextGray10sptv"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="8dp"
                 android:text="2018.10.02 21:09:21" />
 
         </RelativeLayout>

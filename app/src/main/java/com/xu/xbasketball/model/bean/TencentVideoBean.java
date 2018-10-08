@@ -22,6 +22,7 @@ public class TencentVideoBean {
     private String source;
     private int duration;
     private String update_time;
+    private int imgHeight;
 
     public String getImg() {
         return img;
@@ -69,5 +70,13 @@ public class TencentVideoBean {
 
     public void setUpdate_time(String update_time) {
         this.update_time = update_time;
+    }
+
+    public int getImgHeight() {
+        return imgHeight;
+    }
+
+    public void setImgHeight(int imgHeight) {
+        this.imgHeight = imgHeight;
     }
 }

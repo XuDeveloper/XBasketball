@@ -86,6 +86,9 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
                             list.get(holder.getAdapterPosition()).setHeight(realHeight);
                             ViewGroup.LayoutParams lp = holder.ivPic.getLayoutParams();
                             lp.height = realHeight;
+                        } else {
+                            ViewGroup.LayoutParams lp = holder.ivPic.getLayoutParams();
+                            lp.height = list.get(holder.getAdapterPosition()).getHeight();
                         }
                     }
                     holder.ivPic.setImageBitmap(resource);

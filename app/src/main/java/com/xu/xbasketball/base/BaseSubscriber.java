@@ -1,5 +1,7 @@
 package com.xu.xbasketball.base;
 
+import android.util.Log;
+
 import io.reactivex.subscribers.ResourceSubscriber;
 
 /**
@@ -31,6 +33,7 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<T> {
 //            L.i("message-onerror: " + e.getMessage());
 //            getBaseView().showLoadFailMsg(e.getMessage());
 //        }
-//        getBaseView().hideProgress();
+        Log.i("test", e.getMessage());
+        getBaseView().hideProgress();
     }
 }

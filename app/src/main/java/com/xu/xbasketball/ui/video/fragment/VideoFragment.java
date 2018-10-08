@@ -11,6 +11,7 @@ import android.view.View;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
+import com.xu.xbasketball.base.BaseMVPFragment;
 import com.xu.xbasketball.base.contract.news.NewsContract;
 import com.xu.xbasketball.base.contract.video.VideoContract;
 import com.xu.xbasketball.model.bean.TencentNewsBean;
@@ -31,7 +32,7 @@ import butterknife.BindView;
  *
  * @author Xu
  */
-public class VideoFragment extends BaseLazyLoadFragment<VideoPresenter> implements VideoContract.View {
+public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements VideoContract.View {
 
     @BindView(R.id.rv_video)
     RecyclerView rvVideo;
@@ -47,7 +48,7 @@ public class VideoFragment extends BaseLazyLoadFragment<VideoPresenter> implemen
     private boolean isLoadingMore = false;
 
     @Override
-    protected void initDatas() {
+    public void initData() {
         mList = new ArrayList<>();
         adapter = new VideoAdapter(mContext);
         page = 1;
@@ -66,15 +67,7 @@ public class VideoFragment extends BaseLazyLoadFragment<VideoPresenter> implemen
             public void onItemClick(int position) {
             }
         });
-    }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_video;
-    }
-
-    @Override
-    protected void lazyLoad() {
         mPresenter.getVideos(page);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -98,6 +91,11 @@ public class VideoFragment extends BaseLazyLoadFragment<VideoPresenter> implemen
                 }
             }
         });
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_video;
     }
 
     @Override
