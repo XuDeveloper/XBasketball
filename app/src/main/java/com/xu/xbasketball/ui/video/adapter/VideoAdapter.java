@@ -19,7 +19,12 @@ import com.xu.xbasketball.model.bean.TencentVideoBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.DateUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -42,7 +47,36 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     }
 
     public void updateData(List<TencentVideoBean> list) {
+        // 去重
+//        ArrayList<TencentVideoBean> noDuplicateList = new ArrayList<>();
+//        HashSet<TencentVideoBean> set = new HashSet<>();
+//        for (TencentVideoBean videoBean: list) {
+//            if (set.add(videoBean)) {
+//                noDuplicateList.add(videoBean);
+//            }
+//        }
+//        this.list = noDuplicateList;
         this.list = list;
+        Collections.sort(this.list, new Comparator<TencentVideoBean>() {
+            @Override
+            public int compare(TencentVideoBean o1, TencentVideoBean o2) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    Date date1 = format.parse(o1.getUpdate_time());
+                    Date date2 = format.parse(o2.getUpdate_time());
+                    if (date1.getTime() > date2.getTime()) {
+                        return -1;
+                    } else if (date1.getTime() < date2.getTime()) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
         this.notifyDataSetChanged();
     }
 
