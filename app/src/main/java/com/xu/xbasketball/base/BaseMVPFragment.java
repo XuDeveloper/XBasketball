@@ -44,7 +44,6 @@ public abstract class BaseMVPFragment<T extends IBasePresenter> extends BaseFrag
         if (mPresenter != null) {
             mPresenter.attach(this);
         }
-        initData();
         super.onViewCreated(view, savedInstanceState);
     }
 

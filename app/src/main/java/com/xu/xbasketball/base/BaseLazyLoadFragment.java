@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,7 @@ public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fra
         if (mPresenter != null) {
             mPresenter.attach(this);
         }
-        /**初始化的时候去加载数据**/
+        // 初始化的时候去加载数据
         isCanLoadData();
         return view;
     }
@@ -102,7 +103,6 @@ public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fra
         if (!isInit) {
             return;
         }
-
         if (isVisible) {
             lazyLoad();
             isLoad = true;

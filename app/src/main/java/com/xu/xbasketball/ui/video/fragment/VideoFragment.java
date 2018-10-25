@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.xu.xbasketball.R;
@@ -84,7 +85,7 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int lastItem = mLayoutManager.findLastCompletelyVisibleItemPosition();
-                if (lastItem >= adapter.getItemCount() - 1 && !isLoadingMore) {
+                if (lastItem >= adapter.getItemCount() - 1 && !isLoadingMore && dy > 0) {
                     isLoadingMore = true;
                     page++;
                     mPresenter.getVideos(page);
@@ -107,6 +108,7 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
     public void showVideos(List<TencentVideoBean> videos) {
         mList.addAll(videos);
         adapter.updateData(mList);
+        Log.i("test", "size: " + mList.size());
         isLoadingMore = false;
     }
 
