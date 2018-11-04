@@ -1,6 +1,7 @@
 package com.xu.xbasketball.ui.main;
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.xu.xbasketball.ui.court.fragment.CourtFragment;

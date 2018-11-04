@@ -2,10 +2,11 @@ package com.xu.xbasketball.ui.basketball.fragment;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseFragment;
-import com.xu.xbasketball.ui.main.adapter.MainFragmentPagerAdapter;
+import com.xu.xbasketball.ui.basketball.adapter.BasketballFragmentPagerAdapter;
 
 import butterknife.BindView;
 
@@ -21,12 +22,14 @@ public class BasketballFragment extends BaseFragment {
     @BindView(R.id.vp_basketball)
     ViewPager vpBasketball;
 
-    private MainFragmentPagerAdapter mFragmentPagerAdapter;
+    private BasketballFragmentPagerAdapter mFragmentPagerAdapter;
 
     @Override
     public void initData() {
-        mFragmentPagerAdapter = new MainFragmentPagerAdapter(
-                getChildFragmentManager(), mContext);
+        if (mFragmentPagerAdapter == null) {
+            mFragmentPagerAdapter = new BasketballFragmentPagerAdapter(
+                    getChildFragmentManager(), mContext);
+        }
         vpBasketball.setAdapter(mFragmentPagerAdapter);
         tlBasketball.setupWithViewPager(vpBasketball);
     }
@@ -35,7 +38,6 @@ public class BasketballFragment extends BaseFragment {
     public int getLayoutId() {
         return R.layout.fragment_basketball_main;
     }
-
 
 
 }

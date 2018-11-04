@@ -1,4 +1,4 @@
-package com.xu.xbasketball.ui.main.adapter;
+package com.xu.xbasketball.ui.basketball.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -13,13 +13,13 @@ import com.xu.xbasketball.ui.main.FragmentFactory;
  *
  * @author Xu
  */
-public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
+public class BasketballFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private static final int COUNT = 3;
 
     private String[] titles;
 
-    public MainFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public BasketballFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         titles = context.getResources().getStringArray(R.array.tab_title);
     }

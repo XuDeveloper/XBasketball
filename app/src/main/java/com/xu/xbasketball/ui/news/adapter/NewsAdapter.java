@@ -86,7 +86,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         }
         holder.tvNewsTitle.setText(newsBean.getTitle());
         holder.tvNewsTime.setText(newsBean.getTime());
-        ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
+        if (newsBean.getBigImage().size() > 0) {
+            ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
+        }
         holder.llNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
