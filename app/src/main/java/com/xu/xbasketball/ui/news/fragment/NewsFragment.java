@@ -82,6 +82,7 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                // todo 重复数据问题！！
                 mList.clear();
                 mPresenter.getNews(Constants.DEVID);
             }

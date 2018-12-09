@@ -1,5 +1,6 @@
 package com.xu.xbasketball.model.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,7 +92,7 @@ public class TencentNewsBean {
     private String time;
     private int timestamp;
     private int readCount;
-    private List<String> bigImage;
+    private List<String> bigImage = new ArrayList<>();
 
     public String getId() {
         return id;

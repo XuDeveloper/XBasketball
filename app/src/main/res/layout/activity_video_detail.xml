@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <ViewStub
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/include_loading"
+        android:visibility="gone" />
+
+    <include layout="@layout/view_toolbar" />
+
+    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+        android:id="@+id/video_player_video_detail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/video_detail_height" />
+
+    <TextView
+        android:layout_margin="10dp"
+        android:id="@+id/tv_video_detail_title"
+        style="@style/TextBlack16sptv"
+        android:text="123123"/>
+
+</LinearLayout>

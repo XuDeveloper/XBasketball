@@ -122,9 +122,10 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         }
         holder.cvVideo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(position);
+                    View shareView = view.findViewById(R.id.iv_video_bimg);
+                    onItemClickListener.onItemClick(position, shareView);
                 }
             }
         });
@@ -166,7 +167,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position, View shareView);
     }
 
 }

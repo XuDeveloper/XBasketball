@@ -65,7 +65,7 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
 
         adapter.setOnItemClickListener(new VideoAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position, View shareView) {
             }
         });
 
