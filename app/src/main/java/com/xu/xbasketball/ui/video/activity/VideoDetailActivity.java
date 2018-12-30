@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
+import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.video.VideoManager;
 
 import butterknife.BindView;
 
@@ -40,8 +43,11 @@ public class VideoDetailActivity extends BaseActivity {
     private String videoUrl;
     private String videoBImgUrl;
     private String title;
+    private OrientationUtils orientationUtils;
+    private boolean isPlay;
+    private boolean isPause;
 
-    // todo 封装videoplayer
+    private VideoManager videoManager;
 
     public static void launch(Context context, String video_url, String video_bimg_url, String title, Bundle bundle) {
         Intent intent = new Intent(context, VideoDetailActivity.class);
@@ -90,5 +96,44 @@ public class VideoDetailActivity extends BaseActivity {
         videoPlayer.getTitleTextView().setVisibility(View.GONE);
         videoPlayer.getBackButton().setVisibility(View.GONE);
 
+        //外部辅助的旋转，帮助全屏
+        orientationUtils = new OrientationUtils(this, videoPlayer);
+        //初始化不打开外部的旋转
+        orientationUtils.setEnable(false);
+
+        videoManager = new VideoManager();
+        videoManager.setDefaultOption(imageView, title);
+        videoManager.play(videoPlayer, videoUrl, new GSYSampleCallBack() {
+            @Override
+            public void onPrepared(String url, Object... objects) {
+                super.onPrepared(url, objects);
+                //开始播放了才能旋转和全屏
+                orientationUtils.setEnable(true);
+                isPlay = true;
+            }
+
+            @Override
+            public void onQuitFullscreen(String url, Object... objects) {
+                super.onQuitFullscreen(url, objects);
+                if (orientationUtils != null) {
+                    orientationUtils.backToProtVideo();
+                }
+            }
+        }, (view, lock) -> {
+            if (orientationUtils != null) {
+                //配合下方的onConfigurationChanged
+                orientationUtils.setEnable(!lock);
+            }
+        });
+
+        videoPlayer.getFullscreenButton().setOnClickListener(view -> {
+            //直接横屏
+            orientationUtils.resolveByClick();
+            //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
+            videoPlayer.startWindowFullscreen(VideoDetailActivity.this, true, true);
+        });
+
     }
+
+    // todo https://github.com/CarGuo/GSYVideoPlayer/blob/master/app/src/main/java/com/example/gsyvideoplayer/simple/SimpleDetailActivityMode2.java
 }
