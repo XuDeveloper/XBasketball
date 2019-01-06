@@ -14,7 +14,7 @@ import com.xu.xbasketball.ui.dailyscore.fragment.DailyScoreFragment;
  *
  * @author Xu
  */
-public class FragmentFactory {
+public class BasketballFragmentFactory {
 
     private static SparseArray<Fragment> sparseArray = new SparseArray<>();
 

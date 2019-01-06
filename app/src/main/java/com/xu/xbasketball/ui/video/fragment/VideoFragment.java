@@ -20,6 +20,7 @@ import com.xu.xbasketball.model.bean.TencentVideoBean;
 import com.xu.xbasketball.presenter.news.NewsPresenter;
 import com.xu.xbasketball.presenter.video.VideoPresenter;
 import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
+import com.xu.xbasketball.ui.video.activity.VideoDetailActivity;
 import com.xu.xbasketball.ui.video.adapter.VideoAdapter;
 import com.xu.xbasketball.widget.DividerItemDecoration;
 
@@ -63,21 +64,17 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
         rvVideo.setItemAnimator(new DefaultItemAnimator());
         rvVideo.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new VideoAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, View shareView) {
-            }
+        adapter.setOnItemClickListener((position, shareView) -> {
+            VideoDetailActivity.launch(mContext, mList.get(position).getVurl(),
+                    mList.get(position).getImg(), mList.get(position).getTitle(), null);
         });
 
         mPresenter.getVideos(page);
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                page = 1;
-                isLoadingMore = false;
-                mList.clear();
-                mPresenter.getVideos(page);
-            }
+        swipeRefresh.setOnRefreshListener(() -> {
+            page = 1;
+            isLoadingMore = false;
+            mList.clear();
+            mPresenter.getVideos(page);
         });
 
         rvVideo.addOnScrollListener(new RecyclerView.OnScrollListener() {

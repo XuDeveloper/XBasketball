@@ -10,4 +10,10 @@
     <string name="action_share">分享链接</string>
     <string name="action_save">保存到本地</string>
 
+    <string name="drawer_main">首页</string>
+    <string name="drawer_pic">图片</string>
+    <string name="drawer_video">视频</string>
+    <string name="drawer_setting">设置</string>
+    <string name="drawer_about">关于</string>
+
 </resources>

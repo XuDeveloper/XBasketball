@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.xu.xbasketball.R;
-import com.xu.xbasketball.ui.main.FragmentFactory;
+import com.xu.xbasketball.ui.main.BasketballFragmentFactory;
 
 /**
  * Created by Xu on 2018/4/6.
@@ -31,7 +31,7 @@ public class BasketballFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return FragmentFactory.createFragment(position);
+        return BasketballFragmentFactory.createFragment(position);
     }
 
     @Override
