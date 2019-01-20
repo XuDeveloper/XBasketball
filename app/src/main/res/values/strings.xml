@@ -16,4 +16,7 @@
     <string name="drawer_setting">设置</string>
     <string name="drawer_about">关于</string>
 
+    <string name="about_text">Project：XBasketball\n\nAuthor: Xu\n\nGithub address: https://github.com/XuDeveloper/XBasketball\n\nPersonal Blog: https://dev-xu.cn
+    </string>
+
 </resources>

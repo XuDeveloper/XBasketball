@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -67,6 +68,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 return 0;
             }
         });
+        // 去除"垂直化入口"条目
+        Iterator<TencentNewsBean> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            TencentNewsBean newsBean = iterator.next();
+            if (newsBean.getTitle().equals("垂直化入口")) {
+                iterator.remove();
+            }
+        }
         this.notifyDataSetChanged();
     }
 

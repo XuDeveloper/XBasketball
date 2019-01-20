@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.xu.xbasketball.R;
@@ -16,25 +15,12 @@ import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.base.BaseFragment;
 import com.xu.xbasketball.ui.basketball.fragment.BasketballFragment;
-import com.xu.xbasketball.ui.court.fragment.CourtFragment;
+import com.xu.xbasketball.ui.main.fragment.AboutFragment;
 import com.xu.xbasketball.ui.main.fragment.SettingFragment;
 import com.xu.xbasketball.ui.pic.fragment.PicFragment;
 import com.xu.xbasketball.ui.video.fragment.VideoFragment;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.util.Set;
-
 import butterknife.BindView;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by Xu on 2018/3/30.
@@ -55,6 +41,7 @@ public class MainActivity extends BaseActivity {
     private PicFragment picFragment;
     private VideoFragment videoFragment;
     private SettingFragment settingFragment;
+    private AboutFragment aboutFragment;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -83,6 +70,7 @@ public class MainActivity extends BaseActivity {
         picFragment = new PicFragment();
         videoFragment = new VideoFragment();
         settingFragment = new SettingFragment();
+        aboutFragment = new AboutFragment();
 
         navigation.getMenu().findItem(R.id.navigation_basketball).setChecked(true);
 
@@ -102,12 +90,17 @@ public class MainActivity extends BaseActivity {
                     case R.id.navigation_setting:
                         setTargetFragment(settingFragment);
                         break;
+                    case R.id.navigation_about:
+                        setTargetFragment(aboutFragment);
+                        break;
                 }
                 item.setChecked(true);
-                if (item.getTitle().equals("首页")) {
+                if (item.getTitle().equals(getString(R.string.drawer_main))) {
                     toolbar.setTitle("XBasketball");
-                } else if (item.getTitle().equals("设置")) {
+                } else if (item.getTitle().equals(getString(R.string.drawer_setting))) {
                     toolbar.setTitle("系统设置");
+                } else if (item.getTitle().equals(getString(R.string.drawer_about))) {
+                    toolbar.setTitle("关于XBasketball");
                 } else {
                     toolbar.setTitle("篮球" + item.getTitle());
                 }

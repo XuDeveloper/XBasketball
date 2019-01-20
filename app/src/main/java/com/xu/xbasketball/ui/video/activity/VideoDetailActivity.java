@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
@@ -80,6 +81,11 @@ public class VideoDetailActivity extends BaseActivity {
         videoUrl = getIntent().getStringExtra(Constants.VIDEO_URL);
         videoBImgUrl = getIntent().getStringExtra(Constants.VIDEO_BIMG_URL);
         title = getIntent().getStringExtra(Constants.VIDEO_TITLE);
+//        Log.i("test", "videoUrl1: " + videoUrl);
+//
+//        String id = videoUrl.split("/")[videoUrl.split("/").length - 1];
+//        videoUrl = "https://xw.qq.com/a/video/" + id;
+//        Log.i("test", "videoUrl2: " + videoUrl);
 
         tvVideoTitle.setText(title);
         // 增加封面

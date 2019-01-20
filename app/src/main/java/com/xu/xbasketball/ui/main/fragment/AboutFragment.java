@@ -1,5 +1,6 @@
 package com.xu.xbasketball.ui.main.fragment;
 
+import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseFragment;
 
 /**
@@ -16,6 +17,6 @@ public class AboutFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.fragment_about;
     }
 }
