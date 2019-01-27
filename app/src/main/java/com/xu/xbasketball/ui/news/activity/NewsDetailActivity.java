@@ -85,6 +85,8 @@ public class NewsDetailActivity extends BaseActivity {
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
         settings.setDomStorageEnabled(true);
+        // 开启webview 调试模式
+//        WebView.setWebContentsDebuggingEnabled(true);
         wvNewsDetail.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -96,6 +98,8 @@ public class NewsDetailActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[0]);
                 view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[1]);
+                view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[2]);
+                view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[3]);
                 super.onPageFinished(view, url);
             }
         });

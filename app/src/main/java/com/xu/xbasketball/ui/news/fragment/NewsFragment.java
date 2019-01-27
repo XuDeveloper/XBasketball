@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.xu.xbasketball.R;
@@ -82,7 +83,6 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // todo 重复数据问题！！
                 mList.clear();
                 mPresenter.getNews(Constants.DEVID);
             }
@@ -97,13 +97,6 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
                     isLoadingMore = true;
                     mPresenter.getNews(Constants.DEVID);
                 }
-            }
-        });
-
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.getNews(Constants.DEVID);
             }
         });
     }

@@ -53,14 +53,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             public int compare(TencentNewsBean o1, TencentNewsBean o2) {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    Date date1 = format.parse(o1.getTime());
-                    Date date2 = format.parse(o2.getTime());
-                    if (date1.getTime() > date2.getTime()) {
-                        return -1;
-                    } else if (date1.getTime() < date2.getTime()) {
-                        return 1;
+                    if (!o1.getTime().equals("") && !o2.getTime().equals("")) {
+                        Date date1 = format.parse(o1.getTime());
+                        Date date2 = format.parse(o2.getTime());
+                        if (date1.getTime() > date2.getTime()) {
+                            return -1;
+                        } else if (date1.getTime() < date2.getTime()) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
                     } else {
-                        return 0;
+                        return 1;
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
