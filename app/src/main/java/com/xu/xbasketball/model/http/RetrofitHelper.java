@@ -48,8 +48,8 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<TencentNewsResultBean> getNews(String devid) {
-        return mNewsService.getNews(devid);
+    public Flowable<TencentNewsResultBean> getNews() {
+        return mNewsService.getNews();
     }
 
     @Override

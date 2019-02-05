@@ -15,7 +15,7 @@ public interface INewsApi {
 
     String HOST = "https://r.inews.qq.com/";
 
-    @GET("getQQNewsUnreadList?last_id=&chlid=news_news_nba")
-    Flowable<TencentNewsResultBean> getNews(@Query("devid") String devid);
+    @GET("getQQNewsUnreadList?last_id=&chlid=news_news_nba&devid=3")
+    Flowable<TencentNewsResultBean> getNews();
 
 }

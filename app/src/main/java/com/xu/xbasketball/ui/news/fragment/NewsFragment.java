@@ -79,12 +79,12 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
 
     @Override
     protected void lazyLoad() {
-        mPresenter.getNews(Constants.DEVID);
+        mPresenter.getNews();
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mList.clear();
-                mPresenter.getNews(Constants.DEVID);
+                mPresenter.getNews();
             }
         });
 
@@ -95,7 +95,7 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
                 int lastItem = mLayoutManager.findLastCompletelyVisibleItemPosition();
                 if (lastItem >= adapter.getItemCount() - 1 && !isLoadingMore) {
                     isLoadingMore = true;
-                    mPresenter.getNews(Constants.DEVID);
+                    mPresenter.getNews();
                 }
             }
         });

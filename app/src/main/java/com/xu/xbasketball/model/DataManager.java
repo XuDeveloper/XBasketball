@@ -32,8 +32,8 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<TencentNewsResultBean> getNews(String devid) {
-        return mHttpHelper.getNews(devid);
+    public Flowable<TencentNewsResultBean> getNews() {
+        return mHttpHelper.getNews();
     }
 
     @Override

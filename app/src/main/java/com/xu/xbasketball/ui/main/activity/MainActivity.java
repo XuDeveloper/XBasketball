@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.xu.xbasketball.R;
@@ -19,6 +20,11 @@ import com.xu.xbasketball.ui.main.fragment.AboutFragment;
 import com.xu.xbasketball.ui.main.fragment.SettingFragment;
 import com.xu.xbasketball.ui.pic.fragment.PicFragment;
 import com.xu.xbasketball.ui.video.fragment.VideoFragment;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 

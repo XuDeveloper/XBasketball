@@ -16,7 +16,7 @@ public interface HttpHelper {
 
     Flowable<ScoreBoardBean> getDailyScore(String startTime, String endTime);
 
-    Flowable<TencentNewsResultBean> getNews(String devid);
+    Flowable<TencentNewsResultBean> getNews();
 
     Flowable<SinaPicResultBean> getPics(int page, int num);
 

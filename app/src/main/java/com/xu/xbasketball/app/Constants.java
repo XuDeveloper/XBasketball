@@ -20,8 +20,6 @@ public class Constants {
 
     // -----------------------------DEVID-----------------------------
 
-    public static final String DEVID = "3a6d5d1eb7c4f376";
-
     public static final String FILE_PROVIDER_AUTHORITY = "com.xu.xbasketball.fileprovider";
 
     // -----------------------------Intent-----------------------------

@@ -24,9 +24,8 @@ public interface NewsContract {
     interface Presenter extends IBasePresenter<View> {
         /**
          * 获取每日新闻
-         * @param time
          */
-        void getNews(String time);
+        void getNews();
     }
 
 }

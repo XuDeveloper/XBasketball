@@ -23,7 +23,7 @@ public class JavascriptUtil {
     }
 
     public static String[] getNewsDetailJsCode() {
-        String[] result = new String[4];
+        String[] result = new String[2];
         result[0] = "javascript:function clearNewsDetailUnused() {\n" +
                 "var click = document.querySelector('div#root>div:nth-child(1)>div:nth-child(2)>div:nth-child(1)>div:nth-child(2)');\n" +
                 "click.click();\n" +
@@ -33,19 +33,12 @@ public class JavascriptUtil {
                 "document.querySelector('div#root').style.display = 'none';\n" +
                 "document.body.appendChild(title);\n" +
                 "document.body.appendChild(content);\n}}";
-        result[1] = "javascript:function setContentSecurityPolicy() {\n" +
-                "var meta = document.createElement('meta');\n" +
-                "meta.content = 'upgrade-insecure-requests';\n" +
-                "meta.httpEquiv = 'Content-Security-Policy';\n" +
-                "document.getElementsByTagName('head')[0].appendChild(meta);\n}";
-        result[2] = "javascript:setContentSecurityPolicy();";
         // window.location.reload() 刷新页面
-        result[3] = "javascript:let timer = setInterval(() => {\n" +
+        result[1] = "javascript:let timer = setInterval(() => {\n" +
                 "var click = document.querySelector('div#root>div:nth-child(1)>div:nth-child(2)>div:nth-child(1)>div:nth-child(2)');\n" +
                 "if (click != null) {\n" +
                 "clearInterval(timer);\n" +
-                "clearNewsDetailUnused();\n" +
-                "setContentSecurityPolicy();}}, 150);\n";
+                "clearNewsDetailUnused();}}, 150);\n";
         return result;
     }
 

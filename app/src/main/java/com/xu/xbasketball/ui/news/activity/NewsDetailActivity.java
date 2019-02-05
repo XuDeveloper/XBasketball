@@ -85,6 +85,10 @@ public class NewsDetailActivity extends BaseActivity {
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
         settings.setDomStorageEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
         // 开启webview 调试模式
 //        WebView.setWebContentsDebuggingEnabled(true);
         wvNewsDetail.setWebViewClient(new WebViewClient() {
@@ -98,8 +102,6 @@ public class NewsDetailActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[0]);
                 view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[1]);
-                view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[2]);
-                view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[3]);
                 super.onPageFinished(view, url);
             }
         });
@@ -130,9 +132,6 @@ public class NewsDetailActivity extends BaseActivity {
             wvNewsDetail = null;
         }
         super.onDestroy();
-
-//        Visibility returnTransition = buildReturnTransition();
-//        getWindow().setReturnTransition(returnTransition);
         finishAfterTransition();
     }
 

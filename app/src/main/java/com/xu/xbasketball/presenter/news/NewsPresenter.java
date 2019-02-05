@@ -29,8 +29,8 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
     }
 
     @Override
-    public void getNews(String devid) {
-        addSubscribe(mDataManager.getNews(devid)
+    public void getNews() {
+        addSubscribe(mDataManager.getNews()
             .compose(RxUtil.<TencentNewsResultBean>rxSchedulerHelper())
             .subscribeWith(new BaseSubscriber<TencentNewsResultBean>() {
                 @Override
