@@ -42,4 +42,6 @@ public class JavascriptUtil {
         return result;
     }
 
+    // https://m.v.qq.com/play.html?ptag=v_qq_com%23v.play.adaptor%233&vid=c00296olesr
+
 }

@@ -105,7 +105,6 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
     public void showVideos(List<TencentVideoBean> videos) {
         mList.addAll(videos);
         adapter.updateData(mList);
-        Log.i("VideoFragmentShowVideos", "size: " + mList.size());
         isLoadingMore = false;
     }
 

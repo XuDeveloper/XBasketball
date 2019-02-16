@@ -14,15 +14,17 @@
 
     <include layout="@layout/view_toolbar" />
 
-    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
-        android:id="@+id/video_player_video_detail"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/video_detail_height" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_margin="10dp"
-        android:id="@+id/tv_video_detail_title"
-        style="@style/TextBlack16sptv"
-        android:text="123123"/>
+        <WebView
+            android:id="@+id/wv_video_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:isScrollContainer="false"
+            android:overScrollMode="never"
+            android:scrollbars="vertical" />
+    </FrameLayout>
 
 </LinearLayout>

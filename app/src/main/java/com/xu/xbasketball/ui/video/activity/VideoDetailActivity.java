@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,10 +38,8 @@ public class VideoDetailActivity extends BaseActivity {
     ViewStub loading;
     @BindView(R.id.tb_basketball)
     Toolbar toolbar;
-    @BindView(R.id.video_player_video_detail)
-    StandardGSYVideoPlayer videoPlayer;
-    @BindView(R.id.tv_video_detail_title)
-    TextView tvVideoTitle;
+    @BindView(R.id.wv_video_detail)
+    WebView wvVideoDetail;
 
     private ImageView imageView;
     private String videoUrl;
@@ -81,11 +80,19 @@ public class VideoDetailActivity extends BaseActivity {
         videoUrl = getIntent().getStringExtra(Constants.VIDEO_URL);
         videoBImgUrl = getIntent().getStringExtra(Constants.VIDEO_BIMG_URL);
         title = getIntent().getStringExtra(Constants.VIDEO_TITLE);
-//        Log.i("test", "videoUrl1: " + videoUrl);
+        Log.i("test", "videoUrl1: " + videoUrl);
 //
 //        String id = videoUrl.split("/")[videoUrl.split("/").length - 1];
 //        videoUrl = "https://xw.qq.com/a/video/" + id;
 //        Log.i("test", "videoUrl2: " + videoUrl);
+
+        videoUrl = "https://apd-ded6eeda9a619d2652a84668520a58bd.v.smtcdns.com/sports.tc.qq.co" +
+                "m/AEqWy1HYQsv2KsgujN_cgDxtyUa47Vypfc6gv_mC67bg/c00296olesr.mp4?sdtfrom=v5010" +
+                "&guid=f0b7f7a0e71ead185383dca75e488cdf" +
+                "&vkey=DCFFACD42B491165EBCB51ED75EC2EB92D066C84E1B08CE255741345E5338120B7030B40" +
+                "08BFCD5FB18E12CE83AD2BFB895803594043695FECA124D354307186E50B105B0DF83495552D5A" +
+                "6C4C17E55903DA5099E25C089B6DF841C1136DDC7894E447019CFE8C912462E90C73C1E8F71C3C" +
+                "028D6EAE236C&platform=2";
 
         tvVideoTitle.setText(title);
         // 增加封面
@@ -172,7 +179,9 @@ public class VideoDetailActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (isPlay) {
-            videoPlayer.getCurrentPlayer().release();
+            if (videoPlayer.getCurrentPlayer() != null) {
+                videoPlayer.getCurrentPlayer().release();
+            }
         }
         if (orientationUtils != null) {
             orientationUtils.releaseListener();
