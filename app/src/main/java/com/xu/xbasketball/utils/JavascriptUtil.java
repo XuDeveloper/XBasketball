@@ -42,6 +42,13 @@ public class JavascriptUtil {
         return result;
     }
 
-    // https://m.v.qq.com/play.html?ptag=v_qq_com%23v.play.adaptor%233&vid=c00296olesr
+    public static String[] getVideoDetailJsCode() {
+        String[] result = new String[2];
+        // var content = $("div.list-item")[0];
+        // $("div#__next").css("display", "none");
+        // $("body").append(content);
+        // $(".video-meta").remove();
+        return result;
+    }
 
 }

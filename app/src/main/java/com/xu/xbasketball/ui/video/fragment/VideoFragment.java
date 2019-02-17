@@ -65,8 +65,8 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
         rvVideo.setAdapter(adapter);
 
         adapter.setOnItemClickListener((position, shareView) -> {
-            VideoDetailActivity.launch(mContext, mList.get(position).getVurl(),
-                    mList.get(position).getImg(), mList.get(position).getTitle(), null);
+            VideoDetailActivity.launch(mContext, mList.get(position).getId(),
+                    mList.get(position).getTitle());
         });
 
         mPresenter.getVideos(page);

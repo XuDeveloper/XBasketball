@@ -5,13 +5,6 @@
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
-    <ViewStub
-        android:id="@+id/loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout="@layout/include_loading"
-        android:visibility="gone" />
-
     <include layout="@layout/view_toolbar" />
 
     <FrameLayout

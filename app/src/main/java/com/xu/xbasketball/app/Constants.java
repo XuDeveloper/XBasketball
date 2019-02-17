@@ -34,9 +34,7 @@ public class Constants {
 
     public static final String PIC_URL = "pic_url";
 
-    public static final String VIDEO_URL = "video_url";
-
-    public static final String VIDEO_BIMG_URL = "video_bimg_url";
+    public static final String VIDEO_ID = "video_id";
 
     public static final String VIDEO_TITLE = "video_title";
 
