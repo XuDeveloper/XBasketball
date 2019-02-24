@@ -73,8 +73,8 @@ public class VideoDetailActivity extends BaseActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-//                view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[0]);
-//                view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[1]);
+                view.loadUrl(JavascriptUtil.getVideoDetailJsCode()[0]);
+                view.loadUrl(JavascriptUtil.getVideoDetailJsCode()[1]);
                 super.onPageFinished(view, url);
             }
         });

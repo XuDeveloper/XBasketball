@@ -1,5 +1,6 @@
 package com.xu.xbasketball.ui.video.fragment;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Xu on 2018/10/7.
@@ -40,6 +42,8 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
     RecyclerView rvVideo;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
+    @BindView(R.id.fab_video_back_to_top)
+    FloatingActionButton fabVideoBackToTop;
 
     private VideoAdapter adapter;
     private LinearLayoutManager mLayoutManager;
@@ -51,6 +55,7 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
 
     @Override
     public void initData() {
+        fabVideoBackToTop.setVisibility(View.GONE);
         mList = new ArrayList<>();
         adapter = new VideoAdapter(mContext);
         page = 1;
@@ -88,6 +93,23 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
                     mPresenter.getVideos(page);
                 }
             }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // 判断是否超过一屏
+                    if (firstVisibleItemPosition == 0) {
+                        fabVideoBackToTop.setVisibility(View.GONE);
+                    } else {
+                        fabVideoBackToTop.setVisibility(View.VISIBLE);
+                    }
+                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    // 滑动状态不显示
+                    fabVideoBackToTop.setVisibility(View.GONE);
+                }
+            }
         });
     }
 
@@ -106,6 +128,12 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
         mList.addAll(videos);
         adapter.updateData(mList);
         isLoadingMore = false;
+    }
+
+    @OnClick(R.id.fab_video_back_to_top)
+    public void videoBackToTop() {
+        rvVideo.smoothScrollToPosition(0);
+        fabVideoBackToTop.setVisibility(View.GONE);
     }
 
     @Override

@@ -44,10 +44,17 @@ public class JavascriptUtil {
 
     public static String[] getVideoDetailJsCode() {
         String[] result = new String[2];
-        // var content = $("div.list-item")[0];
-        // $("div#__next").css("display", "none");
-        // $("body").append(content);
-        // $(".video-meta").remove();
+        result[0] = "javascript:function clearVideoDetailUnused() {\n" +
+                "var content = $('div.list-item')[0];\n" +
+                "var mod_player = $('#mod_player');\n" +
+                "$('div#__next').css('display', 'none');\n" +
+                "$('body').append(content);\n" +
+                "$('body').append(mod_player);\n" +
+                "$('.video-meta').remove();\n}";
+        result[1] = "javascript:let timer = setInterval(() => {\n" +
+                "if ($('.video-meta') != null) {\n" +
+                "clearInterval(timer);\n" +
+                "clearVideoDetailUnused();}}, 150);\n";
         return result;
     }
 

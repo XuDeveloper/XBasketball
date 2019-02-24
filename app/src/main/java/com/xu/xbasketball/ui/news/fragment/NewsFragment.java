@@ -2,6 +2,7 @@ package com.xu.xbasketball.ui.news.fragment;
 
 import android.app.ActivityOptions;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import io.reactivex.internal.schedulers.NewThreadWorker;
 
 /**
  * Created by Xu on 2018/4/7.
@@ -38,6 +41,8 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
     RecyclerView rvNews;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
+    @BindView(R.id.fab_news_back_to_top)
+    FloatingActionButton fabNewsBackToTop;
 
     private NewsAdapter adapter;
     private LinearLayoutManager mLayoutManager;
@@ -79,6 +84,7 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
 
     @Override
     protected void lazyLoad() {
+        fabNewsBackToTop.setVisibility(View.GONE);
         mPresenter.getNews();
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -98,6 +104,23 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
                     mPresenter.getNews();
                 }
             }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // 判断是否超过一屏
+                    if (firstVisibleItemPosition == 0) {
+                        fabNewsBackToTop.setVisibility(View.GONE);
+                    } else {
+                        fabNewsBackToTop.setVisibility(View.VISIBLE);
+                    }
+                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    // 滑动状态不显示
+                    fabNewsBackToTop.setVisibility(View.GONE);
+                }
+            }
         });
     }
 
@@ -111,6 +134,12 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
         mList.addAll(news);
         adapter.updateData(mList);
         isLoadingMore = false;
+    }
+
+    @OnClick(R.id.fab_news_back_to_top)
+    public void newsBackToTop() {
+        rvNews.smoothScrollToPosition(0);
+        fabNewsBackToTop.setVisibility(View.GONE);
     }
 
     @Override

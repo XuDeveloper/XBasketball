@@ -3,6 +3,7 @@ package com.xu.xbasketball.ui.pic.fragment;
 import android.app.ActivityOptions;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Xu on 2018/6/6.
@@ -36,6 +38,8 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
     RecyclerView rvPic;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
+    @BindView(R.id.fab_pic_back_to_top)
+    FloatingActionButton fabPicBackToTop;
 
     private PicAdapter adapter;
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
@@ -52,6 +56,7 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
 
     @Override
     public void initData() {
+        fabPicBackToTop.setVisibility(View.GONE);
         mList = new ArrayList<>();
         adapter = new PicAdapter(mContext);
         page = 1;
@@ -90,13 +95,21 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                int[] firstVisibleItems = mStaggeredGridLayoutManager.findFirstVisibleItemPositions(null);
+                int firstVisibleItemPosition = Math.min(firstVisibleItems[0], firstVisibleItems[1]);
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_IDLE:
                         ImageLoader.resumeImageRequests(mContext);
+                        if (firstVisibleItemPosition == 0) {
+                            fabPicBackToTop.setVisibility(View.GONE);
+                        } else {
+                            fabPicBackToTop.setVisibility(View.VISIBLE);
+                        }
                         break;
                     case RecyclerView.SCROLL_STATE_DRAGGING:
                     case RecyclerView.SCROLL_STATE_SETTLING:
                         ImageLoader.pauseImageRequests(mContext);
+                        fabPicBackToTop.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -121,6 +134,12 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
         mList.addAll(pics);
         adapter.updateData(mList);
         isLoadingMore = false;
+    }
+
+    @OnClick(R.id.fab_pic_back_to_top)
+    public void picBackToTop() {
+        rvPic.smoothScrollToPosition(0);
+        fabPicBackToTop.setVisibility(View.GONE);
     }
 
     @Override

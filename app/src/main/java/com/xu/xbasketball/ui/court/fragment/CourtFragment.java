@@ -1,10 +1,12 @@
 package com.xu.xbasketball.ui.court.fragment;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by xu on 2018/8/24.
@@ -30,6 +33,8 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
     RecyclerView rvCourt;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
+    @BindView(R.id.fab_court_back_to_top)
+    FloatingActionButton fabCourtBackToTop;
 
     private CourtAdapter adapter;
     private LinearLayoutManager mLayoutManager;
@@ -73,8 +78,8 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
 
     @Override
     protected void lazyLoad() {
+        fabCourtBackToTop.setVisibility(View.GONE);
         mPresenter.getCourtArticles(page);
-
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -95,6 +100,23 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
                     mPresenter.getCourtArticles(page);
                 }
             }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // 判断是否超过一屏
+                    if (firstVisibleItemPosition == 0) {
+                        fabCourtBackToTop.setVisibility(View.GONE);
+                    } else {
+                        fabCourtBackToTop.setVisibility(View.VISIBLE);
+                    }
+                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    // 滑动状态不显示
+                    fabCourtBackToTop.setVisibility(View.GONE);
+                }
+            }
         });
     }
 
@@ -103,6 +125,12 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
         mList.addAll(data);
         adapter.updateData(mList);
         isLoadingMore = false;
+    }
+
+    @OnClick(R.id.fab_court_back_to_top)
+    public void courtBackToTop() {
+        rvCourt.smoothScrollToPosition(0);
+        fabCourtBackToTop.setVisibility(View.GONE);
     }
 
     @Override

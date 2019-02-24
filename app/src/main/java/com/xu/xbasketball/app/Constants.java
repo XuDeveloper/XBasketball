@@ -18,7 +18,7 @@ public class Constants {
 
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "xu" + File.separator + "XBasketball";
 
-    // -----------------------------DEVID-----------------------------
+    // -----------------------------Others-----------------------------
 
     public static final String FILE_PROVIDER_AUTHORITY = "com.xu.xbasketball.fileprovider";
 
@@ -43,6 +43,7 @@ public class Constants {
     public static final String SP_NO_IMAGE = "no_image";
 
     // -----------------------------RecyclerView Adapter-----------------------------
+
     public static final int TYPE_EMPTY = 1;
 
 }
