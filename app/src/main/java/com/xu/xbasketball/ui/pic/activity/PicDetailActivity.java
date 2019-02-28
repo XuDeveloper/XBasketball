@@ -18,7 +18,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
-import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImageLoaderBack;
 import com.xu.xbasketball.utils.ImageUtil;
 import com.xu.xbasketball.utils.SnackBarUtil;
 
@@ -69,7 +69,7 @@ public class PicDetailActivity extends BaseActivity {
         loading.setVisibility(View.VISIBLE);
         imgUrl = getIntent().getStringExtra(Constants.PIC_URL);
         if (imgUrl != null) {
-            ImageLoader.load(this, imgUrl, R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>() {
+            ImageLoaderBack.load(this, imgUrl, R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
                     bitmap = resource;

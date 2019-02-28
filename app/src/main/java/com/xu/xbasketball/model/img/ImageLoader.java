@@ -1,67 +1,51 @@
 package com.xu.xbasketball.model.img;
 
-import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.xu.xbasketball.R;
-import com.xu.xbasketball.app.App;
-
 /**
- * Created by Xu on 2018/4/6.
+ * Created by Xu on 2019/2/28.
  *
  * @author Xu
  */
 public class ImageLoader {
 
-    public static void load(Activity activity, String url, ImageView iv) {
-        if (!activity.isDestroyed()) {
-            Glide.with(activity).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
+    public static final String TAG = "ImageLoader";
+
+    private static IBaseImgLoad iBaseImgLoad;
+
+    static {
+//        iBaseImgLoad =
+    }
+
+    public static void load(Context context, String imgUrl, ImageView iv) {
+        iBaseImgLoad.load(context, imgUrl, iv, null, null);
+    }
+
+    public static void load(Context context, String imgUrl, ImageView iv, int defaultPlaceholder) {
+        ImgConfig imgConfig = new ImgConfig(defaultPlaceholder);
+        iBaseImgLoad.load(context, imgUrl, iv, imgConfig, null);
+    }
+
+    public static void pauseAllImageRequests(Context context) {
+//        iBaseImgLoad.pauseImgLoad(context, );
+    }
+
+    public static void pauseImageLoad(Context context, String imgUrl) {
+        iBaseImgLoad.pauseImgLoad(context, imgUrl);
+    }
+
+    public static void resumeAllImageRequests(Context context) {
+
+    }
+
+    public static void resumeImageLoad(Context context, String imgUrl) {
+        iBaseImgLoad.resumeImgLoad(context, imgUrl);
+    }
+
+    public static void clearImageView(Context context, ImageView iv, String imgUrl) {
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.clearImageView(context, iv, imgUrl);
         }
     }
-
-    public static void load(Context context, String url, ImageView iv) {
-        if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
-            Glide.with(context).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
-        }
-    }
-
-    public static void load(Context context, String url, ImageView iv, int placeholder) {
-        if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
-            Glide.with(context).load(url).placeholder(placeholder).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
-        }
-    }
-
-    // todo 加载图片优化
-    public static void load(Context context, String url, int placeholder, SimpleTarget simpleTarget) {
-        if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
-            Glide.with(context).load(url).asBitmap().placeholder(placeholder).fitCenter().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(simpleTarget);
-        }
-    }
-
-    /**
-     * 不缓存，直接加载图片
-     * @param context
-     * @param url
-     * @param iv
-     */
-    public static void loadNoCache(Context context, String url, ImageView iv) {
-        Glide.with(context).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.NONE).into(iv);
-    }
-
-    public static void loadMipmap(Context context, int mipmapId, ImageView iv) {
-        Glide.with(context).load(mipmapId).fitCenter().diskCacheStrategy(DiskCacheStrategy.ALL).into(iv);
-    }
-
-    public static void pauseImageRequests(Context context) {
-        Glide.with(context).pauseRequests();
-    }
-
-    public static void resumeImageRequests(Context context) {
-        Glide.with(context).resumeRequests();
-    }
-
 }

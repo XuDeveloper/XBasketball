@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.model.bean.SinaPicBean;
-import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImageLoaderBack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +74,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
         });
 
         if (picBean.getImg_url().equals(holder.ivPic.getTag())) {
-            ImageLoader.load(mContext, picBean.getImg_url(), R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_WIDTH / 2) {
+            ImageLoaderBack.load(mContext, picBean.getImg_url(), R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_WIDTH / 2) {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                     if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {

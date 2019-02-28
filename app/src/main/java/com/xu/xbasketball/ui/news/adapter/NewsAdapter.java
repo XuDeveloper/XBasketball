@@ -14,13 +14,11 @@ import android.widget.TextView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.model.bean.TencentNewsBean;
-import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImageLoaderBack;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -100,7 +98,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.tvNewsTitle.setText(newsBean.getTitle());
         holder.tvNewsTime.setText(newsBean.getTime());
         if (newsBean.getBigImage().size() > 0) {
-            ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
+            ImageLoaderBack.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
         }
         holder.llNews.setOnClickListener(new View.OnClickListener() {
             @Override

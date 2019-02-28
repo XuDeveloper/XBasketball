@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.model.bean.GameBean;
-import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImageLoaderBack;
 import com.xu.xbasketball.utils.DateUtil;
 
 import java.util.ArrayList;
@@ -66,10 +66,10 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
             ViewHolder viewHolder = (ViewHolder) holder;
             viewHolder.tvDate.setText(DateUtil.getTodayDate());
-            ImageLoader.load(mContext, gameBean.getLeftBadge(), viewHolder.ivAwayPic);
+            ImageLoaderBack.load(mContext, gameBean.getLeftBadge(), viewHolder.ivAwayPic);
             viewHolder.tvAwayName.setText(gameBean.getLeftName());
             viewHolder.tvAwayScore.setText(gameBean.getLeftGoal());
-            ImageLoader.load(mContext, gameBean.getRightBadge(), viewHolder.ivHomePic);
+            ImageLoaderBack.load(mContext, gameBean.getRightBadge(), viewHolder.ivHomePic);
             viewHolder.tvHomeName.setText(gameBean.getRightName());
             viewHolder.tvHomeScore.setText(gameBean.getRightGoal());
             if (mContext.getString(R.string.quarter_time_end).equals(gameBean.getQuarterTime())) {

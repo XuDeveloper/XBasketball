@@ -5,14 +5,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.contract.court.HupuCourtContract;
 import com.xu.xbasketball.model.bean.HupuCourtBean;
-import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.court.HupuCourtPresenter;
 import com.xu.xbasketball.ui.court.activity.CourtDetailActivity;
 import com.xu.xbasketball.ui.court.adapter.CourtAdapter;

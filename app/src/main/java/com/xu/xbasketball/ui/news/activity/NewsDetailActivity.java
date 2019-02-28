@@ -1,21 +1,12 @@
 package com.xu.xbasketball.ui.news.activity;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.transition.Fade;
-import android.transition.Visibility;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
-import android.webkit.JavascriptInterface;
-import android.webkit.SslErrorHandler;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -24,13 +15,10 @@ import android.widget.ImageView;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
-import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImageLoaderBack;
 import com.xu.xbasketball.utils.JavascriptUtil;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 
@@ -66,7 +54,7 @@ public class NewsDetailActivity extends BaseActivity {
         url = url.split("\\?")[0];
         String img = getIntent().getStringExtra(Constants.NEWS_IMG);
         if (img != null) {
-            ImageLoader.load(this, img, ivNewsDetailPic);
+            ImageLoaderBack.load(this, img, ivNewsDetailPic);
         }
         String title = getIntent().getStringExtra(Constants.NEWS_TITLE);
         if (title != null) {

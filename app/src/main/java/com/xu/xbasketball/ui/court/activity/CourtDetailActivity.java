@@ -4,11 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -20,7 +17,7 @@ import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
-import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImageLoaderBack;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
 import com.xu.xbasketball.utils.JavascriptUtil;
 import com.xu.xbasketball.utils.SnackBarUtil;
@@ -123,9 +120,9 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             timer.schedule(timerTask, 2000);
         }
         if (!data.getImg().equals("")) {
-            ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
+            ImageLoaderBack.load(this, data.getImg(), ivCourtDetailPic);
         } else {
-            ImageLoader.loadMipmap(this, R.mipmap.ic_launcher, ivCourtDetailPic);
+            ImageLoaderBack.loadMipmap(this, R.mipmap.ic_launcher, ivCourtDetailPic);
         }
     }
 

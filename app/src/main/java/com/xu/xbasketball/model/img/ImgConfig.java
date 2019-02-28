@@ -10,14 +10,14 @@ import android.widget.ImageView;
 public class ImgConfig {
 
     /**
-     * 默认占位符
+     * 默认/加载过程中的占位符
      */
-    private int defaultRes;
+    private int defaultPlaceholder;
 
     /**
      * 失败占位符
      */
-    private int failRes;
+    private int failPlaceholder;
 
     /**
      * 圆角半径
@@ -39,51 +39,51 @@ public class ImgConfig {
      */
     private int height;
 
-    public ImgConfig(int defaultRes, int failRes, int radius, ImageView.ScaleType scaleType, int width, int height) {
-        this.defaultRes = defaultRes;
-        this.failRes = failRes;
+    public ImgConfig(int defaultPlaceholder, int failPlaceholder, int radius, ImageView.ScaleType scaleType, int width, int height) {
+        this.defaultPlaceholder = defaultPlaceholder;
+        this.failPlaceholder = failPlaceholder;
         this.radius = radius;
         this.scaleType = scaleType;
         this.width = width;
         this.height = height;
     }
 
-    public ImgConfig(int defaultRes, int failRes, int radius, int width, int height) {
-        this(defaultRes, failRes, radius, ImageView.ScaleType.FIT_CENTER, width, height);
+    public ImgConfig(int defaultPlaceholder, int failPlaceholder, int radius, int width, int height) {
+        this(defaultPlaceholder, failPlaceholder, radius, ImageView.ScaleType.FIT_CENTER, width, height);
     }
 
-    public ImgConfig(int defaultRes, int failRes, int width, int height) {
-        this(defaultRes, failRes, 0, ImageView.ScaleType.FIT_CENTER, width, height);
+    public ImgConfig(int defaultPlaceholder, int failPlaceholder, int width, int height) {
+        this(defaultPlaceholder, failPlaceholder, 0, ImageView.ScaleType.FIT_CENTER, width, height);
     }
 
-    public ImgConfig(int defaultRes, int failRes, int radius) {
-        this(defaultRes, failRes, radius, ImageView.ScaleType.FIT_CENTER, -1, -1);
+    public ImgConfig(int defaultPlaceholder, int failPlaceholder, int radius) {
+        this(defaultPlaceholder, failPlaceholder, radius, ImageView.ScaleType.FIT_CENTER, -1, -1);
     }
 
-    public ImgConfig(int defaultRes, int failRes) {
-        this(defaultRes, failRes, 0);
+    public ImgConfig(int defaultPlaceholder, int failPlaceholder) {
+        this(defaultPlaceholder, failPlaceholder, 0);
     }
 
-    public ImgConfig(int defaultRes) {
-        this(defaultRes, -1);
+    public ImgConfig(int defaultPlaceholder) {
+        this(defaultPlaceholder, -1);
     }
 
-    public int getDefaultRes() {
-        return defaultRes;
+    public int getDefaultPlaceholder() {
+        return defaultPlaceholder;
     }
 
-    public void setDefaultRes(int defaultRes) {
-        this.defaultRes = defaultRes;
+    public void setDefaultPlaceholder(int defaultPlaceholder) {
+        this.defaultPlaceholder = defaultPlaceholder;
     }
 
-    public int getFailRes() {
-        return failRes;
+    public int getFailPlaceholder() {
+        return failPlaceholder;
     }
 
-    public void setFailRes(int failRes) {
-        this.failRes = failRes;
+    public void setFailPlaceholder(int failPlaceholder) {
+        this.failPlaceholder = failPlaceholder;
     }
-
+    
     public int getRadius() {
         return radius;
     }

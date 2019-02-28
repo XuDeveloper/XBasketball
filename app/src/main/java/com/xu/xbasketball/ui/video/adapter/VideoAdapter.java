@@ -16,7 +16,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.model.bean.TencentVideoBean;
-import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImageLoaderBack;
 import com.xu.xbasketball.utils.DateUtil;
 
 import java.text.ParseException;
@@ -100,7 +100,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         holder.tvVideoUpdateTime.setText(videoBean.getUpdate_time());
         holder.ivVideoBimg.setTag(videoBean.getImg());
         if (videoBean.getImg().equals(holder.ivVideoBimg.getTag())) {
-            ImageLoader.load(mContext, videoBean.getImg() + ".jpg", R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>() {
+            ImageLoaderBack.load(mContext, videoBean.getImg() + ".jpg", R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
                     if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {

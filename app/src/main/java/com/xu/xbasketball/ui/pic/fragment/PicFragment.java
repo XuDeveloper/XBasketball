@@ -1,8 +1,5 @@
 package com.xu.xbasketball.ui.pic.fragment;
 
-import android.app.ActivityOptions;
-import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,7 +11,7 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseMVPFragment;
 import com.xu.xbasketball.base.contract.pic.PicContract;
 import com.xu.xbasketball.model.bean.SinaPicBean;
-import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImageLoaderBack;
 import com.xu.xbasketball.presenter.pic.PicPresenter;
 import com.xu.xbasketball.ui.pic.activity.PicDetailActivity;
 import com.xu.xbasketball.ui.pic.adapter.PicAdapter;
@@ -99,7 +96,7 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
                 int firstVisibleItemPosition = Math.min(firstVisibleItems[0], firstVisibleItems[1]);
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_IDLE:
-                        ImageLoader.resumeImageRequests(mContext);
+                        ImageLoaderBack.resumeImageRequests(mContext);
                         if (firstVisibleItemPosition == 0) {
                             fabPicBackToTop.setVisibility(View.GONE);
                         } else {
@@ -108,7 +105,7 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
                         break;
                     case RecyclerView.SCROLL_STATE_DRAGGING:
                     case RecyclerView.SCROLL_STATE_SETTLING:
-                        ImageLoader.pauseImageRequests(mContext);
+                        ImageLoaderBack.pauseImageRequests(mContext);
                         fabPicBackToTop.setVisibility(View.GONE);
                         break;
                 }
