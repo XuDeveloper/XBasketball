@@ -31,7 +31,7 @@ ext {
             "jsoup"                      : "org.jsoup:jsoup:1.10.1",
 
             // image
-            "glide"                      : "com.github.bumptech.glide:glide:3.7.0",
+            "glide"                      : "com.github.bumptech.glide:glide:4.8.0",
 
             // structure
             "butterknife"                : "com.jakewharton:butterknife:8.8.1",

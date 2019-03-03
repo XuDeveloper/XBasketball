@@ -17,6 +17,7 @@ import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
+import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.model.img.ImageLoaderBack;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
 import com.xu.xbasketball.utils.JavascriptUtil;
@@ -120,9 +121,9 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             timer.schedule(timerTask, 2000);
         }
         if (!data.getImg().equals("")) {
-            ImageLoaderBack.load(this, data.getImg(), ivCourtDetailPic);
+            ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
         } else {
-            ImageLoaderBack.loadMipmap(this, R.mipmap.ic_launcher, ivCourtDetailPic);
+            ImageLoader.loadResource(this, R.mipmap.ic_launcher, ivCourtDetailPic);
         }
     }
 

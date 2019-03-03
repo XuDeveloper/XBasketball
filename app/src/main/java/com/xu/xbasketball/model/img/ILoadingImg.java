@@ -24,4 +24,9 @@ public interface ILoadingImg {
      */
     void onFail();
 
+    /**
+     * 资源清除
+     */
+    void onClear();
+
 }

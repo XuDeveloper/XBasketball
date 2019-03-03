@@ -52,7 +52,9 @@ dependencies {
     implementation rootProject.ext.dependencies["rxjava2-adapter"]
     implementation rootProject.ext.dependencies["rxandroid"]
     implementation rootProject.ext.dependencies["retrofit2:converter-gson"]
-    implementation rootProject.ext.dependencies["glide"]
+    implementation(rootProject.ext.dependencies["glide"]) {
+        exclude group: 'com.android.support'
+    }
     implementation rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     compileOnly rootProject.ext.dependencies["annotation"]

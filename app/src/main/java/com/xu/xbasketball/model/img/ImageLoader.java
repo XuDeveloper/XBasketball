@@ -10,42 +10,66 @@ import android.widget.ImageView;
  */
 public class ImageLoader {
 
-    public static final String TAG = "ImageLoader";
+    private static final String TAG = "ImageLoader";
 
     private static IBaseImgLoad iBaseImgLoad;
 
     static {
-//        iBaseImgLoad =
+        iBaseImgLoad = new ImgLoadByGlide();
     }
 
     public static void load(Context context, String imgUrl, ImageView iv) {
-        iBaseImgLoad.load(context, imgUrl, iv, null, null);
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.load(context, imgUrl, iv, null, null);
+        }
+    }
+
+    public static void loadResource(Context context, int resourceId, ImageView iv) {
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.load(context, resourceId, iv, null, null);
+        }
     }
 
     public static void load(Context context, String imgUrl, ImageView iv, int defaultPlaceholder) {
         ImgConfig imgConfig = new ImgConfig(defaultPlaceholder);
-        iBaseImgLoad.load(context, imgUrl, iv, imgConfig, null);
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.load(context, imgUrl, iv, imgConfig, null);
+        }
+    }
+
+    public static void load(Context context, String imgUrl, ImageView iv, ImgConfig imgConfig) {
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.load(context, imgUrl, iv, imgConfig, null);
+        }
+    }
+
+    public static void load(Context context, String imgUrl, ImageView iv, ImgConfig imgConfig, ILoadingImg iLoadingImg) {
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.load(context, imgUrl, iv, imgConfig, iLoadingImg);
+        }
     }
 
     public static void pauseAllImageRequests(Context context) {
-//        iBaseImgLoad.pauseImgLoad(context, );
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.pauseAllImgLoad(context);
+        }
     }
 
     public static void pauseImageLoad(Context context, String imgUrl) {
-        iBaseImgLoad.pauseImgLoad(context, imgUrl);
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.pauseImgLoad(context, imgUrl);
+        }
     }
 
     public static void resumeAllImageRequests(Context context) {
-
+        if (iBaseImgLoad != null) {
+            iBaseImgLoad.resumeAllImgLoad(context);
+        }
     }
 
     public static void resumeImageLoad(Context context, String imgUrl) {
-        iBaseImgLoad.resumeImgLoad(context, imgUrl);
-    }
-
-    public static void clearImageView(Context context, ImageView iv, String imgUrl) {
         if (iBaseImgLoad != null) {
-            iBaseImgLoad.clearImageView(context, iv, imgUrl);
+            iBaseImgLoad.resumeImgLoad(context, imgUrl);
         }
     }
 }

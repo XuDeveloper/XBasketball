@@ -19,7 +19,7 @@ public class ImageLoaderBack {
 
     public static void load(Activity activity, String url, ImageView iv) {
         if (!activity.isDestroyed()) {
-            Glide.with(activity).load(url).fitCenter().crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
+            Glide.with(activity).load(url).crossFade().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
         }
     }
 
