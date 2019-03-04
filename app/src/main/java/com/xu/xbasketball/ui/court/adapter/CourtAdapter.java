@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.base.listener.BaseClickListener;
 import com.xu.xbasketball.model.bean.HupuCourtBean;
 
 import java.util.ArrayList;
@@ -51,10 +52,15 @@ public class CourtAdapter extends RecyclerView.Adapter<CourtAdapter.ViewHolder> 
         holder.tvCourtSource.setText(bean.getSource());
         holder.tvCourtTitle.setText(bean.getTitle());
         holder.tvCourtTime.setText(bean.getTime());
-        holder.llCourt.setOnClickListener(new View.OnClickListener() {
+        holder.llCourt.setOnClickListener(new BaseClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onSingleClick(View view) {
                 onItemClickListener.onItemClick(position);
+            }
+
+            @Override
+            public void onFastClick(View view) {
+                
             }
         });
     }

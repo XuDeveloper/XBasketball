@@ -26,7 +26,7 @@ public class ImageLoader {
 
     public static void loadResource(Context context, int resourceId, ImageView iv) {
         if (iBaseImgLoad != null) {
-            iBaseImgLoad.load(context, resourceId, iv, null, null);
+            iBaseImgLoad.loadResource(context, resourceId, iv, null, null);
         }
     }
 

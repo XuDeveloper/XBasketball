@@ -20,6 +20,8 @@ public class Constants {
 
     // -----------------------------Others-----------------------------
 
+    public static final long TIME_INTERNAL = 1000L;
+
     public static final String FILE_PROVIDER_AUTHORITY = "com.xu.xbasketball.fileprovider";
 
     // -----------------------------Intent-----------------------------

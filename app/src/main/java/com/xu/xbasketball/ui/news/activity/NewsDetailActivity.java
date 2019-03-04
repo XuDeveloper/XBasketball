@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
-import com.xu.xbasketball.model.img.ImageLoaderBack;
+import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.JavascriptUtil;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
@@ -54,7 +54,7 @@ public class NewsDetailActivity extends BaseActivity {
         url = url.split("\\?")[0];
         String img = getIntent().getStringExtra(Constants.NEWS_IMG);
         if (img != null) {
-            ImageLoaderBack.load(this, img, ivNewsDetailPic);
+            ImageLoader.load(this, img, ivNewsDetailPic);
         }
         String title = getIntent().getStringExtra(Constants.NEWS_TITLE);
         if (title != null) {
