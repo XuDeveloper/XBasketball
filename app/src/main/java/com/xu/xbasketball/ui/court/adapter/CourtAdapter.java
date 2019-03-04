@@ -60,7 +60,7 @@ public class CourtAdapter extends RecyclerView.Adapter<CourtAdapter.ViewHolder> 
 
             @Override
             public void onFastClick(View view) {
-                
+
             }
         });
     }
