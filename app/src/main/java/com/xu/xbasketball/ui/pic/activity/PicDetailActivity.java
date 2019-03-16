@@ -12,13 +12,13 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
-import com.xu.xbasketball.model.img.ImageLoaderBack;
+import com.xu.xbasketball.model.img.ILoadingImg;
+import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImgConfig;
 import com.xu.xbasketball.utils.ImageUtil;
 import com.xu.xbasketball.utils.SnackBarUtil;
 
@@ -69,12 +69,28 @@ public class PicDetailActivity extends BaseActivity {
         loading.setVisibility(View.VISIBLE);
         imgUrl = getIntent().getStringExtra(Constants.PIC_URL);
         if (imgUrl != null) {
-            ImageLoaderBack.load(this, imgUrl, R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>() {
+            ImgConfig imgConfig = new ImgConfig(R.mipmap.pic_placeholder, R.mipmap.pic_fail_placeholder);
+            ImageLoader.load(this, imgUrl, ivPicDetail, imgConfig, new ILoadingImg() {
                 @Override
-                public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-                    bitmap = resource;
-                    ivPicDetail.setImageBitmap(resource);
+                public void onResourceReady(Bitmap resource) {
                     loading.setVisibility(View.GONE);
+                    bitmap = resource;
+                }
+
+                @Override
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onFail() {
+                    loading.setVisibility(View.GONE);
+                    SnackBarUtil.show(view, "加载图片失败，请重试！");
+                }
+
+                @Override
+                public void onClear() {
+
                 }
             });
         }

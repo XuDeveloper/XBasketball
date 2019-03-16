@@ -45,7 +45,7 @@ public class ImageUtil {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,uri));
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             uri = FileProvider.getUriForFile(context.getApplicationContext(),
                     Constants.FILE_PROVIDER_AUTHORITY, imageFile);

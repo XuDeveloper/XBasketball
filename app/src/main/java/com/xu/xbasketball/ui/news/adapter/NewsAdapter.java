@@ -2,8 +2,6 @@ package com.xu.xbasketball.ui.news.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.AsyncLayoutInflater;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,7 @@ import android.widget.TextView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.model.bean.TencentNewsBean;
-import com.xu.xbasketball.model.img.ImageLoaderBack;
+import com.xu.xbasketball.model.img.ImageLoader;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -98,7 +96,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.tvNewsTitle.setText(newsBean.getTitle());
         holder.tvNewsTime.setText(newsBean.getTime());
         if (newsBean.getBigImage().size() > 0) {
-            ImageLoaderBack.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
+            ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
         }
         holder.llNews.setOnClickListener(new View.OnClickListener() {
             @Override

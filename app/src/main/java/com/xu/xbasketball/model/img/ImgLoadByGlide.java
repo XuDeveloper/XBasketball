@@ -29,7 +29,7 @@ public class ImgLoadByGlide implements IBaseImgLoad {
             return;
         }
         try {
-            if ((imgConfig == null || imgConfig.getDefaultPlaceholder() <= 0) && TextUtils.isEmpty(imgUrl)) {
+            if ((imgConfig == null || imgConfig.getDefaultPlaceholder() == -1) && TextUtils.isEmpty(imgUrl)) {
                 return;
             }
             RequestOptions requestOptions = parseImgConfig(imgConfig);
@@ -38,7 +38,7 @@ public class ImgLoadByGlide implements IBaseImgLoad {
                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                     super.onResourceReady(resource, transition);
                     if (iLoadingImg != null) {
-                        iLoadingImg.onResourceReady();
+                        iLoadingImg.onResourceReady(resource);
                     }
                 }
 
@@ -78,7 +78,7 @@ public class ImgLoadByGlide implements IBaseImgLoad {
             return;
         }
         try {
-            if ((imgConfig == null || imgConfig.getDefaultPlaceholder() <= 0) && resourceId < 0) {
+            if ((imgConfig == null || imgConfig.getDefaultPlaceholder() == -1) && resourceId < 0) {
                 return;
             }
             RequestOptions requestOptions = parseImgConfig(imgConfig);
@@ -87,7 +87,7 @@ public class ImgLoadByGlide implements IBaseImgLoad {
                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                     super.onResourceReady(resource, transition);
                     if (iLoadingImg != null) {
-                        iLoadingImg.onResourceReady();
+                        iLoadingImg.onResourceReady(resource);
                     }
                 }
 
@@ -124,10 +124,10 @@ public class ImgLoadByGlide implements IBaseImgLoad {
     private RequestOptions parseImgConfig(ImgConfig imgConfig) {
         RequestOptions requestOptions = new RequestOptions();
         if (imgConfig != null) {
-            if (imgConfig.getDefaultPlaceholder() > 0) {
+            if (imgConfig.getDefaultPlaceholder() != -1) {
                 requestOptions.placeholder(imgConfig.getDefaultPlaceholder());
             }
-            if (imgConfig.getFailPlaceholder() > 0) {
+            if (imgConfig.getFailPlaceholder() != -1) {
                 requestOptions.error(imgConfig.getFailPlaceholder());
             }
             if (imgConfig.getScaleType() != null) {

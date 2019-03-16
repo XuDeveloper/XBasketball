@@ -18,7 +18,6 @@ import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
 import com.xu.xbasketball.model.img.ImageLoader;
-import com.xu.xbasketball.model.img.ImageLoaderBack;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
 import com.xu.xbasketball.utils.JavascriptUtil;
 import com.xu.xbasketball.utils.SnackBarUtil;

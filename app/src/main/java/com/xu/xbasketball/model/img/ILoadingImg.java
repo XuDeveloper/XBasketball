@@ -1,5 +1,7 @@
 package com.xu.xbasketball.model.img;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by xu on 2019/02/24.
  *
@@ -11,8 +13,9 @@ public interface ILoadingImg {
 
     /**
      * 资源准备妥当
+     * @param bitmap
      */
-    void onResourceReady();
+    void onResourceReady(Bitmap bitmap);
 
     /**
      * 开始加载

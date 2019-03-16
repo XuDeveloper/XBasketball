@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.model.bean.TencentVideoBean;
-import com.xu.xbasketball.model.img.ImageLoaderBack;
+import com.xu.xbasketball.model.img.ILoadingImg;
+import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImgConfig;
 import com.xu.xbasketball.utils.DateUtil;
 
 import java.text.ParseException;
@@ -98,27 +98,10 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         holder.tvVideoSource.setText(videoBean.getSource());
         holder.tvVideoTitle.setText(videoBean.getTitle());
         holder.tvVideoUpdateTime.setText(videoBean.getUpdate_time());
-        holder.ivVideoBimg.setTag(videoBean.getImg());
-        if (videoBean.getImg().equals(holder.ivVideoBimg.getTag())) {
-            ImageLoaderBack.load(mContext, videoBean.getImg() + ".jpg", R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-                    if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
-                        if (list.get(holder.getAdapterPosition()).getImgHeight() <= 0) {
-                            int width = resource.getWidth();
-                            int height = resource.getHeight();
-                            int realHeight = App.SCREEN_WIDTH * height / width;
-                            list.get(holder.getAdapterPosition()).setImgHeight(realHeight);
-                            ViewGroup.LayoutParams lp = holder.ivVideoBimg.getLayoutParams();
-                            lp.height = realHeight;
-                        } else {
-                            ViewGroup.LayoutParams lp = holder.ivVideoBimg.getLayoutParams();
-                            lp.height = list.get(holder.getAdapterPosition()).getImgHeight();
-                        }
-                    }
-                    holder.ivVideoBimg.setImageBitmap(resource);
-                }
-            });
+        holder.ivVideoBimg.setTag(R.id.glide_tag, videoBean.getImg());
+        if (videoBean.getImg().equals(holder.ivVideoBimg.getTag(R.id.glide_tag))) {
+            ImgConfig imgConfig = new ImgConfig(R.mipmap.pic_placeholder);
+            ImageLoader.load(mContext, videoBean.getImg() + ".jpg", holder.ivVideoBimg, imgConfig);
         }
         holder.cvVideo.setOnClickListener(new View.OnClickListener() {
             @Override

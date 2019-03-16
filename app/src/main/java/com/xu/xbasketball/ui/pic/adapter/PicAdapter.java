@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.model.bean.SinaPicBean;
-import com.xu.xbasketball.model.img.ImageLoaderBack;
+import com.xu.xbasketball.model.img.ILoadingImg;
+import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.model.img.ImgConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,9 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
         }
 
         holder.ivPic.setImageResource(R.mipmap.pic_placeholder);
-        holder.ivPic.setTag(picBean.getImg_url());
+        // You must not call setTag() on a view Glide is targeting
+        // https://stackoverflow.com/questions/34833627/error-you-must-not-call-settag-on-a-view-glide-is-targeting-when-use-glide
+        holder.ivPic.setTag(R.id.glide_tag, picBean.getImg_url());
         holder.ivPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,10 +75,11 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
             }
         });
 
-        if (picBean.getImg_url().equals(holder.ivPic.getTag())) {
-            ImageLoaderBack.load(mContext, picBean.getImg_url(), R.mipmap.pic_placeholder, new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_WIDTH / 2) {
+        if (picBean.getImg_url().equals(holder.ivPic.getTag(R.id.glide_tag))) {
+            ImgConfig imgConfig = new ImgConfig(R.mipmap.pic_placeholder);
+            ImageLoader.load(mContext, picBean.getImg_url(), holder.ivPic, imgConfig, new ILoadingImg() {
                 @Override
-                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                public void onResourceReady(Bitmap resource) {
                     if (holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
                         if (list.get(holder.getAdapterPosition()).getHeight() <= 0) {
                             int width = resource.getWidth();
@@ -90,7 +93,21 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
                             lp.height = list.get(holder.getAdapterPosition()).getHeight();
                         }
                     }
-                    holder.ivPic.setImageBitmap(resource);
+                }
+
+                @Override
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+
+                @Override
+                public void onClear() {
+
                 }
             });
         }
