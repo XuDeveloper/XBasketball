@@ -28,7 +28,7 @@
                 android:id="@+id/iv_dailyscore_away_pic"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/pic_no_image" />
 
             <TextView
                 android:id="@+id/tv_dailyscore_away_name"

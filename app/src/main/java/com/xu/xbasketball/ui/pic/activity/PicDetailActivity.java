@@ -1,10 +1,14 @@
 package com.xu.xbasketball.ui.pic.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +18,7 @@ import android.widget.ImageView;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.model.img.ILoadingImg;
@@ -21,6 +26,9 @@ import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.model.img.ImgConfig;
 import com.xu.xbasketball.utils.ImageUtil;
 import com.xu.xbasketball.utils.SnackBarUtil;
+import com.xu.xbasketball.utils.SystemUtil;
+
+import java.io.File;
 
 import butterknife.BindView;
 import io.reactivex.functions.Consumer;
@@ -39,7 +47,6 @@ public class PicDetailActivity extends BaseActivity {
     @BindView(R.id.tb_basketball)
     Toolbar toolbar;
 
-    private RxPermissions rxPermissions;
     private String imgUrl;
     private Bitmap bitmap;
 
@@ -116,19 +123,42 @@ public class PicDetailActivity extends BaseActivity {
     }
 
     private void save() {
-        if (rxPermissions == null) {
-            rxPermissions = new RxPermissions(this);
+        // 检查权限
+        if (SystemUtil.checkPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            saveInternal();
+        } else {
+            showGetPermissionDialog();
         }
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean granted) throws Exception {
-                        if (granted) {
-                            ImageUtil.saveBitmapToFile(mContext, imgUrl, bitmap, ivPicDetail);
-                        } else {
-                            SnackBarUtil.show(view, "获取权限失败，请重试！");
-                        }
-                    }
-                });
+    }
+
+    private void saveInternal() {
+        Uri uri = ImageUtil.saveBitmapToFile(mContext, imgUrl, bitmap);
+        if (uri != null) {
+            String filePath = Constants.PATH_SDCARD +
+                    File.separator +
+                    imgUrl.substring(imgUrl.lastIndexOf("/"), imgUrl.lastIndexOf(".")) + ".png";
+            SnackBarUtil.showLong(view, "保存成功！保存路径为" + filePath);
+        } else {
+            SnackBarUtil.showLong(view, "保存失败，请重试！");
+        }
+    }
+
+    private void showGetPermissionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("XBasketball需要向您获取\"写入SD卡\"权限，这样才能正常保存图片。");
+        builder.setNegativeButton(R.string.cancel, (dialog, i) -> {
+            SnackBarUtil.showLong(view, "获取权限失败，无法保存图片！");
+        });
+        builder.setPositiveButton(R.string.confirm, (dialogInterface, i) -> {
+            requestPermission(granted -> {
+                if (granted) {
+                    saveInternal();
+                } else {
+                    SnackBarUtil.showLong(view, "获取权限失败，请重试！");
+                }
+            }, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        });
+        builder.show();
     }
 }

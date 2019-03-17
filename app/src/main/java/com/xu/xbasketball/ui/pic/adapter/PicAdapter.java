@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
+import com.xu.xbasketball.base.listener.BaseClickListener;
 import com.xu.xbasketball.model.bean.SinaPicBean;
 import com.xu.xbasketball.model.img.ILoadingImg;
 import com.xu.xbasketball.model.img.ImageLoader;
@@ -65,13 +66,18 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.ViewHolder> {
         // You must not call setTag() on a view Glide is targeting
         // https://stackoverflow.com/questions/34833627/error-you-must-not-call-settag-on-a-view-glide-is-targeting-when-use-glide
         holder.ivPic.setTag(R.id.glide_tag, picBean.getImg_url());
-        holder.ivPic.setOnClickListener(new View.OnClickListener() {
+        holder.ivPic.setOnClickListener(new BaseClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onSingleClick(View view) {
                 if (onItemClickListener != null) {
                     View shareView = view.findViewById(R.id.iv_pic);
                     onItemClickListener.onItemClick(position, shareView);
                 }
+            }
+
+            @Override
+            public void onFastClick(View view) {
+
             }
         });
 

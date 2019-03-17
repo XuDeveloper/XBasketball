@@ -2,6 +2,7 @@ package com.xu.xbasketball.ui.court.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
@@ -75,6 +77,12 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
         settings.setDomStorageEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
+            if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
+                settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            }
+        }
         wvCourtDetail.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -119,10 +127,10 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             Timer timer = new Timer();
             timer.schedule(timerTask, 2000);
         }
-        if (!data.getImg().equals("")) {
-            ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
-        } else {
-            ImageLoader.loadResource(this, R.mipmap.ic_launcher, ivCourtDetailPic);
+        if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
+            if (!data.getImg().equals("")) {
+                ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
+            } 
         }
     }
 

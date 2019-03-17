@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
+import com.xu.xbasketball.base.listener.BaseClickListener;
 import com.xu.xbasketball.model.bean.TencentVideoBean;
 import com.xu.xbasketball.model.img.ILoadingImg;
 import com.xu.xbasketball.model.img.ImageLoader;
@@ -103,13 +104,18 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
             ImgConfig imgConfig = new ImgConfig(R.mipmap.pic_placeholder);
             ImageLoader.load(mContext, videoBean.getImg() + ".jpg", holder.ivVideoBimg, imgConfig);
         }
-        holder.cvVideo.setOnClickListener(new View.OnClickListener() {
+        holder.cvVideo.setOnClickListener(new BaseClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onSingleClick(View view) {
                 if (onItemClickListener != null) {
                     View shareView = view.findViewById(R.id.iv_video_bimg);
                     onItemClickListener.onItemClick(position, shareView);
                 }
+            }
+
+            @Override
+            public void onFastClick(View view) {
+
             }
         });
     }

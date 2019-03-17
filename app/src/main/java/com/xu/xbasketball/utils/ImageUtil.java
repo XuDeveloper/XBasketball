@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class ImageUtil {
 
-    public static Uri saveBitmapToFile(Context context, String url, Bitmap bitmap, View container) {
+    public static Uri saveBitmapToFile(Context context, String url, Bitmap bitmap) {
         String fileName = url.substring(url.lastIndexOf("/"), url.lastIndexOf(".")) + ".png";
         File fileDir = new File(Constants.PATH_SDCARD);
         if (!fileDir.exists()) {
@@ -29,16 +29,14 @@ public class ImageUtil {
         try {
             FileOutputStream fos = new FileOutputStream(imageFile);
             boolean isCompress = bitmap.compress(Bitmap.CompressFormat.PNG, 90, fos);
-            if (isCompress) {
-                SnackBarUtil.show(container, "保存成功！");
-            } else {
-                SnackBarUtil.show(container, "保存失败，请重试！");
+            if (!isCompress) {
+                return null;
             }
             fos.flush();
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
-            SnackBarUtil.show(container, "保存失败，请重试！");
+            return null;
         }
         try {
             MediaStore.Images.Media.insertImage(context.getContentResolver(), imageFile.getAbsolutePath(), fileName, null);

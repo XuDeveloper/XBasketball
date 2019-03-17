@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.App;
+import com.xu.xbasketball.base.listener.BaseClickListener;
 import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 
@@ -95,15 +97,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         }
         holder.tvNewsTitle.setText(newsBean.getTitle());
         holder.tvNewsTime.setText(newsBean.getTime());
-        if (newsBean.getBigImage().size() > 0) {
-            ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
+        if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
+            if (newsBean.getBigImage().size() > 0) {
+                ImageLoader.load(mContext, newsBean.getBigImage().get(0) + ".jpg", holder.ivNewsPic);
+            }
         }
-        holder.llNews.setOnClickListener(new View.OnClickListener() {
+        holder.llNews.setOnClickListener(new BaseClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onSingleClick(View view) {
                 if (onItemClickListener != null) {
                     onItemClickListener.onItemClick(position, holder.ivNewsPic, holder.llNews);
                 }
+            }
+
+            @Override
+            public void onFastClick(View view) {
+
             }
         });
     }

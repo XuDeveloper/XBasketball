@@ -5,18 +5,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navigation_basketball"
+            android:icon="@mipmap/ic_main"
             android:title="@string/drawer_main" />
         <item
             android:id="@+id/navigation_pic"
+            android:icon="@mipmap/ic_pic"
             android:title="@string/drawer_pic" />
         <item
             android:id="@+id/navigation_video"
+            android:icon="@mipmap/ic_video"
             android:title="@string/drawer_video" />
         <item
             android:id="@+id/navigation_setting"
+            android:icon="@mipmap/ic_setting"
             android:title="@string/drawer_setting" />
         <item
             android:id="@+id/navigation_about"
+            android:icon="@mipmap/ic_about"
             android:title="@string/drawer_about" />
     </group>
 

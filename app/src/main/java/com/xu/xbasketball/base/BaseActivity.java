@@ -1,6 +1,7 @@
 package com.xu.xbasketball.base;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.di.component.ActivityComponent;
 import com.xu.xbasketball.di.component.DaggerActivityComponent;
@@ -22,6 +24,8 @@ import com.xu.xbasketball.utils.SnackBarUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by Xu on 2018/3/28.
@@ -34,6 +38,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Activity mContext;
     protected View view;
     private Unbinder unbinder;
+
+    protected RxPermissions rxPermissions;
+    protected CompositeDisposable compositeDisposable;
 
     protected ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder()
@@ -55,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         App.getInstance().addActivity(this);
         mContext = this;
         view = ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
-        requestPermission();
+//        requestPermission();
         viewCreated();
         initData();
     }
@@ -78,44 +85,41 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         App.getInstance().removeActivity(this);
         unbinder.unbind();
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
+        }
     }
 
     public abstract int getLayoutId();
 
     protected abstract void initInject();
 
-    private void requestPermission() {
+    protected void requestPermission(Consumer<Boolean> consumer, String... permissions) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED ||
-                    ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                            != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_PHONE_STATE},
-                        MY_PERMISSIONS_REQUEST);
+            if (rxPermissions == null) {
+                rxPermissions = new RxPermissions(this);
             }
+            if (compositeDisposable == null) {
+                compositeDisposable = new CompositeDisposable();
+            }
+            compositeDisposable.add(rxPermissions.request(permissions).subscribe(consumer));
+//            if (ContextCompat.checkSelfPermission(this,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    != PackageManager.PERMISSION_GRANTED ||
+//                    ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+//                            != PackageManager.PERMISSION_GRANTED) {
+//
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                Manifest.permission.READ_PHONE_STATE},
+//                        MY_PERMISSIONS_REQUEST);
+//            }
+
         }
     }
 
     public void viewCreated() {
 
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-            } else {
-                // Permission Denied
-                SnackBarUtil.show(view, "Permission Denied");
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public abstract void initData();

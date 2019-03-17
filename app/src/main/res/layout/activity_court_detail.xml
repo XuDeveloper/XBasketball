@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="0.8"
-                    android:background="@mipmap/ic_launcher"
+                    android:background="@mipmap/pic_no_image"
                     android:scaleType="centerCrop" />
 
             </FrameLayout>

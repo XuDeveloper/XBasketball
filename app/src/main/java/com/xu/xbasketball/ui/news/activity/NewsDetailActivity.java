@@ -13,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.model.img.ImageLoader;
@@ -75,7 +76,9 @@ public class NewsDetailActivity extends BaseActivity {
         settings.setDomStorageEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
+                settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            }
         }
         // 开启webview 调试模式
 //        WebView.setWebContentsDebuggingEnabled(true);
