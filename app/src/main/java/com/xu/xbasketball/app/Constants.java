@@ -24,6 +24,8 @@ public class Constants {
 
     public static final String FILE_PROVIDER_AUTHORITY = "com.xu.xbasketball.fileprovider";
 
+    public static final String EMAIL_ADDRESS = "zhangzhaoxu1215@gmail.com";
+
     // -----------------------------Intent-----------------------------
 
     public static final String NEWS_URL = "news_url";

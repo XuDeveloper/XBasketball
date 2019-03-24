@@ -11,6 +11,7 @@
     <string name="game_end">已结束</string>
 
     <string name="action_share">分享链接</string>
+    <string name="pic_share_title">#XBasketball 分享一张篮球美图</string>
     <string name="action_save">保存到本地</string>
 
     <string name="drawer_main">首页</string>

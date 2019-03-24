@@ -1,18 +1,15 @@
 package com.xu.xbasketball.base;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -20,7 +17,7 @@ import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.di.component.ActivityComponent;
 import com.xu.xbasketball.di.component.DaggerActivityComponent;
 import com.xu.xbasketball.di.module.ActivityModule;
-import com.xu.xbasketball.utils.SnackBarUtil;
+import com.xu.xbasketball.widget.ActivitySwipeBackHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,9 +28,7 @@ import io.reactivex.functions.Consumer;
  * Created by Xu on 2018/3/28.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
-
-    private static final int MY_PERMISSIONS_REQUEST = 1;
+public abstract class BaseActivity extends AppCompatActivity implements ActivitySwipeBackHelper.SwipeBackCallback {
 
     protected Activity mContext;
     protected View view;
@@ -41,6 +36,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected RxPermissions rxPermissions;
     protected CompositeDisposable compositeDisposable;
+
+    private boolean useSwipeToExit;
+    private ActivitySwipeBackHelper helper;
 
     protected ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder()
@@ -90,10 +88,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public abstract int getLayoutId();
-
-    protected abstract void initInject();
-
     protected void requestPermission(Consumer<Boolean> consumer, String... permissions) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (rxPermissions == null) {
@@ -103,24 +97,36 @@ public abstract class BaseActivity extends AppCompatActivity {
                 compositeDisposable = new CompositeDisposable();
             }
             compositeDisposable.add(rxPermissions.request(permissions).subscribe(consumer));
-//            if (ContextCompat.checkSelfPermission(this,
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                    != PackageManager.PERMISSION_GRANTED ||
-//                    ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-//                            != PackageManager.PERMISSION_GRANTED) {
-//
-//                ActivityCompat.requestPermissions(this,
-//                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                                Manifest.permission.READ_PHONE_STATE},
-//                        MY_PERMISSIONS_REQUEST);
-//            }
-
         }
     }
 
     public void viewCreated() {
 
     }
+
+    public void setUseSwipeToExit(boolean useSwipeToExit) {
+        this.useSwipeToExit = useSwipeToExit;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (!useSwipeToExit) {
+            return super.dispatchTouchEvent(ev);
+        }
+        if (helper == null) {
+            helper = new ActivitySwipeBackHelper(this, this);
+        }
+        return helper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void onSwipeBack() {
+        Log.i("Activity", "isSliding!");
+    }
+
+    public abstract int getLayoutId();
+
+    protected abstract void initInject();
 
     public abstract void initData();
 

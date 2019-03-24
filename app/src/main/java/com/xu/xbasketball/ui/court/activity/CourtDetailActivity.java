@@ -130,7 +130,7 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
             if (!data.getImg().equals("")) {
                 ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
-            } 
+            }
         }
     }
 

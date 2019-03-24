@@ -25,6 +25,7 @@ import com.xu.xbasketball.model.img.ILoadingImg;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.model.img.ImgConfig;
 import com.xu.xbasketball.utils.ImageUtil;
+import com.xu.xbasketball.utils.ShareUtil;
 import com.xu.xbasketball.utils.SnackBarUtil;
 import com.xu.xbasketball.utils.SystemUtil;
 
@@ -117,6 +118,7 @@ public class PicDetailActivity extends BaseActivity {
                 save();
                 break;
             case R.id.action_share:
+                ShareUtil.shareImage(mContext, ImageUtil.saveBitmapToFile(mContext, imgUrl, bitmap), getString(R.string.pic_share_title));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -124,7 +126,7 @@ public class PicDetailActivity extends BaseActivity {
 
     private void save() {
         // 检查权限
-        if (SystemUtil.checkPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        if (SystemUtil.checkPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             saveInternal();
         } else {
             showGetPermissionDialog();
