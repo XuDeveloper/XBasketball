@@ -13,17 +13,6 @@ public abstract class BaseMVPActivity<T extends IBasePresenter> extends BaseActi
     @Inject
     protected T mPresenter;
 
-//    protected ActivityComponent getActivityComponent(){
-//        return  DaggerActivityComponent.builder()
-//                .appComponent(App.getAppComponent())
-//                .activityModule(getActivityModule())
-//                .build();
-//    }
-//
-//    protected ActivityModule getActivityModule(){
-//        return new ActivityModule(this);
-//    }
-
     @Override
     public void viewCreated() {
         super.viewCreated();

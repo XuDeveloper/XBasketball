@@ -25,7 +25,7 @@ public class ShareUtil {
         intent.setType("image/png");
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         context.startActivity(Intent.createChooser(intent, title));
-    } 
+    }
 
     public static void sendEmail(Context context, String title) {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + Constants.EMAIL_ADDRESS));

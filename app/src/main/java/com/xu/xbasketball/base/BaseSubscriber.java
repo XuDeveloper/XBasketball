@@ -33,7 +33,7 @@ public abstract class BaseSubscriber<T> extends ResourceSubscriber<T> {
 //            L.i("message-onerror: " + e.getMessage());
 //            getBaseView().showLoadFailMsg(e.getMessage());
 //        }
-        Log.i("test", e.getMessage());
         getBaseView().hideProgress();
+        getBaseView().showLoadFailMsg(e.getMessage());
     }
 }

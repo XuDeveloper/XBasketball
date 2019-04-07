@@ -27,7 +27,7 @@ public abstract class BaseMVPFragment<T extends IBasePresenter> extends BaseFrag
     protected T mPresenter;
 
     private Unbinder unbinder;
-    View view;
+    protected View view;
 
     protected FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()

@@ -43,7 +43,7 @@ public abstract class BaseLazyLoadFragment<T extends IBasePresenter> extends Fra
     protected Context mContext;
     protected Activity mActivity;
     private Unbinder unbinder;
-    private View view;
+    protected View view;
 
     protected FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()

@@ -15,6 +15,7 @@ import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.pic.PicPresenter;
 import com.xu.xbasketball.ui.pic.activity.PicDetailActivity;
 import com.xu.xbasketball.ui.pic.adapter.PicAdapter;
+import com.xu.xbasketball.utils.SnackBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,4 +150,8 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
         swipeRefresh.setRefreshing(false);
     }
 
+    @Override
+    public void showLoadFailMsg(String msg) {
+        SnackBarUtil.show(view, msg);
+    }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -61,9 +62,9 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
     public void initData() {
         String url = getIntent().getStringExtra(Constants.COURT_URL);
 
-        String detail = url.split("/")[url.split("/").length - 1];
+        String detailAddress = url.split("/")[url.split("/").length - 1];
 
-        mPresenter.getCourtArticleDetail(detail);
+        mPresenter.getCourtArticleDetail(detailAddress);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,6 +130,7 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         }
         if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
             if (!data.getImg().equals("")) {
+                Log.i("test", "img: " + data.getImg());
                 ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
             }
         }
@@ -142,6 +144,11 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
     @Override
     public void hideProgress() {
 
+    }
+
+    @Override
+    public void showLoadFailMsg(String msg) {
+        SnackBarUtil.show(view, msg);
     }
 
     @Override

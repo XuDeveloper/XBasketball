@@ -21,6 +21,7 @@ import com.xu.xbasketball.presenter.news.NewsPresenter;
 import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 import com.xu.xbasketball.ui.news.adapter.NewsAdapter;
 import com.xu.xbasketball.ui.pic.activity.PicDetailActivity;
+import com.xu.xbasketball.utils.SnackBarUtil;
 import com.xu.xbasketball.widget.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -152,4 +153,8 @@ public class NewsFragment extends BaseLazyLoadFragment<NewsPresenter> implements
         swipeRefresh.setRefreshing(false);
     }
 
+    @Override
+    public void showLoadFailMsg(String msg) {
+        SnackBarUtil.show(view, msg);
+    }
 }

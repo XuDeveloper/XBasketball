@@ -1,5 +1,7 @@
 package com.xu.xbasketball.presenter.dailyscore;
 
+import android.util.Log;
+
 import com.xu.xbasketball.base.BaseSubscriber;
 import com.xu.xbasketball.base.IBaseView;
 import com.xu.xbasketball.base.RxPresenter;
@@ -37,9 +39,13 @@ public class DailyScorePresenter extends RxPresenter<DailyScoreContract.View> im
                 .subscribeWith(new BaseSubscriber<ScoreBoardBean>() {
                     @Override
                     public void onNext(ScoreBoardBean scoreBoardBean) {
-                        Map<String, List<GameBean>> data = scoreBoardBean.getData();
-                        List<GameBean> gameBeans = data.get(DateUtil.getTodayDate());
-                        mView.showDailyScore(gameBeans);
+                        if (scoreBoardBean != null && scoreBoardBean.getData() != null) {
+                            Map<String, List<GameBean>> data = scoreBoardBean.getData();
+                            List<GameBean> gameBeans = data.get(DateUtil.getTodayDate());
+                            mView.showDailyScore(gameBeans);
+                        } else {
+                            mView.showLoadFailMsg("暂无数据，请重试！");
+                        }
                     }
 
                     @Override

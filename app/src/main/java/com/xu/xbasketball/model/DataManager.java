@@ -47,8 +47,8 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<ResponseBody> getCourtArticleDetail(String detail) {
-        return mHttpHelper.getCourtArticleDetail(detail);
+    public Flowable<ResponseBody> getCourtArticleDetail(String detailAddress) {
+        return mHttpHelper.getCourtArticleDetail(detailAddress);
     }
 
     @Override

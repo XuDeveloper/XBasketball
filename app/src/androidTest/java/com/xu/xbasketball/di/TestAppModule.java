@@ -1,6 +1,7 @@
-package com.xu.xbasketball.di.module;
+package com.xu.xbasketball.di;
 
 import com.xu.xbasketball.app.App;
+import com.xu.xbasketball.app.TestApp;
 import com.xu.xbasketball.model.DataManager;
 import com.xu.xbasketball.model.http.HttpHelper;
 import com.xu.xbasketball.model.http.RetrofitHelper;
@@ -13,14 +14,16 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by Xu on 2018/3/12.
+ * Created by xu on 2019/04/07.
+ *
+ * @author xu
  */
 @Module
-public class AppModule {
+public class TestAppModule {
 
-    private final App application;
+    private final TestApp application;
 
-    public AppModule(App application) {
+    public TestAppModule(TestApp application) {
         this.application = application;
     }
 

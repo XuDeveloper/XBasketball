@@ -31,8 +31,10 @@ public class PicPresenter extends RxPresenter<PicContract.View> implements PicCo
                 .subscribeWith(new BaseSubscriber<SinaPicResultBean>() {
                     @Override
                     public void onNext(SinaPicResultBean sinaPicResultBean) {
-                        if (sinaPicResultBean.getData() != null) {
+                        if (sinaPicResultBean != null && sinaPicResultBean.getData() != null) {
                             mView.showPics(sinaPicResultBean.getData());
+                        } else {
+                            mView.showLoadFailMsg("暂无数据，请重试！");
                         }
                     }
 

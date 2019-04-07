@@ -41,33 +41,39 @@ public class HupuCourtPresenter extends RxPresenter<HupuCourtContract.View> impl
                 .subscribeWith(new BaseSubscriber<ResponseBody>() {
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        ArrayList<HupuCourtBean> list = new ArrayList<>();
                         try {
-                            Document document = Jsoup.parse(responseBody.string());
-                            Element parent = document.select("div.common-list.news-list").select("ul").first();
-                            Elements children = parent.children();
-                            for (Element e : children) {
-                                Elements a = e.getElementsByTag("a");
-                                String url = a.attr("href");
-                                Elements h3 = e.getElementsByTag("h3");
-                                String title = h3.text();
-                                Element t = e.select(".news-time").first();
-                                String time = t.text();
-                                Element s = e.select(".news-source").first();
-                                String source = s.text();
+                            if (responseBody != null && responseBody.contentLength() != 0) {
+                                ArrayList<HupuCourtBean> list = new ArrayList<>();
+                                Document document = Jsoup.parse(responseBody.string());
+                                Element parent = document.select("div.common-list.news-list").select("ul").first();
+                                Elements children = parent.children();
+                                for (Element e : children) {
+                                    Elements a = e.getElementsByTag("a");
+                                    String url = a.attr("href");
+                                    Elements h3 = e.getElementsByTag("h3");
+                                    String title = h3.text();
+                                    Element t = e.select(".news-time").first();
+                                    String time = t.text();
+                                    Element s = e.select(".news-source").first();
+                                    String source = s.text();
 
-                                HupuCourtBean bean = new HupuCourtBean();
-                                bean.setTitle(title);
-                                bean.setUrl(url);
-                                bean.setTime(time);
-                                bean.setSource(source);
-                                list.add(bean);
+                                    HupuCourtBean bean = new HupuCourtBean();
+                                    bean.setTitle(title);
+                                    bean.setUrl(url);
+                                    bean.setTime(time);
+                                    bean.setSource(source);
+                                    list.add(bean);
+                                }
+                                if (list.size() != 0) {
+                                    mView.showCourtArticles(list);
+                                } else {
+                                    mView.showLoadFailMsg("暂无数据，请重试！");
+                                }
+                            } else {
+                                mView.showLoadFailMsg("暂无数据，请重试！");
                             }
                         } catch (IOException e) {
                             mView.showLoadFailMsg(e.getMessage());
-                        }
-                        if (list.size() != 0) {
-                            mView.showCourtArticles(list);
                         }
                     }
 

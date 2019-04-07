@@ -33,8 +33,10 @@ public class VideoPresenter extends RxPresenter<VideoContract.View> implements V
                 .subscribeWith(new BaseSubscriber<TencentVideoResultBean>() {
                     @Override
                     public void onNext(TencentVideoResultBean tencentVideoResultBean) {
-                        if (tencentVideoResultBean != null) {
+                        if (tencentVideoResultBean != null && tencentVideoResultBean.getData() != null) {
                             mView.showVideos(tencentVideoResultBean.getData());
+                        } else {
+                            mView.showLoadFailMsg("暂无数据，请重试！");
                         }
                     }
 

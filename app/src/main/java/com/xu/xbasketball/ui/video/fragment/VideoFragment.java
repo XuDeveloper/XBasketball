@@ -23,6 +23,7 @@ import com.xu.xbasketball.presenter.video.VideoPresenter;
 import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 import com.xu.xbasketball.ui.video.activity.VideoDetailActivity;
 import com.xu.xbasketball.ui.video.adapter.VideoAdapter;
+import com.xu.xbasketball.utils.SnackBarUtil;
 import com.xu.xbasketball.widget.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -146,4 +147,8 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
         swipeRefresh.setRefreshing(false);
     }
 
+    @Override
+    public void showLoadFailMsg(String msg) {
+        SnackBarUtil.show(view, msg);
+    }
 }

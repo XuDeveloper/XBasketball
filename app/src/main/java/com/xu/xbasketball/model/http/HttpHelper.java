@@ -22,7 +22,7 @@ public interface HttpHelper {
 
     Flowable<ResponseBody> getCourtArticles(int page);
 
-    Flowable<ResponseBody> getCourtArticleDetail(String detail);
+    Flowable<ResponseBody> getCourtArticleDetail(String detailAddress);
 
     Flowable<TencentVideoResultBean> getVideos(int page);
 

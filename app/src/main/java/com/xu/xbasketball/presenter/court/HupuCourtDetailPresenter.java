@@ -31,36 +31,40 @@ public class HupuCourtDetailPresenter extends RxPresenter<HupuCourtDetailContrac
     }
 
     @Override
-    public void getCourtArticleDetail(String detail) {
-        addSubscribe(mDataManager.getCourtArticleDetail(detail)
+    public void getCourtArticleDetail(String detailAddress) {
+        addSubscribe(mDataManager.getCourtArticleDetail(detailAddress)
                 .compose(RxUtil.<ResponseBody>rxSchedulerHelper())
                 .subscribeWith(new BaseSubscriber<ResponseBody>() {
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        HupuCourtDetailBean bean = new HupuCourtDetailBean();
-                        bean.setTitle("");
-                        bean.setImg("");
-                        try {
-                            Document document = Jsoup.parse(responseBody.string());
-                            Element title = document.select("h1.headline").first();
-                            Element img = document.select(".detail-wrap").select(".detail-content")
-                                    .select(".article-content")
-                                    .select("div")
-                                    .select("center")
-                                    .select("center")
-                                    .select("img")
-                                    .first();
+                        if (responseBody != null && responseBody.contentLength() != 0) {
+                            HupuCourtDetailBean bean = new HupuCourtDetailBean();
+                            bean.setTitle("");
+                            bean.setImg("");
+                            try {
+                                Document document = Jsoup.parse(responseBody.string());
+                                Element title = document.select("h1.headline").first();
+                                Element img = document.select(".detail-wrap").select(".detail-content")
+                                        .select(".article-content")
+                                        .select("div")
+                                        .select("center")
+                                        .select("center")
+                                        .select("img")
+                                        .first();
 
-                            if (img != null) {
-                                bean.setImg(img.attr("src"));
-                            }
-                            if (title != null) {
-                                bean.setTitle(title.text());
-                            }
+                                if (img != null) {
+                                    bean.setImg(img.attr("src"));
+                                }
+                                if (title != null) {
+                                    bean.setTitle(title.text());
+                                }
 
-                            mView.showCourtArticleDetail(bean);
-                        } catch (IOException e) {
-                            mView.showLoadFailMsg(e.getMessage());
+                                mView.showCourtArticleDetail(bean);
+                            } catch (IOException e) {
+                                mView.showLoadFailMsg(e.getMessage());
+                            }
+                        } else {
+                            mView.showLoadFailMsg("暂无数据，请重试！");
                         }
                     }
 

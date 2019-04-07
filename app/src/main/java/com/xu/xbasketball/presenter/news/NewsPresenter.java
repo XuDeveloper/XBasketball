@@ -35,9 +35,13 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
             .subscribeWith(new BaseSubscriber<TencentNewsResultBean>() {
                 @Override
                 public void onNext(TencentNewsResultBean tencentNewsResultBean) {
-                    List<TencentNewsBean> news = tencentNewsResultBean.getData();
-                    if (news != null) {
-                        mView.showNews(news);
+                    if (tencentNewsResultBean != null && tencentNewsResultBean.getData() != null) {
+                        List<TencentNewsBean> news = tencentNewsResultBean.getData();
+                        if (news != null) {
+                            mView.showNews(news);
+                        }
+                    } else {
+                        mView.showLoadFailMsg("暂无数据，请重试！");
                     }
                 }
 
