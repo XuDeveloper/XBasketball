@@ -8,7 +8,11 @@
     <string name="confirm">确定</string>
 
     <string name="quarter_time_end">00:00</string>
+    <string name="quarter_fourth">第4节</string>
     <string name="game_end">已结束</string>
+
+    <string name="quarter_not_start">第0节</string>
+    <string name="game_not_start">未开始</string>
 
     <string name="action_share">分享链接</string>
     <string name="pic_share_title">#XBasketball 分享一张篮球美图</string>
@@ -22,5 +26,7 @@
 
     <string name="about_text">Project：XBasketball\n\nAuthor: Xu\n\nGithub address: https://github.com/XuDeveloper/XBasketball\n\nPersonal Blog: https://dev-xu.cn
     </string>
+
+
 
 </resources>

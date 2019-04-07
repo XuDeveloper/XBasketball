@@ -59,7 +59,7 @@ public class DailyScorePresenterTest extends BaseTest {
         scoreBoardBean.setData(null);
         when(mMockDataManager.getDailyScore(anyString(), anyString())).thenReturn(Flowable.just(scoreBoardBean));
 
-        dailyScorePresenter.getDailyScore("2018-04-05", "2018-04-05");
+        dailyScorePresenter.getDailyScore("2019-04-05", "2019-04-05");
 
         // 测试model是否有获取数据
         verify(mMockDataManager).getDailyScore(anyString(), anyString());

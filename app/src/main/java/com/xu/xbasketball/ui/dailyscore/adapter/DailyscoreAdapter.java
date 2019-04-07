@@ -75,14 +75,15 @@ public class DailyscoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
             viewHolder.tvHomeName.setText(gameBean.getRightName());
             viewHolder.tvHomeScore.setText(gameBean.getRightGoal());
-            if (mContext.getString(R.string.quarter_time_end).equals(gameBean.getQuarterTime())) {
+            if (mContext.getString(R.string.quarter_time_end).equals(gameBean.getQuarterTime()) && mContext.getString(R.string.quarter_fourth).equals(gameBean.getQuarter())) {
                 viewHolder.tvStatus.setText(R.string.game_end);
+            } else if (mContext.getString(R.string.quarter_not_start).equals(gameBean.getQuarter())) {
+                viewHolder.tvStatus.setText(R.string.game_not_start);
             } else {
-                StringBuilder sb = new StringBuilder();
-                sb.append(gameBean.getQuarter());
-                sb.append(" ");
-                sb.append(gameBean.getQuarterTime());
-                viewHolder.tvStatus.setText(sb.toString());
+                String sb = gameBean.getQuarter() +
+                        " " +
+                        gameBean.getQuarterTime();
+                viewHolder.tvStatus.setText(sb);
             }
         }
     }
