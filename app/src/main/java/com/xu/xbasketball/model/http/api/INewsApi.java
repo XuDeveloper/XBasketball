@@ -4,7 +4,6 @@ import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 /**
  * Created by Xu on 2018/5/28.

@@ -40,6 +40,7 @@ dependencies {
     implementation rootProject.ext.dependencies["cardview-v7"]
     implementation files(rootProject.ext.dependencies["circleimageview"])
     implementation files(rootProject.ext.dependencies["materialloadingprogressbar"])
+    implementation rootProject.ext.dependencies["espresso-resource"]
     implementation(rootProject.ext.dependencies["butterknife"]) {
         exclude group: 'com.android.support'
     }

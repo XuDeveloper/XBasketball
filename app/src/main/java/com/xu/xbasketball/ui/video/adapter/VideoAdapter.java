@@ -1,7 +1,6 @@
 package com.xu.xbasketball.ui.video.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xu.xbasketball.R;
-import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.base.listener.BaseClickListener;
 import com.xu.xbasketball.model.bean.TencentVideoBean;
-import com.xu.xbasketball.model.img.ILoadingImg;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.model.img.ImgConfig;
 import com.xu.xbasketball.utils.DateUtil;

@@ -7,8 +7,6 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.bumptech.glide.request.target.ViewTarget;
-import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.di.component.AppComponent;
 import com.xu.xbasketball.di.component.DaggerAppComponent;

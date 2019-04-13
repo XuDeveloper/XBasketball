@@ -1,7 +1,5 @@
 package com.xu.xbasketball.model.http.api;
 
-import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
-
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;

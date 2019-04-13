@@ -1,26 +1,17 @@
 package com.xu.xbasketball.ui.video.fragment;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.xu.xbasketball.R;
-import com.xu.xbasketball.app.Constants;
-import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.BaseMVPFragment;
-import com.xu.xbasketball.base.contract.news.NewsContract;
 import com.xu.xbasketball.base.contract.video.VideoContract;
-import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.model.bean.TencentVideoBean;
-import com.xu.xbasketball.presenter.news.NewsPresenter;
 import com.xu.xbasketball.presenter.video.VideoPresenter;
-import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 import com.xu.xbasketball.ui.video.activity.VideoDetailActivity;
 import com.xu.xbasketball.ui.video.adapter.VideoAdapter;
 import com.xu.xbasketball.utils.SnackBarUtil;

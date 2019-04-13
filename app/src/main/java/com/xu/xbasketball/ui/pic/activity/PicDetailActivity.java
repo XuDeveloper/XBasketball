@@ -1,13 +1,13 @@
 package com.xu.xbasketball.ui.pic.activity;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,14 +16,13 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xu.xbasketball.R;
-import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.model.img.ILoadingImg;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.model.img.ImgConfig;
+import com.xu.xbasketball.utils.EspressoIdlingResource;
 import com.xu.xbasketball.utils.ImageUtil;
 import com.xu.xbasketball.utils.ShareUtil;
 import com.xu.xbasketball.utils.SnackBarUtil;
@@ -32,7 +31,6 @@ import com.xu.xbasketball.utils.SystemUtil;
 import java.io.File;
 
 import butterknife.BindView;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by Xu on 2018/9/1.
@@ -73,6 +71,9 @@ public class PicDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        // for Espresso Test
+        EspressoIdlingResource.increment();
+
         setToolBar(toolbar, "");
         loading.setVisibility(View.VISIBLE);
         imgUrl = getIntent().getStringExtra(Constants.PIC_URL);
@@ -87,13 +88,21 @@ public class PicDetailActivity extends BaseActivity {
 
                 @Override
                 public void onStart() {
-
+                    // for Espresso Test
+                    if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                        EspressoIdlingResource.decrement();
+                    }
                 }
 
                 @Override
                 public void onFail() {
                     loading.setVisibility(View.GONE);
                     SnackBarUtil.show(view, "加载图片失败，请重试！");
+
+                    // for Espresso Test
+                    if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                        EspressoIdlingResource.decrement();
+                    }
                 }
 
                 @Override
@@ -101,6 +110,10 @@ public class PicDetailActivity extends BaseActivity {
 
                 }
             });
+        }
+        // for Espresso Test
+        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+            EspressoIdlingResource.decrement();
         }
     }
 
@@ -163,4 +176,10 @@ public class PicDetailActivity extends BaseActivity {
         });
         builder.show();
     }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
+    }
+
 }

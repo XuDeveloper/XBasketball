@@ -1,7 +1,5 @@
 package com.xu.xbasketball.ui.news.fragment;
 
-import android.app.ActivityOptions;
-import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -9,18 +7,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.xu.xbasketball.R;
-import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.contract.news.NewsContract;
 import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.presenter.news.NewsPresenter;
 import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 import com.xu.xbasketball.ui.news.adapter.NewsAdapter;
-import com.xu.xbasketball.ui.pic.activity.PicDetailActivity;
 import com.xu.xbasketball.utils.SnackBarUtil;
 import com.xu.xbasketball.widget.DividerItemDecoration;
 
@@ -29,7 +24,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.internal.schedulers.NewThreadWorker;
 
 /**
  * Created by Xu on 2018/4/7.

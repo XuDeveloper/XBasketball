@@ -1,21 +1,14 @@
 package com.xu.xbasketball.presenter.dailyscore;
 
-import android.util.ArrayMap;
-
 import com.xu.xbasketball.base.BaseTest;
 import com.xu.xbasketball.base.contract.dailyscore.DailyScoreContract;
-import com.xu.xbasketball.model.bean.GameBean;
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-
-import java.util.List;
 
 import io.reactivex.Flowable;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

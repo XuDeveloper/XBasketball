@@ -1,8 +1,6 @@
 package com.xu.xbasketball.widget;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 

@@ -1,7 +1,5 @@
 package com.xu.xbasketball.presenter.court;
 
-import android.util.Log;
-
 import com.xu.xbasketball.base.BaseSubscriber;
 import com.xu.xbasketball.base.IBaseView;
 import com.xu.xbasketball.base.RxPresenter;

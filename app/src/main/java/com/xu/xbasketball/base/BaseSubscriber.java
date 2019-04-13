@@ -1,7 +1,5 @@
 package com.xu.xbasketball.base;
 
-import android.util.Log;
-
 import io.reactivex.subscribers.ResourceSubscriber;
 
 /**

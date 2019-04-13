@@ -1,14 +1,10 @@
 package com.xu.xbasketball.ui.basketball.fragment;
 
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import com.xu.xbasketball.R;
-import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseFragment;
-import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.ui.basketball.adapter.BasketballFragmentPagerAdapter;
 
 import butterknife.BindView;

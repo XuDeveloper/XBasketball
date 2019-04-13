@@ -3,7 +3,8 @@ package com.xu.xbasketball.ui.court.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +23,11 @@ import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
+import com.xu.xbasketball.utils.EspressoIdlingResource;
 import com.xu.xbasketball.utils.JavascriptUtil;
 import com.xu.xbasketball.utils.SnackBarUtil;
+
+import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -60,8 +64,9 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
     @Override
     public void initData() {
+        // for Espresso Test
+        EspressoIdlingResource.increment();
         String url = getIntent().getStringExtra(Constants.COURT_URL);
-
         String detailAddress = url.split("/")[url.split("/").length - 1];
 
         mPresenter.getCourtArticleDetail(detailAddress);
@@ -134,6 +139,10 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
                 ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
             }
         }
+        // for Espresso Test
+        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+            EspressoIdlingResource.decrement();
+        }
     }
 
     @Override
@@ -181,6 +190,11 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         Intent intent = new Intent(context, CourtDetailActivity.class);
         intent.putExtra(Constants.COURT_URL, url);
         context.startActivity(intent);
+    }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
     }
 
 }

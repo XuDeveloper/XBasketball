@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.view.View;
 
 import com.xu.xbasketball.app.Constants;
 

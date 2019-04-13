@@ -1,7 +1,5 @@
 package com.xu.xbasketball.model;
 
-import android.util.Log;
-
 import com.xu.xbasketball.model.bean.ScoreBoardBean;
 import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;

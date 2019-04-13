@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -17,6 +20,7 @@ import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
 import com.xu.xbasketball.model.img.ImageLoader;
+import com.xu.xbasketball.utils.EspressoIdlingResource;
 import com.xu.xbasketball.utils.JavascriptUtil;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
@@ -51,6 +55,9 @@ public class NewsDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        // for Espresso Test
+        EspressoIdlingResource.increment();
+
         String url = getIntent().getStringExtra(Constants.NEWS_URL);
         url = url.split("\\?")[0];
         String img = getIntent().getStringExtra(Constants.NEWS_IMG);
@@ -97,6 +104,10 @@ public class NewsDetailActivity extends BaseActivity {
             }
         });
         wvNewsDetail.loadUrl(url);
+        // for Espresso Test
+        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+            EspressoIdlingResource.decrement();
+        }
     }
 
     @Override
@@ -136,6 +147,11 @@ public class NewsDetailActivity extends BaseActivity {
         } else {
             context.startActivity(intent);
         }
+    }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
     }
 
 }
