@@ -19,4 +19,8 @@ public class TestConstants {
 
     public static final String PIC_DETAIL_ACTIVITY_TEST_IMG = "http://n.sinaimg.cn/sports/transform/200/w600h400/20190413/mftI-hvscktf1887470.jpg";
 
+    public static final String VIDEO_DETAIL_ACTIVITY_TEST_TITLE = "";
+
+    public static final String VIDEO_DETAIL_ACTIVITY_TEST_ID = "n0030du7k9a";
+
 }

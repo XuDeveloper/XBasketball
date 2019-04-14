@@ -2,6 +2,7 @@ package com.xu.xbasketball.ui.court.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
@@ -21,6 +22,7 @@ import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
+import com.xu.xbasketball.model.img.ILoadingImg;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
 import com.xu.xbasketball.utils.EspressoIdlingResource;
@@ -135,13 +137,28 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         }
         if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
             if (!data.getImg().equals("")) {
-                Log.i("test", "img: " + data.getImg());
-                ImageLoader.load(this, data.getImg(), ivCourtDetailPic);
+                ImageLoader.load(this, data.getImg(), ivCourtDetailPic, null, new ILoadingImg() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap) {
+
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onFail() {
+
+                    }
+
+                    @Override
+                    public void onClear() {
+
+                    }
+                });
             }
-        }
-        // for Espresso Test
-        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
-            EspressoIdlingResource.decrement();
         }
     }
 
@@ -152,7 +169,10 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
     @Override
     public void hideProgress() {
-
+        // for Espresso Test
+        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+            EspressoIdlingResource.decrement();
+        }
     }
 
     @Override

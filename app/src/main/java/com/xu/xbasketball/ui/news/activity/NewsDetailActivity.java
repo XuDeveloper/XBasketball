@@ -100,14 +100,14 @@ public class NewsDetailActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[0]);
                 view.loadUrl(JavascriptUtil.getNewsDetailJsCode()[1]);
+                // for Espresso Test
+                if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                    EspressoIdlingResource.decrement();
+                }
                 super.onPageFinished(view, url);
             }
         });
         wvNewsDetail.loadUrl(url);
-        // for Espresso Test
-        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
-            EspressoIdlingResource.decrement();
-        }
     }
 
     @Override

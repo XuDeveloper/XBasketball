@@ -2,7 +2,9 @@ package com.xu.xbasketball.ui.main.activity;
 
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.NavigationView;
+import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,6 +21,7 @@ import com.xu.xbasketball.ui.main.fragment.AboutFragment;
 import com.xu.xbasketball.ui.main.fragment.SettingFragment;
 import com.xu.xbasketball.ui.pic.fragment.PicFragment;
 import com.xu.xbasketball.ui.video.fragment.VideoFragment;
+import com.xu.xbasketball.utils.EspressoIdlingResource;
 
 import butterknife.BindView;
 

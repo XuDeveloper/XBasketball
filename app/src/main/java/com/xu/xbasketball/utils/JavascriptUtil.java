@@ -45,10 +45,8 @@ public class JavascriptUtil {
     public static String[] getVideoDetailJsCode() {
         String[] result = new String[2];
         result[0] = "javascript:function clearVideoDetailUnused() {\n" +
-                "var content = $('div.list-item')[0];\n" +
                 "var mod_player = $('#mod_player');\n" +
                 "$('div#__next').css('display', 'none');\n" +
-                "$('body').append(content);\n" +
                 "$('body').append(mod_player);\n" +
                 "$('.video-meta').remove();\n}";
         result[1] = "javascript:let timer = setInterval(() => {\n" +

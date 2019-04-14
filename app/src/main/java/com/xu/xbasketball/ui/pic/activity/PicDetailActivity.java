@@ -10,6 +10,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,21 +78,22 @@ public class PicDetailActivity extends BaseActivity {
         setToolBar(toolbar, "");
         loading.setVisibility(View.VISIBLE);
         imgUrl = getIntent().getStringExtra(Constants.PIC_URL);
-        if (imgUrl != null) {
+        if (!TextUtils.isEmpty(imgUrl)) {
             ImgConfig imgConfig = new ImgConfig(R.mipmap.pic_placeholder, R.mipmap.pic_fail_placeholder);
             ImageLoader.load(this, imgUrl, ivPicDetail, imgConfig, new ILoadingImg() {
                 @Override
                 public void onResourceReady(Bitmap resource) {
                     loading.setVisibility(View.GONE);
                     bitmap = resource;
-                }
-
-                @Override
-                public void onStart() {
                     // for Espresso Test
                     if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
                         EspressoIdlingResource.decrement();
                     }
+                }
+
+                @Override
+                public void onStart() {
+
                 }
 
                 @Override
@@ -107,13 +109,8 @@ public class PicDetailActivity extends BaseActivity {
 
                 @Override
                 public void onClear() {
-
                 }
             });
-        }
-        // for Espresso Test
-        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
-            EspressoIdlingResource.decrement();
         }
     }
 

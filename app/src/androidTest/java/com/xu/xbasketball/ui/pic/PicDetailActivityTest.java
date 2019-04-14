@@ -10,7 +10,6 @@ import android.support.test.runner.AndroidJUnit4;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.TestConstants;
-import com.xu.xbasketball.ui.news.activity.NewsDetailActivity;
 import com.xu.xbasketball.ui.pic.activity.PicDetailActivity;
 
 import org.junit.After;
@@ -23,11 +22,9 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.xu.xbasketball.base.MatcherUtil.withCollapsingToolbarLayoutText;
-import static org.hamcrest.Matchers.is;
 
 /**
- * Created by xu on 2019/4/9.
+ * Created by xu on 2019/4/14.
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -46,8 +43,9 @@ public class PicDetailActivityTest {
     }
 
     @Test
-    public void showPic() {
+    public void showPicDetail() {
         onView(withId(R.id.tb_basketball)).check(matches(isDisplayed()));
+        onView(withId(R.id.iv_pic_detail)).check(matches(isDisplayed()));
     }
 
     @After

@@ -3,7 +3,11 @@ package com.xu.xbasketball.ui.video.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -12,6 +16,7 @@ import android.webkit.WebViewClient;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
+import com.xu.xbasketball.utils.EspressoIdlingResource;
 import com.xu.xbasketball.utils.JavascriptUtil;
 
 import butterknife.BindView;
@@ -44,10 +49,15 @@ public class VideoDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        // for Espresso Test
+        EspressoIdlingResource.increment();
+
         setToolBar(toolbar, "");
         videoTitle = getIntent().getStringExtra(Constants.VIDEO_TITLE);
         videoId = getIntent().getStringExtra(Constants.VIDEO_ID);
-        videoUrl = "https://xw.qq.com/a/video/" + videoId;
+        if (!TextUtils.isEmpty(videoId)) {
+            videoUrl = "https://xw.qq.com/a/video/" + videoId;
+        }
         WebSettings settings = wvVideoDetail.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
@@ -58,8 +68,8 @@ public class VideoDetailActivity extends BaseActivity {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-        // 开启webview 调试模式
-        WebView.setWebContentsDebuggingEnabled(true);
+        // 开启webview调试模式
+//        WebView.setWebContentsDebuggingEnabled(true);
         wvVideoDetail.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -75,6 +85,10 @@ public class VideoDetailActivity extends BaseActivity {
             }
         });
         wvVideoDetail.loadUrl(videoUrl);
+        // for Espresso Test
+        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+            EspressoIdlingResource.decrement();
+        }
     }
 
     @Override
@@ -109,6 +123,11 @@ public class VideoDetailActivity extends BaseActivity {
         intent.putExtra(Constants.VIDEO_ID, video_id);
         intent.putExtra(Constants.VIDEO_TITLE, title);
         context.startActivity(intent);
+    }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
     }
 
 }
