@@ -1,6 +1,7 @@
 package com.xu.xbasketball.base;
 
 import android.support.test.espresso.matcher.BoundedMatcher;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
@@ -28,8 +29,19 @@ public class MatcherUtil {
         };
     }
 
-    public static RecyclerViewMatcher withRecyclerView(final int recyclerViewId) {
-        return new RecyclerViewMatcher(recyclerViewId);
+    public static Matcher<View> withToolbarText(Matcher<String> stringMatcher) {
+        return new BoundedMatcher<View, Toolbar>(Toolbar.class) {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with Toolbar title: ");
+                stringMatcher.describeTo(description);
+            }
+
+            @Override
+            protected boolean matchesSafely(Toolbar toolbar) {
+                return stringMatcher.matches(toolbar.getTitle());
+            }
+        };
     }
 
 }

@@ -7,25 +7,32 @@ import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.LayoutMatchers;
 import android.support.test.rule.ActivityTestRule;
+import android.view.View;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.base.TestConstants;
 import com.xu.xbasketball.ui.main.activity.MainActivity;
 
+import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
+import static com.xu.xbasketball.base.MatcherUtil.withToolbarText;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.core.AllOf.allOf;
 import static org.junit.Assert.*;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.*;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
-import static com.xu.xbasketball.base.MatcherUtil.withRecyclerView;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by xu on 2019/04/14.
@@ -43,13 +50,9 @@ public class MainActivityTest {
 
     }
 
-    @Test
-    public void showBasketballFragment() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//    @Test
+    public void showBasketballFragment_Tab_DailyScore() {
+        sleep(3000);
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
 
@@ -57,53 +60,99 @@ public class MainActivityTest {
         onView(withId(R.id.navigation)).perform(NavigationViewActions.navigateTo(R.id.navigation_basketball));
 
         onView(withId(R.id.tl_basketball)).check(matches(isDisplayed()));
+
+        Matcher<View> matcher = allOf(withText(TestConstants.MAIN_ACTIVITY_TEST_BASKETBALL_FRAGMENT_TAB_DAILY_SCORE),
+                isDescendantOfA(withId(R.id.tl_basketball)));
+        onView(matcher).check(matches(isDisplayed())).perform(click());
+        sleep(2000);
+        onView(withId(R.id.rv_daily_score)).check(matches(isDisplayed())).perform(swipeUp());
+        sleep(2000);
+        onView(withId(R.id.fab_daily_score_back_to_top)).check(matches(isDisplayed())).perform(click());
+        sleep(1000);
+        onView(withId(R.id.fab_daily_score_back_to_top)).check(matches(not(isDisplayed())));
+    }
+
+    @Test
+    public void showBasketballFragment_Tab_News() {
+        sleep(3000);
+        onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.navigation)).perform(NavigationViewActions.navigateTo(R.id.navigation_basketball));
+
+        onView(withId(R.id.tl_basketball)).check(matches(isDisplayed()));
+
+        Matcher<View> matcher = allOf(withText(TestConstants.MAIN_ACTIVITY_TEST_BASKETBALL_FRAGMENT_TAB_NEWS),
+                isDescendantOfA(withId(R.id.tl_basketball)));
+        onView(matcher).check(matches(isDisplayed())).perform(click());
+        sleep(2000);
+        onView(withId(R.id.rv_news)).check(matches(isDisplayed())).perform(swipeUp());
+        sleep(2000);
+        onView(withId(R.id.fab_news_back_to_top)).check(matches(isDisplayed())).perform(click());
+        sleep(1000);
+        onView(withId(R.id.fab_news_back_to_top)).check(matches(not(isDisplayed())));
+    }
+
+    @Test
+    public void showBasketballFragment_Tab_Court() {
+        sleep(3000);
+        onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.navigation)).perform(NavigationViewActions.navigateTo(R.id.navigation_basketball));
+
+        onView(withId(R.id.tl_basketball)).check(matches(isDisplayed()));
+
+        Matcher<View> matcher = allOf(withText(TestConstants.MAIN_ACTIVITY_TEST_BASKETBALL_FRAGMENT_TAB_COURT),
+                isDescendantOfA(withId(R.id.tl_basketball)));
+        onView(matcher).check(matches(isDisplayed())).perform(click());
+        sleep(2000);
+        onView(withId(R.id.rv_court)).check(matches(isDisplayed())).perform(swipeUp());
+        sleep(2000);
+        onView(withId(R.id.fab_court_back_to_top)).check(matches(isDisplayed())).perform(click());
+        sleep(1000);
+        onView(withId(R.id.fab_court_back_to_top)).check(matches(not(isDisplayed())));
     }
 
     @Test
     public void showPicFragment() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(3000);
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
 
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.navigation)).perform(NavigationViewActions.navigateTo(R.id.navigation_pic));
 
-        onView(withId(R.id.rv_pic)).check(matches(isDisplayed()));
+        sleep(2000);
+        onView(withId(R.id.rv_pic)).check(matches(isDisplayed())).perform(swipeUp());
+        sleep(2000);
+        onView(withId(R.id.fab_pic_back_to_top)).check(matches(isDisplayed())).perform(click());
+        sleep(1000);
+        onView(withId(R.id.fab_pic_back_to_top)).check(matches(not(isDisplayed())));
     }
 
     @Test
     public void showVideoFragment() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(3000);
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
 
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.navigation)).perform(NavigationViewActions.navigateTo(R.id.navigation_video));
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        onView(withRecyclerView(R.id.rv_video).atPosition(3)).check(matches(isDisplayed())).perform(RecyclerViewActions.scrollToPosition(3));
-        onView(withId(R.id.fab_video_back_to_top)).check(matches(isDisplayed()));
+        sleep(2000);
+        onView(withId(R.id.rv_video)).check(matches(isDisplayed())).perform(swipeUp());
+        sleep(2000);
+        onView(withId(R.id.fab_video_back_to_top)).check(matches(isDisplayed())).perform(click());
+        sleep(1000);
+        onView(withId(R.id.fab_video_back_to_top)).check(matches(not(isDisplayed())));
     }
 
     @Test
     public void showSettingFragment() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(3000);
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
 
@@ -117,11 +166,7 @@ public class MainActivityTest {
 
     @Test
     public void showAboutFragment() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(3000);
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
 
@@ -136,4 +181,13 @@ public class MainActivityTest {
     public void tearDown() {
 
     }
+
+    private void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

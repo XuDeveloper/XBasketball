@@ -23,4 +23,10 @@ public class TestConstants {
 
     public static final String VIDEO_DETAIL_ACTIVITY_TEST_ID = "n0030du7k9a";
 
+    public static final String MAIN_ACTIVITY_TEST_BASKETBALL_FRAGMENT_TAB_DAILY_SCORE = "今日战报";
+
+    public static final String MAIN_ACTIVITY_TEST_BASKETBALL_FRAGMENT_TAB_NEWS = "篮球新闻";
+
+    public static final String MAIN_ACTIVITY_TEST_BASKETBALL_FRAGMENT_TAB_COURT = "球场中心";
+
 }
