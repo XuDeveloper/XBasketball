@@ -29,6 +29,9 @@ ext {
             "okhttp3:logging-interceptor": "com.squareup.okhttp3:logging-interceptor:3.6.0",
             "jsoup"                      : "org.jsoup:jsoup:1.10.1",
 
+            // tbs
+            "tbs_sdk"                    : "libs/tbs_sdk.jar",
+
             // image
             "glide"                      : "com.github.bumptech.glide:glide:4.8.0",
 

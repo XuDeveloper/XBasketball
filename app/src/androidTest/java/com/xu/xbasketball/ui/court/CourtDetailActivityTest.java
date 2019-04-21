@@ -1,24 +1,18 @@
 package com.xu.xbasketball.ui.court;
 
 import android.content.Intent;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.IdlingRegistry;
-import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.view.View;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.TestConstants;
 import com.xu.xbasketball.ui.court.activity.CourtDetailActivity;
-import com.xu.xbasketball.utils.EspressoIdlingResource;
 
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
