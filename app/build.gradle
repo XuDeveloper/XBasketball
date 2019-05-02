@@ -49,7 +49,6 @@ dependencies {
     implementation rootProject.ext.dependencies["okhttp"]
     implementation rootProject.ext.dependencies["okhttp3:logging-interceptor"]
     implementation rootProject.ext.dependencies["jsoup"]
-    implementation files(rootProject.ext.dependencies["tbs_sdk"])
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxjava2-adapter"]
     implementation rootProject.ext.dependencies["rxandroid"]

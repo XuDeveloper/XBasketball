@@ -21,6 +21,7 @@ import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
+import com.xu.xbasketball.model.http.webview.WebViewHelper;
 import com.xu.xbasketball.model.img.ILoadingImg;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
@@ -78,16 +79,12 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             }
         });
 
-        WebSettings settings = wvCourtDetail.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setSupportZoom(true);
-        settings.setDomStorageEnabled(true);
+        WebViewHelper.setDefaultSetting(wvCourtDetail);
+        WebViewHelper.removeJavascriptInterfaces(wvCourtDetail);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
             if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
-                settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+                wvCourtDetail.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             }
         }
         wvCourtDetail.setWebViewClient(new WebViewClient(){
