@@ -184,9 +184,16 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
     }
 
     @Override
+    protected void onStop() {
+        wvCourtDetail.getSettings().setJavaScriptEnabled(false);
+        super.onStop();
+    }
+
+    @Override
     protected void onResume() {
         wvCourtDetail.onResume();
         wvCourtDetail.resumeTimers();
+        wvCourtDetail.getSettings().setJavaScriptEnabled(true);
         super.onResume();
     }
 

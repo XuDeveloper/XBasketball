@@ -14,9 +14,9 @@ public class Constants {
 
     public static final String PATH_DATA = App.getInstance().getCacheDir().getAbsolutePath() + File.separator + "data";
 
-    public static final String PATH_CACHE = PATH_DATA + "/NetCache";
+    public static final String PATH_CACHE = App.getInstance().getExternalCacheDir().getAbsolutePath() + "/NetCache";
 
-    public static final String PATH_WEBVIEW_CACHE = PATH_DATA + "/WebViewCache";
+    public static final String PATH_WEBVIEW_CACHE = App.getInstance().getExternalCacheDir().getAbsolutePath() + "/WebViewCache";
 
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "com.xu.xbasketball" + File.separator + "images";
 
