@@ -27,6 +27,9 @@
     <string name="about_text">Project：XBasketball\n\nAuthor: Xu\n\nGithub address: https://github.com/XuDeveloper/XBasketball\n\nPersonal Blog: https://dev-xu.cn
     </string>
 
+    <string name="notice">提示</string>
+    <string name="notice_get_sdcard_permission">XBasketball需要向您获取\"写入SD卡\"权限，这样才能正常保存图片。</string>
+    <string name="notice_get_permission_fail">获取权限失败，请重试！</string>
 
 
 </resources>

@@ -3,6 +3,7 @@ package com.xu.xbasketball.model.http.webview;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 
 /**
@@ -38,6 +39,21 @@ public class WebViewWrapper extends WebView {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
+    }
+
+    public void enableJavascript() {
+        getSettings().setJavaScriptEnabled(true);
+    }
+
+    public void disableJavascript() {
+        getSettings().setJavaScriptEnabled(false);
+    }
+
+    public void destory() {
+        loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+        clearHistory();
+        ((ViewGroup) this.getParent()).removeView(this);
+        destroy();
     }
 
 }

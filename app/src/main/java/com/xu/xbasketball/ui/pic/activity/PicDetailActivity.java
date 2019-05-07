@@ -157,8 +157,8 @@ public class PicDetailActivity extends BaseActivity {
 
     private void showGetPermissionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("提示");
-        builder.setMessage("XBasketball需要向您获取\"写入SD卡\"权限，这样才能正常保存图片。");
+        builder.setTitle(getString(R.string.notice));
+        builder.setMessage(getString(R.string.notice_get_sdcard_permission));
         builder.setNegativeButton(R.string.cancel, (dialog, i) -> {
             SnackBarUtil.showLong(view, "获取权限失败，无法保存图片！");
         });
@@ -167,7 +167,7 @@ public class PicDetailActivity extends BaseActivity {
                 if (granted) {
                     saveInternal();
                 } else {
-                    SnackBarUtil.showLong(view, "获取权限失败，请重试！");
+                    SnackBarUtil.showLong(view, mContext.getString(R.string.notice_get_permission_fail));
                 }
             }, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         });
