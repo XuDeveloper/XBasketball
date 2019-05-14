@@ -3,6 +3,7 @@ package com.xu.xbasketball.model.http.webview;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
@@ -35,10 +36,9 @@ public class WebViewWrapper extends WebView {
         WebViewHelper.removeJavascriptInterfaces(this);
     }
 
-    public void openWebViewDebug() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true);
-        }
+    public void load(String url) {
+        Log.i("WebViewWrapper", "load url: " + url);
+        loadUrl(url);
     }
 
     public void enableJavascript() {
@@ -49,11 +49,32 @@ public class WebViewWrapper extends WebView {
         getSettings().setJavaScriptEnabled(false);
     }
 
-    public void destory() {
+    public void pause() {
+        onPause();
+        pauseTimers();
+    }
+
+    public void resume() {
+        onResume();
+        resumeTimers();
+        enableJavascript();
+    }
+
+    public void stop() {
+        disableJavascript();
+    }
+
+    public void destroyWebView() {
         loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
         clearHistory();
         ((ViewGroup) this.getParent()).removeView(this);
         destroy();
+    }
+
+    public void openWebViewDebug() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
     }
 
 }

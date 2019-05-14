@@ -18,6 +18,7 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
+import com.xu.xbasketball.model.http.webview.WebViewWrapper;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.EspressoIdlingResource;
 import com.xu.xbasketball.utils.JavascriptUtil;
@@ -34,7 +35,7 @@ import butterknife.BindView;
 public class NewsDetailActivity extends BaseActivity {
 
     @BindView(R.id.wv_news_detail)
-    WebView wvNewsDetail;
+    WebViewWrapper wvNewsDetail;
     @BindView(R.id.iv_news_detail_pic)
     ImageView ivNewsDetailPic;
     @BindView(R.id.clp_toolbar)
@@ -74,19 +75,15 @@ public class NewsDetailActivity extends BaseActivity {
             }
         });
 
-        WebSettings settings = wvNewsDetail.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setSupportZoom(true);
-        settings.setDomStorageEnabled(true);
+        wvNewsDetail.init();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
             if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
-                settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+                wvNewsDetail.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             }
         }
-        // 开启webview 调试模式
+        // 开启 webview 调试模式
+//        wvNewsDetail.openWebViewDebug();
 //        WebView.setWebContentsDebuggingEnabled(true);
         wvNewsDetail.setWebViewClient(new WebViewClient() {
             @Override
@@ -106,31 +103,25 @@ public class NewsDetailActivity extends BaseActivity {
                 super.onPageFinished(view, url);
             }
         });
-        wvNewsDetail.loadUrl(url);
+        wvNewsDetail.load(url);
     }
 
     @Override
     protected void onPause() {
-        wvNewsDetail.onPause();
-        wvNewsDetail.pauseTimers();
+        wvNewsDetail.pause();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        wvNewsDetail.onResume();
-        wvNewsDetail.resumeTimers();
+        wvNewsDetail.resume();
         super.onResume();
     }
 
     @Override
     protected void onDestroy() {
         if (wvNewsDetail != null) {
-            wvNewsDetail.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            wvNewsDetail.clearHistory();
-            ((ViewGroup) wvNewsDetail.getParent()).removeView(wvNewsDetail);
-            wvNewsDetail.destroy();
-            wvNewsDetail = null;
+            wvNewsDetail.destroyWebView();
         }
         super.onDestroy();
         finishAfterTransition();

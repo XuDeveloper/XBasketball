@@ -22,6 +22,7 @@ import com.xu.xbasketball.base.BaseMVPActivity;
 import com.xu.xbasketball.base.contract.court.HupuCourtDetailContract;
 import com.xu.xbasketball.model.bean.HupuCourtDetailBean;
 import com.xu.xbasketball.model.http.webview.WebViewHelper;
+import com.xu.xbasketball.model.http.webview.WebViewWrapper;
 import com.xu.xbasketball.model.img.ILoadingImg;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.presenter.court.HupuCourtDetailPresenter;
@@ -44,7 +45,7 @@ import butterknife.BindView;
 public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresenter> implements HupuCourtDetailContract.View {
 
     @BindView(R.id.wv_court_detail)
-    WebView wvCourtDetail;
+    WebViewWrapper wvCourtDetail;
     @BindView(R.id.clp_toolbar)
     CollapsingToolbarLayout clpToolbar;
     @BindView(R.id.iv_court_detail_pic)
@@ -79,8 +80,9 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             }
         });
 
-        WebViewHelper.setDefaultSetting(wvCourtDetail);
-        WebViewHelper.removeJavascriptInterfaces(wvCourtDetail);
+//        WebViewHelper.setDefaultSetting(wvCourtDetail);
+//        WebViewHelper.removeJavascriptInterfaces(wvCourtDetail);
+        wvCourtDetail.init();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
             if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
@@ -112,7 +114,7 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
                 super.onProgressChanged(view, newProgress);
             }
         });
-        wvCourtDetail.loadUrl(url);
+        wvCourtDetail.load(url);
     }
 
     @Override
@@ -178,33 +180,26 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
     @Override
     protected void onPause() {
-        wvCourtDetail.onPause();
-        wvCourtDetail.pauseTimers();
+        wvCourtDetail.pause();
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        wvCourtDetail.getSettings().setJavaScriptEnabled(false);
+        wvCourtDetail.stop();
         super.onStop();
     }
 
     @Override
     protected void onResume() {
-        wvCourtDetail.onResume();
-        wvCourtDetail.resumeTimers();
-        wvCourtDetail.getSettings().setJavaScriptEnabled(true);
+        wvCourtDetail.resume();
         super.onResume();
     }
 
     @Override
     protected void onDestroy() {
         if (wvCourtDetail != null) {
-            wvCourtDetail.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            wvCourtDetail.clearHistory();
-            ((ViewGroup) wvCourtDetail.getParent()).removeView(wvCourtDetail);
-            wvCourtDetail.destroy();
-            wvCourtDetail = null;
+            wvCourtDetail.destroyWebView();
         }
         super.onDestroy();
     }

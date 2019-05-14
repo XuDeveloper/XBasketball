@@ -15,6 +15,7 @@ import android.webkit.WebViewClient;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
+import com.xu.xbasketball.model.http.webview.WebViewWrapper;
 import com.xu.xbasketball.utils.EspressoIdlingResource;
 import com.xu.xbasketball.utils.JavascriptUtil;
 
@@ -30,7 +31,7 @@ public class VideoDetailActivity extends BaseActivity {
     @BindView(R.id.tb_basketball)
     Toolbar toolbar;
     @BindView(R.id.wv_video_detail)
-    WebView wvVideoDetail;
+    WebViewWrapper wvVideoDetail;
 
     private String videoTitle;
     private String videoId;
@@ -57,17 +58,13 @@ public class VideoDetailActivity extends BaseActivity {
         if (!TextUtils.isEmpty(videoId)) {
             videoUrl = "https://xw.qq.com/a/video/" + videoId;
         }
-        WebSettings settings = wvVideoDetail.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setSupportZoom(true);
-        settings.setDomStorageEnabled(true);
+        wvVideoDetail.init();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            wvVideoDetail.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
         // 开启webview调试模式
+//        wvVideoDetail.openWebViewDebug();
 //        WebView.setWebContentsDebuggingEnabled(true);
         wvVideoDetail.setWebViewClient(new WebViewClient() {
             @Override
@@ -83,7 +80,7 @@ public class VideoDetailActivity extends BaseActivity {
                 super.onPageFinished(view, url);
             }
         });
-        wvVideoDetail.loadUrl(videoUrl);
+        wvVideoDetail.load(videoUrl);
         // for Espresso Test
         if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
             EspressoIdlingResource.decrement();
@@ -92,26 +89,20 @@ public class VideoDetailActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
-        wvVideoDetail.onPause();
-        wvVideoDetail.pauseTimers();
+        wvVideoDetail.pause();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        wvVideoDetail.onResume();
-        wvVideoDetail.resumeTimers();
+        wvVideoDetail.resume();
         super.onResume();
     }
 
     @Override
     protected void onDestroy() {
         if (wvVideoDetail != null) {
-            wvVideoDetail.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            wvVideoDetail.clearHistory();
-            ((ViewGroup) wvVideoDetail.getParent()).removeView(wvVideoDetail);
-            wvVideoDetail.destroy();
-            wvVideoDetail = null;
+            wvVideoDetail.destroyWebView();
         }
         super.onDestroy();
         finishAfterTransition();

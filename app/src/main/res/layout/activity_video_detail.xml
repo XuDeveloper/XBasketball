@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <WebView
+        <com.xu.xbasketball.model.http.webview.WebViewWrapper
             android:id="@+id/wv_video_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
