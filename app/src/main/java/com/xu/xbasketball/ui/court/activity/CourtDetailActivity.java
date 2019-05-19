@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -55,6 +59,9 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
     private boolean isJsCodeLoaded = false;
 
+    private long startTime;
+    private long endTime;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_court_detail;
@@ -82,6 +89,7 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
 //        WebViewHelper.setDefaultSetting(wvCourtDetail);
 //        WebViewHelper.removeJavascriptInterfaces(wvCourtDetail);
+        startTime = System.currentTimeMillis();
         wvCourtDetail.init();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
@@ -100,6 +108,15 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 hideProgress();
+                endTime = System.currentTimeMillis();
+                Log.i("WebView_Load", "cost time: " + (endTime - startTime) + "ms");
+            }
+
+            @Nullable
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                Log.i("WebView_Load", "url: " + request.getUrl().toString());
+                return super.shouldInterceptRequest(view, request);
             }
         });
         wvCourtDetail.setWebChromeClient(new WebChromeClient() {

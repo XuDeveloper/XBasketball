@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.view.View;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -73,6 +74,10 @@ public class WebViewHelper {
         } catch (Throwable tr) {
             tr.printStackTrace();
         }
+    }
+
+    public static WebResourceResponse getLocalResponse() {
+        return null;
     }
 
 
