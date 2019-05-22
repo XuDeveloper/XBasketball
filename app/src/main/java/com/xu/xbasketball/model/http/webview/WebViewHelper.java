@@ -11,6 +11,10 @@ import android.webkit.WebView;
 
 import com.xu.xbasketball.app.Constants;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Set;
+
 
 /**
  * Created by xu on 2019/04/21.
@@ -76,7 +80,22 @@ public class WebViewHelper {
         }
     }
 
-    public static WebResourceResponse getLocalResponse() {
+    public static WebResourceResponse getLocalResponse(Context context, String url) {
+        Set<String> set = WebViewInterceptResource.getKeySet();
+        for (String interceptUrl : set) {
+            if (url.contains(interceptUrl)) {
+                InputStream is;
+                try {
+                    // Map local封装为对象？
+                    LocalResource resource = WebViewInterceptResource.get(interceptUrl);
+                    is = context.getApplicationContext().getAssets().open(resource.getLocalPath());
+                    return new WebResourceResponse(resource.getMimeType(),
+                            "utf-8", is);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return null;
     }
 

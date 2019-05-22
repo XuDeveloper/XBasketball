@@ -116,6 +116,12 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
                 Log.i("WebView_Load", "url: " + request.getUrl().toString());
+                Log.i("WebView_Load", "request: " + request.getRequestHeaders().toString());
+                WebResourceResponse response = WebViewHelper.getLocalResponse(mContext, request.getUrl().toString());
+                if (response != null) {
+                    Log.i("WebView_Load", "intercept!");
+                    return response;
+                }
                 return super.shouldInterceptRequest(view, request);
             }
         });
