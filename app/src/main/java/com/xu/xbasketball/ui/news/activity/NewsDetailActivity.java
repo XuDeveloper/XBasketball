@@ -1,14 +1,19 @@
 package com.xu.xbasketball.ui.news.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -18,6 +23,7 @@ import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.app.Constants;
 import com.xu.xbasketball.base.BaseActivity;
+import com.xu.xbasketball.model.http.webview.WebViewHelper;
 import com.xu.xbasketball.model.http.webview.WebViewWrapper;
 import com.xu.xbasketball.model.img.ImageLoader;
 import com.xu.xbasketball.utils.EspressoIdlingResource;
@@ -84,7 +90,6 @@ public class NewsDetailActivity extends BaseActivity {
         }
         // 开启 webview 调试模式
 //        wvNewsDetail.openWebViewDebug();
-//        WebView.setWebContentsDebuggingEnabled(true);
         wvNewsDetail.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -101,6 +106,39 @@ public class NewsDetailActivity extends BaseActivity {
                     EspressoIdlingResource.decrement();
                 }
                 super.onPageFinished(view, url);
+            }
+
+            @Nullable
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+                // 如果命中本地资源，使用本地资源代替
+//                Log.i("WebView_Load_Old_Method", "url: " + url);
+//                if (WebViewHelper.hasLocalResource(url)) {
+//                    WebResourceResponse response = WebViewHelper.getLocalResponse(mContext, url);
+//                    if (response != null) {
+//                        Log.i("WebView_Load_Old_Method", "intercept!");
+//                        return response;
+//                    }
+//                }
+                return super.shouldInterceptRequest(view, url);
+            }
+
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Nullable
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                // 如果命中本地资源，使用本地资源代替
+                Log.i("WebView_Load", "url: " + request.getUrl().toString());
+                Log.i("WebView_Load", "request: " + request.getRequestHeaders().toString());
+                String url = request.getUrl().toString();
+                if (WebViewHelper.hasLocalResource(url)) {
+                    WebResourceResponse response = WebViewHelper.getLocalResponse(mContext, request.getUrl().toString());
+                    if (response != null) {
+                        Log.i("WebView_Load", "intercept!");
+                        return response;
+                    }
+                }
+                return super.shouldInterceptRequest(view, request);
             }
         });
         wvNewsDetail.load(url);

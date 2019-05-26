@@ -1,5 +1,6 @@
 package com.xu.xbasketball.ui.court.activity;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -87,8 +88,6 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             }
         });
 
-//        WebViewHelper.setDefaultSetting(wvCourtDetail);
-//        WebViewHelper.removeJavascriptInterfaces(wvCourtDetail);
         startTime = System.currentTimeMillis();
         wvCourtDetail.init();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -114,13 +113,33 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
             @Nullable
             @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+                // 如果命中本地资源，使用本地资源代替
+                Log.i("WebView_Load_Old_Method", "url: " + url);
+                if (WebViewHelper.hasLocalResource(url)) {
+                    WebResourceResponse response = WebViewHelper.getLocalResponse(mContext, url);
+                    if (response != null) {
+                        Log.i("WebView_Load_Old_Method", "intercept!");
+                        return response;
+                    }
+                }
+                return super.shouldInterceptRequest(view, url);
+            }
+
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Nullable
+            @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                // 如果命中本地资源，使用本地资源代替
                 Log.i("WebView_Load", "url: " + request.getUrl().toString());
                 Log.i("WebView_Load", "request: " + request.getRequestHeaders().toString());
-                WebResourceResponse response = WebViewHelper.getLocalResponse(mContext, request.getUrl().toString());
-                if (response != null) {
-                    Log.i("WebView_Load", "intercept!");
-                    return response;
+                String url = request.getUrl().toString();
+                if (WebViewHelper.hasLocalResource(url)) {
+                    WebResourceResponse response = WebViewHelper.getLocalResponse(mContext, request.getUrl().toString());
+                    if (response != null) {
+                        Log.i("WebView_Load", "intercept!");
+                        return response;
+                    }
                 }
                 return super.shouldInterceptRequest(view, request);
             }

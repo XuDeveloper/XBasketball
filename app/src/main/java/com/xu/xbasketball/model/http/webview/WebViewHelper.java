@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -80,24 +81,25 @@ public class WebViewHelper {
         }
     }
 
-    public static WebResourceResponse getLocalResponse(Context context, String url) {
+    public static boolean hasLocalResource(String url) {
         Set<String> set = WebViewInterceptResource.getKeySet();
-        for (String interceptUrl : set) {
-            if (url.contains(interceptUrl)) {
-                InputStream is;
-                try {
-                    // Map local封装为对象？
-                    LocalResource resource = WebViewInterceptResource.get(interceptUrl);
-                    is = context.getApplicationContext().getAssets().open(resource.getLocalPath());
-                    return new WebResourceResponse(resource.getMimeType(),
-                            "utf-8", is);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
+        return set.contains(url);
     }
 
+    public static WebResourceResponse getLocalResponse(Context context, String url) {
+        InputStream is;
+        if (TextUtils.isEmpty(url)) {
+            return null;
+        }
+        try {
+            LocalResource resource = WebViewInterceptResource.get(url);
+            is = context.getApplicationContext().getAssets().open(resource.getLocalPath());
+            return new WebResourceResponse(resource.getMimeType(),
+                    "utf-8", is);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
