@@ -18,6 +18,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.xu.xbasketball.R;
@@ -49,14 +50,16 @@ import butterknife.BindView;
  */
 public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresenter> implements HupuCourtDetailContract.View {
 
-    @BindView(R.id.wv_court_detail)
-    WebViewWrapper wvCourtDetail;
+    @BindView(R.id.fl_court_detail)
+    FrameLayout flCourtDetail;
     @BindView(R.id.clp_toolbar)
     CollapsingToolbarLayout clpToolbar;
     @BindView(R.id.iv_court_detail_pic)
     ImageView ivCourtDetailPic;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    WebViewWrapper wvCourtDetail;
 
     private boolean isJsCodeLoaded = false;
 
@@ -89,7 +92,12 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         });
 
         startTime = System.currentTimeMillis();
+
+        wvCourtDetail = App.getInstance().getGlobalWebview();
+        flCourtDetail.addView(wvCourtDetail);
+
         wvCourtDetail.init();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
             if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
@@ -241,7 +249,7 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
     @Override
     protected void onDestroy() {
         if (wvCourtDetail != null) {
-            wvCourtDetail.destroyWebView();
+            wvCourtDetail.clearWebView();
         }
         super.onDestroy();
     }

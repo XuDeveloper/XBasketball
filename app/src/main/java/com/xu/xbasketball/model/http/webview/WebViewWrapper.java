@@ -64,9 +64,19 @@ public class WebViewWrapper extends WebView {
         disableJavascript();
     }
 
+    public void clearWebView() {
+        loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+        removeAllViews();
+        clearHistory();
+        setTag(null);
+        ((ViewGroup) this.getParent()).removeView(this);
+    }
+
     public void destroyWebView() {
         loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+        removeAllViews();
         clearHistory();
+        setTag(null);
         ((ViewGroup) this.getParent()).removeView(this);
         destroy();
     }

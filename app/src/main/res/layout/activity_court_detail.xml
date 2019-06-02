@@ -62,16 +62,17 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout
+            android:id="@+id/fl_court_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.xu.xbasketball.model.http.webview.WebViewWrapper
-                android:id="@+id/wv_court_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:isScrollContainer="false"
-                android:overScrollMode="never"
-                android:scrollbars="vertical" />
+            <!--<com.xu.xbasketball.model.http.webview.WebViewWrapper-->
+                <!--android:id="@+id/wv_court_detail"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:isScrollContainer="false"-->
+                <!--android:overScrollMode="never"-->
+                <!--android:scrollbars="vertical" />-->
 
         </FrameLayout>
     </android.support.v4.widget.NestedScrollView>

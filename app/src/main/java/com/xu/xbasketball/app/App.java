@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Process;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.xu.xbasketball.base.BaseActivity;
@@ -12,6 +13,7 @@ import com.xu.xbasketball.di.component.AppComponent;
 import com.xu.xbasketball.di.component.DaggerAppComponent;
 import com.xu.xbasketball.di.module.AppModule;
 import com.xu.xbasketball.di.module.NetModule;
+import com.xu.xbasketball.model.http.webview.WebViewWrapper;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +29,7 @@ public class App extends Application {
     public static int SCREEN_WIDTH = -1;
     private static App instance;
     private Set<BaseActivity> allActivities;
+    private WebViewWrapper mGlobalWebview;
 
     public static synchronized App getInstance() {
         return instance;
@@ -70,6 +73,14 @@ public class App extends Application {
     }
 
     private void init() {
+        mGlobalWebview = new WebViewWrapper(getApplicationContext());
+        mGlobalWebview.setScrollContainer(false);
+        mGlobalWebview.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        mGlobalWebview.setVerticalScrollBarEnabled(true);
+    }
+
+    public WebViewWrapper getGlobalWebview() {
+        return mGlobalWebview;
     }
 
     public void addActivity(BaseActivity activity) {
@@ -93,6 +104,7 @@ public class App extends Application {
                 }
             }
         }
+        mGlobalWebview.destroyWebView();
         Process.killProcess(Process.myPid());
         System.exit(0);
     }

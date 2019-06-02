@@ -38,10 +38,6 @@ public class WebViewInterceptResource {
         // https://assets-m.hoopchina.com.cn/touch/static/common/images/ios_a683c89.jpg
         resourceMap.put("https://assets-m.hoopchina.com.cn/touch/static/common/images/ios_a683c89.jpg",
                 new LocalResource("image/*", "court/image/ios_a683c89.jpg"));
-        // https://assets-m.hoopchina.com.cn/touch/static/common/pkg/common_4c53c37.css
-//        resourceMap.put("common_4c53c37.css", new LocalResource("image/*", "court/css/common_4c53c37.css"));
-        // https://assets-m.hoopchina.com.cn/touch/static/bbs/bbs/pkg/bbs_detail_dbc8d00.css
-//        resourceMap.put("bbs_detail_dbc8d00.css", new LocalResource("image/*", "court/css/bbs_detail_dbc8d00.css"));
         // https://i1.hoopchina.com.cn/touch/622/3598622/touch_adlist_3598622_1513748992.7881.png
         resourceMap.put("https://i1.hoopchina.com.cn/touch/622/3598622/touch_adlist_3598622_1513748992.7881.png",
                 new LocalResource("image/*", "court/image/touch_adlist_3598622_1513748992.7881.png"));
@@ -56,6 +52,24 @@ public class WebViewInterceptResource {
                 new LocalResource("image/*", "court/image/close_db8b234.png"));
 
         // tencent news
+        // https://vm.gtimg.cn/tencentvideo/txp/js/txplayer.js
+        resourceMap.put("https://vm.gtimg.cn/tencentvideo/txp/js/txplayer.js",
+                new LocalResource("*/*", "news/js/txplayer.js"));
+        // https://mat1.gtimg.com/pingjs/js/tnfe/works/news/manifest.fd956a13.js
+        resourceMap.put("https://mat1.gtimg.com/pingjs/js/tnfe/works/news/manifest.fd956a13.js",
+                new LocalResource("*/*", "news/js/manifest.fd956a13.js"));
+        // https://mat1.gtimg.com/pingjs/js/tnfe/works/news/vendors.23c0c922.js
+        resourceMap.put("https://mat1.gtimg.com/pingjs/js/tnfe/works/news/vendors.23c0c922.js",
+                new LocalResource("*/*", "news/js/vendors.23c0c922.js"));
+        // https://mat1.gtimg.com/pingjs/js/tnfe/works/news/main.777d8795.js
+        resourceMap.put("https://mat1.gtimg.com/pingjs/js/tnfe/works/news/main.777d8795.js",
+                new LocalResource("*/*", "news/js/main.777d8795.js"));
+        // https://mat1.gtimg.com/pingjs/js/tnfe/works/news/0.ea81ffde.chunk.js
+        resourceMap.put("https://mat1.gtimg.com/pingjs/js/tnfe/works/news/0.ea81ffde.chunk.js",
+                new LocalResource("*/*", "news/js/0.ea81ffde.chunk.js"));
+        // https://mat1.gtimg.com/pingjs/js/tnfe/works/news/share.911923fb.chunk.js
+        resourceMap.put("https://mat1.gtimg.com/pingjs/js/tnfe/works/news/share.911923fb.chunk.js",
+                new LocalResource("*/*", "news/js/share.911923fb.chunk.js"));
         // https://view.inews.qq.com/favicon.ico
         resourceMap.put("https://view.inews.qq.com/favicon.ico",
                 new LocalResource("image/*", "news/image/favicon.ico"));
@@ -68,6 +82,9 @@ public class WebViewInterceptResource {
         // https://mat1.gtimg.com/www/js/news/small-pics-news.png
         resourceMap.put("https://mat1.gtimg.com/www/js/news/small-pics-news.png",
                 new LocalResource("image/*", "news/image/small-pics-news.png"));
+        // https://mat1.gtimg.com/www/js/news/videoArrow.png
+        resourceMap.put("https://mat1.gtimg.com/www/js/news/videoArrow.png",
+                new LocalResource("image/*", "news/image/videoArrow.png"));
         // https://mat1.gtimg.com/www/js/news/big-video-play.png
         resourceMap.put("https://mat1.gtimg.com/www/js/news/big-video-play.png",
                 new LocalResource("image/*", "news/image/big-video-play.png"));
@@ -80,6 +97,12 @@ public class WebViewInterceptResource {
         // https://mat1.gtimg.com/www/js/news/placeholder.png
         resourceMap.put("https://mat1.gtimg.com/www/js/news/placeholder.png",
                 new LocalResource("image/*", "news/image/placeholder.png"));
+        // https://vm.gtimg.cn/tencentvideo/txp/style/img/loading.png
+        resourceMap.put("https://vm.gtimg.cn/tencentvideo/txp/style/img/loading.png",
+                new LocalResource("image/*", "news/image/loading.png"));
+        // https://mat1.gtimg.com/www/images/wise/rplay.png
+        resourceMap.put("https://mat1.gtimg.com/www/images/wise/rplay.png",
+                new LocalResource("image/*", "news/image/rplay.png"));
     }
 
     public static LocalResource get(String url) {

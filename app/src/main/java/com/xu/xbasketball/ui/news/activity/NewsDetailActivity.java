@@ -17,6 +17,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.xu.xbasketball.R;
@@ -40,14 +41,16 @@ import butterknife.BindView;
  */
 public class NewsDetailActivity extends BaseActivity {
 
-    @BindView(R.id.wv_news_detail)
-    WebViewWrapper wvNewsDetail;
+    @BindView(R.id.fl_news_detail)
+    FrameLayout flNewsDetail;
     @BindView(R.id.iv_news_detail_pic)
     ImageView ivNewsDetailPic;
     @BindView(R.id.clp_toolbar)
     CollapsingToolbarLayout clpToolbar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    WebViewWrapper wvNewsDetail;
 
     @Override
     public int getLayoutId() {
@@ -81,7 +84,11 @@ public class NewsDetailActivity extends BaseActivity {
             }
         });
 
+        wvNewsDetail = App.getInstance().getGlobalWebview();
+        flNewsDetail.addView(wvNewsDetail);
+
         wvNewsDetail.init();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
             if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
@@ -112,14 +119,14 @@ public class NewsDetailActivity extends BaseActivity {
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
                 // 如果命中本地资源，使用本地资源代替
-//                Log.i("WebView_Load_Old_Method", "url: " + url);
-//                if (WebViewHelper.hasLocalResource(url)) {
-//                    WebResourceResponse response = WebViewHelper.getLocalResponse(mContext, url);
-//                    if (response != null) {
-//                        Log.i("WebView_Load_Old_Method", "intercept!");
-//                        return response;
-//                    }
-//                }
+                Log.i("WebView_Load_Old_Method", "url: " + url);
+                if (WebViewHelper.hasLocalResource(url)) {
+                    WebResourceResponse response = WebViewHelper.getLocalResponse(mContext, url);
+                    if (response != null) {
+                        Log.i("WebView_Load_Old_Method", "intercept!");
+                        return response;
+                    }
+                }
                 return super.shouldInterceptRequest(view, url);
             }
 
@@ -159,7 +166,7 @@ public class NewsDetailActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         if (wvNewsDetail != null) {
-            wvNewsDetail.destroyWebView();
+            wvNewsDetail.clearWebView();
         }
         super.onDestroy();
         finishAfterTransition();
