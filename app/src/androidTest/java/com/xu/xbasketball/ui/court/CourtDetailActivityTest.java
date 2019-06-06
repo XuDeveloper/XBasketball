@@ -50,7 +50,7 @@ public class CourtDetailActivityTest {
     public void showCourtDetail() {
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.iv_court_detail_pic)).check(matches(isDisplayed()));
-        onView(withId(R.id.wv_court_detail)).check(matches(isDisplayed()));
+        onView(withId(R.id.fl_court_detail)).check(matches(isDisplayed()));
         onView(withId(R.id.clp_toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.clp_toolbar)).check(matches(withCollapsingToolbarLayoutText(is(TestConstants.COURT_DETAIL_ACTIVITY_TEST_TITLE))));
     }
