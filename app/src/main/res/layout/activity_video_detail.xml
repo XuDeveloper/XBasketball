@@ -8,16 +8,17 @@
     <include layout="@layout/view_toolbar" />
 
     <FrameLayout
+        android:id="@+id/fl_video_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.xu.xbasketball.model.http.webview.WebViewWrapper
-            android:id="@+id/wv_video_detail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:isScrollContainer="false"
-            android:overScrollMode="never"
-            android:scrollbars="vertical" />
+        <!--<com.xu.xbasketball.model.http.webview.WebViewWrapper-->
+            <!--android:id="@+id/wv_video_detail"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:isScrollContainer="false"-->
+            <!--android:overScrollMode="never"-->
+            <!--android:scrollbars="vertical" />-->
     </FrameLayout>
 
 </LinearLayout>

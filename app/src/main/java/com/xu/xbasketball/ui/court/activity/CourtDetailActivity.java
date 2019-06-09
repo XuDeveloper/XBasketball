@@ -98,11 +98,13 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
 
         wvCourtDetail.init();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
-            if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
-                wvCourtDetail.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-            }
+        // 无图模式
+        if (App.getAppComponent().preferencesHelper().getNoImageState()) {
+            wvCourtDetail.getSettings().setBlockNetworkImage(true);
+            wvCourtDetail.getSettings().setBlockNetworkLoads(true);
+        } else {
+            wvCourtDetail.getSettings().setBlockNetworkImage(false);
+            wvCourtDetail.getSettings().setBlockNetworkLoads(false);
         }
         wvCourtDetail.setWebViewClient(new WebViewClient(){
             @Override

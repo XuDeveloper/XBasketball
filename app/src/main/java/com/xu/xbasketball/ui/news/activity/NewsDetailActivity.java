@@ -89,14 +89,15 @@ public class NewsDetailActivity extends BaseActivity {
 
         wvNewsDetail.init();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
-            if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
-                wvNewsDetail.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-            }
+        // 无图模式
+        if (App.getAppComponent().preferencesHelper().getNoImageState()) {
+            wvNewsDetail.getSettings().setBlockNetworkImage(true);
+            wvNewsDetail.getSettings().setBlockNetworkLoads(true);
+        } else {
+            wvNewsDetail.getSettings().setBlockNetworkImage(false);
+            wvNewsDetail.getSettings().setBlockNetworkLoads(false);
         }
-        // 开启 webview 调试模式
-//        wvNewsDetail.openWebViewDebug();
+        // todo: ERR_CACHE_MISS
         wvNewsDetail.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

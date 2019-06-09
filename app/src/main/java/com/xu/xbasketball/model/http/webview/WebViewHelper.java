@@ -40,6 +40,7 @@ public class WebViewHelper {
         // 允许SessionStorage/LocalStorage存储
         webSettings.setDomStorageEnabled(true);
         // 5.0以上开启混合模式加载
+        // 从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }

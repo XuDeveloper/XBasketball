@@ -103,6 +103,65 @@ public class WebViewInterceptResource {
         // https://mat1.gtimg.com/www/images/wise/rplay.png
         resourceMap.put("https://mat1.gtimg.com/www/images/wise/rplay.png",
                 new LocalResource("image/*", "news/image/rplay.png"));
+
+        // tencent video
+        // https://mat1.gtimg.com/www/https/pingjs20161020.js
+        resourceMap.put("https://mat1.gtimg.com/www/https/pingjs20161020.js",
+                new LocalResource("*/*", "video/js/pingjs20161020.js"));
+        // https://mat1.gtimg.com/libs/t/finalboss-lite/0.1.13/finalboss-lite.min.js
+        resourceMap.put("https://mat1.gtimg.com/libs/t/finalboss-lite/0.1.13/finalboss-lite.min.js",
+                new LocalResource("*/*", "video/js/finalboss-lite.min.js"));
+        // https://pingjs.qq.com/h5/stats.js
+        resourceMap.put("https://pingjs.qq.com/h5/stats.js",
+                new LocalResource("*/*", "video/js/stats.js"));
+        // https://mat1.gtimg.com/www/js/emonitor/index_20190505.js
+        resourceMap.put("https://mat1.gtimg.com/www/js/emonitor/index_20190505.js",
+                new LocalResource("*/*", "video/js/index_20190505.js"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/v-placehoder-logo.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/v-placehoder-logo.svg",
+                new LocalResource("image/*", "video/image/v-placehoder-logo.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/play-circle_v2.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/play-circle_v2.svg",
+                new LocalResource("image/*", "video/image/play-circle_v2.svg"));
+        // https://mat1.gtimg.com/pingjs/ext2020/xw-article-icons/newui/om-icon-v.svg
+        resourceMap.put("https://mat1.gtimg.com/pingjs/ext2020/xw-article-icons/newui/om-icon-v.svg",
+                new LocalResource("image/*", "video/image/om-icon-v.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/follow-icon.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/follow-icon.svg",
+                new LocalResource("image/*", "video/image/follow-icon.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/nshare-wx.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/nshare-wx.svg",
+                new LocalResource("image/*", "video/image/nshare-wx.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/nshare-tl.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/nshare-tl.svg",
+                new LocalResource("image/*", "video/image/nshare-tl.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/nshare-qq.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/nshare-qq.svg",
+                new LocalResource("image/*", "video/image/nshare-qq.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/nshare-wb.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/nshare-wb.svg",
+                new LocalResource("image/*", "video/image/nshare-wb.svg"));
+        // https://mat1.gtimg.com/pingjs/ext2020/xw-article-icons/newui/white-arrow-right.svg
+        resourceMap.put("https://mat1.gtimg.com/pingjs/ext2020/xw-article-icons/newui/white-arrow-right.svg",
+                new LocalResource("image/*", "video/image/white-arrow-right.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/nshare-qz.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/nshare-qz.svg",
+                new LocalResource("image/*", "video/image/nshare-qz.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/ui-icon_log.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/ui-icon_log.svg",
+                new LocalResource("image/*", "video/image/ui-icon_log.svg"));
+        // https://mat1.gtimg.com/pingjs/ext2020/xw-article-icons/newui/subtitle-video-rec.svg
+        resourceMap.put("https://mat1.gtimg.com/pingjs/ext2020/xw-article-icons/newui/subtitle-video-rec.svg",
+                new LocalResource("image/*", "video/image/subtitle-video-rec.svg"));
+        // https://mat1.gtimg.com/pingjs/ext2020/test2017/components/channel/index/Video/watch.svg
+        resourceMap.put("https://mat1.gtimg.com/pingjs/ext2020/test2017/components/channel/index/Video/watch.svg",
+                new LocalResource("image/*", "video/image/watch.svg"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/logo/v0/192.png
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/logo/v0/192.png",
+                new LocalResource("image/*", "video/image/192.png"));
+        // https://mat1.gtimg.com/www/mobi/2017/image/mute-icons.svg
+        resourceMap.put("https://mat1.gtimg.com/www/mobi/2017/image/mute-icons.svg",
+                new LocalResource("image/*", "video/image/mute-icons.svg"));
     }
 
     public static LocalResource get(String url) {
