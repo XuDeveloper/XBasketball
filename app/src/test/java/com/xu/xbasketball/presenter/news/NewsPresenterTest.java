@@ -2,13 +2,20 @@ package com.xu.xbasketball.presenter.news;
 
 import com.xu.xbasketball.base.BaseTest;
 import com.xu.xbasketball.base.contract.news.NewsContract;
+import com.xu.xbasketball.model.bean.TencentNewsBean;
 import com.xu.xbasketball.model.bean.TencentNewsResultBean;
 
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Flowable;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,6 +41,7 @@ public class NewsPresenterTest extends BaseTest {
     @Test
     public void getNewsAndLoadIntoView() {
         TencentNewsResultBean resultBean = new TencentNewsResultBean();
+        resultBean.setData(new ArrayList<>());
         when(mMockDataManager.getNews()).thenReturn(Flowable.just(resultBean));
 
         newsPresenter.getNews();
@@ -43,6 +51,7 @@ public class NewsPresenterTest extends BaseTest {
 
         // 测试view是否调用相应接口
         verify(view).showProgress();
+        verify(view).showNews(anyList());
         verify(view).hideProgress();
     }
 

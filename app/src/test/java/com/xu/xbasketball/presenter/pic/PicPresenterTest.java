@@ -7,9 +7,12 @@ import com.xu.xbasketball.model.bean.SinaPicResultBean;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.util.ArrayList;
+
 import io.reactivex.Flowable;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,6 +38,7 @@ public class PicPresenterTest extends BaseTest  {
     @Test
     public void getPicsAndLoadIntoView() {
         SinaPicResultBean sinaPicResultBean = new SinaPicResultBean();
+        sinaPicResultBean.setData(new ArrayList<>());
         when(mMockDataManager.getPics(anyInt(), anyInt())).thenReturn(Flowable.just(sinaPicResultBean));
 
         picPresenter.getPics(1, 10);
@@ -44,6 +48,7 @@ public class PicPresenterTest extends BaseTest  {
 
         // 测试view是否调用相应接口
         verify(view).showProgress();
+        verify(view).showPics(anyList());
         verify(view).hideProgress();
     }
 

@@ -92,12 +92,9 @@ public class NewsDetailActivity extends BaseActivity {
         // 无图模式
         if (App.getAppComponent().preferencesHelper().getNoImageState()) {
             wvNewsDetail.getSettings().setBlockNetworkImage(true);
-            wvNewsDetail.getSettings().setBlockNetworkLoads(true);
         } else {
             wvNewsDetail.getSettings().setBlockNetworkImage(false);
-            wvNewsDetail.getSettings().setBlockNetworkLoads(false);
         }
-        // todo: ERR_CACHE_MISS
         wvNewsDetail.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

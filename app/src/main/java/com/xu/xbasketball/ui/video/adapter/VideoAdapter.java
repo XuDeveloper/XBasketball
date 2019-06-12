@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xu.xbasketball.R;
+import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.base.listener.BaseClickListener;
 import com.xu.xbasketball.model.bean.TencentVideoBean;
 import com.xu.xbasketball.model.img.ImageLoader;
@@ -98,8 +99,10 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         holder.tvVideoUpdateTime.setText(videoBean.getUpdate_time());
         holder.ivVideoBimg.setTag(R.id.glide_tag, videoBean.getImg());
         if (videoBean.getImg().equals(holder.ivVideoBimg.getTag(R.id.glide_tag))) {
-            ImgConfig imgConfig = new ImgConfig(R.mipmap.pic_placeholder);
-            ImageLoader.load(mContext, videoBean.getImg() + ".jpg", holder.ivVideoBimg, imgConfig);
+            if (!App.getAppComponent().preferencesHelper().getNoImageState()) {
+                ImgConfig imgConfig = new ImgConfig(R.mipmap.pic_placeholder);
+                ImageLoader.load(mContext, videoBean.getImg() + ".jpg", holder.ivVideoBimg, imgConfig);
+            }
         }
         holder.cvVideo.setOnClickListener(new BaseClickListener() {
             @Override

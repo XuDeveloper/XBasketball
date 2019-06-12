@@ -101,10 +101,8 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         // 无图模式
         if (App.getAppComponent().preferencesHelper().getNoImageState()) {
             wvCourtDetail.getSettings().setBlockNetworkImage(true);
-            wvCourtDetail.getSettings().setBlockNetworkLoads(true);
         } else {
             wvCourtDetail.getSettings().setBlockNetworkImage(false);
-            wvCourtDetail.getSettings().setBlockNetworkLoads(false);
         }
         wvCourtDetail.setWebViewClient(new WebViewClient(){
             @Override

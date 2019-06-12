@@ -57,6 +57,7 @@ public class WebViewHelper {
         webSettings.setTextZoom(100);
         // 10M缓存，api 18后，系统自动管理。
 //        webSettings.setAppCacheMaxSize(10 * 1024 * 1024);
+//        webSettings.setCacheMode();
         // 允许缓存，设置缓存位置
         webSettings.setAppCacheEnabled(true);
         webSettings.setAppCachePath(Constants.PATH_WEBVIEW_CACHE);

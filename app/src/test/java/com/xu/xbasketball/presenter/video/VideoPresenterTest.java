@@ -7,9 +7,12 @@ import com.xu.xbasketball.model.bean.TencentVideoResultBean;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.util.ArrayList;
+
 import io.reactivex.Flowable;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,6 +38,7 @@ public class VideoPresenterTest extends BaseTest {
     @Test
     public void getVideosAndLoadIntoView() {
         TencentVideoResultBean resultBean = new TencentVideoResultBean();
+        resultBean.setData(new ArrayList<>());
         when(mMockDataManager.getVideos(anyInt())).thenReturn(Flowable.just(resultBean));
 
         videoPresenter.getVideos(1);
@@ -44,13 +48,13 @@ public class VideoPresenterTest extends BaseTest {
 
         // 测试view是否调用相应接口
         verify(view).showProgress();
+        verify(view).showVideos(anyList());
         verify(view).hideProgress();
     }
 
     @Test
     public void getNullVideosAndLoadIntoView() {
         TencentVideoResultBean resultBean = new TencentVideoResultBean();
-        resultBean.setData(null);
         when(mMockDataManager.getVideos(anyInt())).thenReturn(Flowable.just(resultBean));
 
         videoPresenter.getVideos(1);
