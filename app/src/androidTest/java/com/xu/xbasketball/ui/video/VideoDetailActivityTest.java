@@ -48,7 +48,7 @@ public class VideoDetailActivityTest {
     @Test
     public void showVideoDetail() {
         onView(withId(R.id.tb_basketball)).check(matches(isDisplayed()));
-        onView(withId(R.id.wv_video_detail)).check(matches(isDisplayed()));
+        onView(withId(R.id.fl_video_detail)).check(matches(isDisplayed()));
     }
 
     @After
