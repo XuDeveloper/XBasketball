@@ -16,7 +16,7 @@ import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.di.component.ActivityComponent;
 import com.xu.xbasketball.di.component.DaggerActivityComponent;
 import com.xu.xbasketball.di.module.ActivityModule;
-import com.xu.xbasketball.widget.ActivitySwipeBackHelper;
+import com.xu.xbasketball.widget.swipeback.ActivitySwipeBackHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
