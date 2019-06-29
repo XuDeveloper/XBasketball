@@ -1,7 +1,8 @@
 package com.xu.xbasketball.utils;
 
-import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.idling.CountingIdlingResource;
+
+import androidx.test.espresso.IdlingResource;
+import androidx.test.espresso.idling.CountingIdlingResource;
 
 /**
  * Created by xu on 2019/04/06.
