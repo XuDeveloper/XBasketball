@@ -1,12 +1,11 @@
 package com.xu.xbasketball.ui.video.fragment;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseMVPFragment;
 import com.xu.xbasketball.base.contract.video.VideoContract;
@@ -47,7 +46,7 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
 
     @Override
     public void initData() {
-        fabVideoBackToTop.setVisibility(View.GONE);
+        fabVideoBackToTop.hide();
         mList = new ArrayList<>();
         adapter = new VideoAdapter(mContext);
         page = 1;
@@ -93,13 +92,13 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     // 判断是否超过一屏
                     if (firstVisibleItemPosition == 0) {
-                        fabVideoBackToTop.setVisibility(View.GONE);
+                        fabVideoBackToTop.hide();
                     } else {
-                        fabVideoBackToTop.setVisibility(View.VISIBLE);
+                        fabVideoBackToTop.show();
                     }
                 } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                     // 滑动状态不显示
-                    fabVideoBackToTop.setVisibility(View.GONE);
+                    fabVideoBackToTop.hide();
                 }
             }
         });
@@ -125,7 +124,7 @@ public class VideoFragment extends BaseMVPFragment<VideoPresenter> implements Vi
     @OnClick(R.id.fab_video_back_to_top)
     public void videoBackToTop() {
         rvVideo.smoothScrollToPosition(0);
-        fabVideoBackToTop.setVisibility(View.GONE);
+        fabVideoBackToTop.hide();
     }
 
     @Override

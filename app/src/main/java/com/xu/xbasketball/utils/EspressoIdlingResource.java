@@ -1,6 +1,5 @@
 package com.xu.xbasketball.utils;
 
-
 import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.idling.CountingIdlingResource;
 

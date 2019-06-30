@@ -1,12 +1,11 @@
 package com.xu.xbasketball.ui.dailyscore.fragment;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.contract.dailyscore.DailyScoreContract;
@@ -59,7 +58,7 @@ public class DailyScoreFragment extends BaseLazyLoadFragment<DailyScorePresenter
 
     @Override
     protected void lazyLoad() {
-        fabDailyScoreBackToTop.setVisibility(View.GONE);
+        fabDailyScoreBackToTop.hide();
         mPresenter.getDailyScore(DateUtil.getTodayDate(), DateUtil.getTodayDate());
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -86,13 +85,13 @@ public class DailyScoreFragment extends BaseLazyLoadFragment<DailyScorePresenter
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     // 判断是否超过一屏
                     if (firstVisibleItemPosition == 0) {
-                        fabDailyScoreBackToTop.setVisibility(View.GONE);
+                        fabDailyScoreBackToTop.hide();
                     } else {
-                        fabDailyScoreBackToTop.setVisibility(View.VISIBLE);
+                        fabDailyScoreBackToTop.show();
                     }
                 } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                     // 滑动状态不显示
-                    fabDailyScoreBackToTop.setVisibility(View.GONE);
+                    fabDailyScoreBackToTop.hide();
                 }
             }
         });
@@ -111,7 +110,7 @@ public class DailyScoreFragment extends BaseLazyLoadFragment<DailyScorePresenter
     @OnClick(R.id.fab_daily_score_back_to_top)
     public void dailyScoreBackToTop() {
         rvDailyScore.smoothScrollToPosition(0);
-        fabDailyScoreBackToTop.setVisibility(View.GONE);
+        fabDailyScoreBackToTop.hide();
     }
 
     @Override

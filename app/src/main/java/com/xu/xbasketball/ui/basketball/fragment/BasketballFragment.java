@@ -1,8 +1,8 @@
 package com.xu.xbasketball.ui.basketball.fragment;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseFragment;
 import com.xu.xbasketball.ui.basketball.adapter.BasketballFragmentPagerAdapter;

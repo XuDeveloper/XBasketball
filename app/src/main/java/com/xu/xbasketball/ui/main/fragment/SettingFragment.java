@@ -1,7 +1,8 @@
 package com.xu.xbasketball.ui.main.fragment;
 
-import android.support.v7.widget.SwitchCompat;
 import android.widget.CompoundButton;
+
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseMVPFragment;

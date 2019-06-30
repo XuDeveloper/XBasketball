@@ -1,8 +1,9 @@
 package com.xu.xbasketball.widget.swipeback;
 
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.utils.SystemUtil;

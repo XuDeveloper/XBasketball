@@ -1,12 +1,13 @@
 package com.xu.xbasketball.ui.pic.fragment;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseMVPFragment;
 import com.xu.xbasketball.base.contract.pic.PicContract;
@@ -54,7 +55,7 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
 
     @Override
     public void initData() {
-        fabPicBackToTop.setVisibility(View.GONE);
+        fabPicBackToTop.hide();
         mList = new ArrayList<>();
         adapter = new PicAdapter(mContext);
         page = 1;
@@ -99,15 +100,15 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
                     case RecyclerView.SCROLL_STATE_IDLE:
                         ImageLoader.resumeAllImageRequests(mContext);
                         if (firstVisibleItemPosition == 0) {
-                            fabPicBackToTop.setVisibility(View.GONE);
+                            fabPicBackToTop.hide();
                         } else {
-                            fabPicBackToTop.setVisibility(View.VISIBLE);
+                            fabPicBackToTop.show();
                         }
                         break;
                     case RecyclerView.SCROLL_STATE_DRAGGING:
                     case RecyclerView.SCROLL_STATE_SETTLING:
                         ImageLoader.pauseAllImageRequests(mContext);
-                        fabPicBackToTop.setVisibility(View.GONE);
+                        fabPicBackToTop.hide();
                         break;
                 }
             }
@@ -137,7 +138,7 @@ public class PicFragment extends BaseMVPFragment<PicPresenter> implements PicCon
     @OnClick(R.id.fab_pic_back_to_top)
     public void picBackToTop() {
         rvPic.smoothScrollToPosition(0);
-        fabPicBackToTop.setVisibility(View.GONE);
+        fabPicBackToTop.hide();
     }
 
     @Override

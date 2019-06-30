@@ -1,12 +1,13 @@
 package com.xu.xbasketball.ui.court.fragment;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.base.BaseLazyLoadFragment;
 import com.xu.xbasketball.base.contract.court.HupuCourtContract;
@@ -76,7 +77,7 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
 
     @Override
     protected void lazyLoad() {
-        fabCourtBackToTop.setVisibility(View.GONE);
+        fabCourtBackToTop.hide();
         mPresenter.getCourtArticles(page);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -106,13 +107,13 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     // 判断是否超过一屏
                     if (firstVisibleItemPosition == 0) {
-                        fabCourtBackToTop.setVisibility(View.GONE);
+                        fabCourtBackToTop.hide();
                     } else {
-                        fabCourtBackToTop.setVisibility(View.VISIBLE);
+                        fabCourtBackToTop.show();
                     }
                 } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                     // 滑动状态不显示
-                    fabCourtBackToTop.setVisibility(View.GONE);
+                    fabCourtBackToTop.hide();
                 }
             }
         });
@@ -128,7 +129,7 @@ public class CourtFragment extends BaseLazyLoadFragment<HupuCourtPresenter> impl
     @OnClick(R.id.fab_court_back_to_top)
     public void courtBackToTop() {
         rvCourt.smoothScrollToPosition(0);
-        fabCourtBackToTop.setVisibility(View.GONE);
+        fabCourtBackToTop.hide();
     }
 
     @Override

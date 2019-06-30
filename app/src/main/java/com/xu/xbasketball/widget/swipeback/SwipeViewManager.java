@@ -1,10 +1,10 @@
 package com.xu.xbasketball.widget.swipeback;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.ref.WeakReference;
 

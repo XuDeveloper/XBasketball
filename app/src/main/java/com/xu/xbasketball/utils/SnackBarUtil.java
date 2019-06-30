@@ -1,10 +1,10 @@
 package com.xu.xbasketball.utils;
 
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.xu.xbasketball.R;
 
 /**

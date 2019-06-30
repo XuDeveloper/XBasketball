@@ -1,8 +1,9 @@
 package com.xu.xbasketball.base;
 
-import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import androidx.test.espresso.matcher.BoundedMatcher;
 
 import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
 

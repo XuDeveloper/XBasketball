@@ -5,21 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.support.test.espresso.IdlingResource;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.widget.Toolbar;
+import androidx.test.espresso.IdlingResource;
 
 import com.xu.xbasketball.R;
 import com.xu.xbasketball.app.App;
@@ -104,7 +103,7 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
         } else {
             wvCourtDetail.getSettings().setBlockNetworkImage(false);
         }
-        wvCourtDetail.setWebViewClient(new WebViewClient(){
+        wvCourtDetail.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);

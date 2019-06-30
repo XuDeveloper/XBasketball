@@ -3,19 +3,20 @@ package com.xu.xbasketball.base;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.xu.xbasketball.app.App;
 import com.xu.xbasketball.di.component.ActivityComponent;
 import com.xu.xbasketball.di.component.DaggerActivityComponent;
 import com.xu.xbasketball.di.module.ActivityModule;
+import com.xu.xbasketball.utils.rxpermissions.RxPermissions;
 import com.xu.xbasketball.widget.swipeback.ActivitySwipeBackHelper;
 
 import butterknife.ButterKnife;
