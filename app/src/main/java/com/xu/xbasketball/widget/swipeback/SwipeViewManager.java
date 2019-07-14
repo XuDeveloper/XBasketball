@@ -28,7 +28,7 @@ public class SwipeViewManager {
         this.mSwipeBackActivityCallback = swipeBackActivityCallback;
     }
 
-    public boolean init() {
+    protected boolean init() {
         mCurrentContentView = mCurrentActivity.findViewById(Window.ID_ANDROID_CONTENT);
         AppCompatActivity previousActivity = mSwipeBackActivityCallback.getPreviousActivity();
         if (previousActivity == null) {
@@ -41,6 +41,33 @@ public class SwipeViewManager {
         }
         mPreviousActivity = new WeakReference<>(previousActivity);
         return false;
+    }
+
+    /**
+     * 开始滑动
+     * @param x
+     * @param screenWidth
+     */
+    protected void translate(float x, int screenWidth) {
+        if (mCurrentContentView == null) {
+            return;
+        }
+        if (mDisplayView != null) {
+            mDisplayView.setX(x);
+        }
+    }
+
+    /**
+     * 复原原始状态
+     */
+    protected void recover() {
+        if (mCurrentContentView == null) {
+            return;
+        }
+        mPreviousDisplayView.setX(0);
+        mPreviousDisplayView = null;
+        mCurrentContentView = null;
+        mDisplayView = null;
     }
 
 }
