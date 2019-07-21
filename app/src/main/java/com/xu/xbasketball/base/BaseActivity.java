@@ -18,6 +18,7 @@ import com.xu.xbasketball.di.component.DaggerActivityComponent;
 import com.xu.xbasketball.di.module.ActivityModule;
 import com.xu.xbasketball.utils.rxpermissions.RxPermissions;
 import com.xu.xbasketball.widget.swipeback.ActivitySwipeBackHelper;
+import com.xu.xbasketball.widget.swipeback.SwipeBackActivityCallback;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -61,6 +62,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         mContext = this;
         view = ((ViewGroup)findViewById(android.R.id.content)).getChildAt(0);
 //        requestPermission();
+        if (helper == null) {
+            helper = new ActivitySwipeBackHelper(this, this, new SwipeBackActivityCallback() {
+                @Override
+                public AppCompatActivity getPreviousActivity() {
+                    return App.getInstance().getPreviousActivity();
+                }
+            });
+            helper.enableSwipeBack(useSwipeToExit);
+        }
         viewCreated();
         initData();
     }
@@ -106,15 +116,14 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 
     public void setUseSwipeToExit(boolean useSwipeToExit) {
         this.useSwipeToExit = useSwipeToExit;
+        helper.enableSwipeBack(useSwipeToExit);
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        // todo 集成于BaseActivity之中
         if (!useSwipeToExit) {
             return super.dispatchTouchEvent(ev);
-        }
-        if (helper == null) {
-            helper = new ActivitySwipeBackHelper(this, this);
         }
         return helper.processTouchEvent(ev) || super.dispatchTouchEvent(ev);
     }

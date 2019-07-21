@@ -16,6 +16,8 @@ import com.xu.xbasketball.di.module.NetModule;
 import com.xu.xbasketball.model.http.webview.WebViewWrapper;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,7 +30,7 @@ public class App extends Application {
     public static int SCREEN_HEIGHT = -1;
     public static int SCREEN_WIDTH = -1;
     private static App instance;
-    private Set<BaseActivity> allActivities;
+    private List<BaseActivity> allActivities;
     private WebViewWrapper mGlobalWebview;
 
     public static synchronized App getInstance() {
@@ -85,7 +87,7 @@ public class App extends Application {
 
     public void addActivity(BaseActivity activity) {
         if (allActivities == null) {
-            allActivities = new HashSet<>();
+            allActivities = new LinkedList<>();
         }
         allActivities.add(activity);
     }
@@ -94,6 +96,14 @@ public class App extends Application {
         if (allActivities != null) {
             allActivities.remove(activity);
         }
+    }
+
+    public BaseActivity getPreviousActivity() {
+        int count = allActivities.size();
+        if (count < 2) {
+            return null;
+        }
+        return allActivities.get(count - 2);
     }
 
     public void exitApp() {

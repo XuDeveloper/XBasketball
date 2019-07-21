@@ -3,6 +3,7 @@ package com.xu.xbasketball.widget.swipeback;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.animation.DecelerateInterpolator;
@@ -21,6 +22,8 @@ import com.xu.xbasketball.utils.SystemUtil;
  */
 public class ActivitySwipeBackHelper {
 
+    private static final String TAG = "ActivitySwipeBackHelper";
+
     // 点击开始
     private static final int SWIPE_STATE_ACTION_DOWN = 1;
     // 点击结束
@@ -34,7 +37,7 @@ public class ActivitySwipeBackHelper {
     // 结束滑动，返回前一页面
     private static final int SWIPE_STATE_ACTION_SWIPEBACK_END = 6;
 
-    //
+    // 滑动阈值
     private static final int SWIPE_THRESHOLD_ONE = App.SCREEN_WIDTH / 4;
 
     private AppCompatActivity mActivity;
@@ -46,52 +49,70 @@ public class ActivitySwipeBackHelper {
     private int screenWidth;
     private ValueAnimator mValueAnimator;
 
+    // 默认开启滑动返回
+    private boolean mEnableSwipeBack = true;
     private boolean mIsSwipeBack = false;
+    // 滑动动画是否正在播放
+    private boolean mSwipeAnimPlaying = false;
 
-    public ActivitySwipeBackHelper(AppCompatActivity activity, SwipeBackActivityCallback swipeBackActivityCallback) {
+    public ActivitySwipeBackHelper(AppCompatActivity activity, SwipeBackCallback swipeBackCallback, SwipeBackActivityCallback swipeBackActivityCallback) {
         this.mActivity = activity;
+        this.callback = swipeBackCallback;
         mTouchSlop = ViewConfiguration.get(mActivity).getScaledTouchSlop();
         swipeViewManager = new SwipeViewManager(activity, swipeBackActivityCallback);
 
         screenWidth = App.SCREEN_WIDTH;
     }
 
+    public void enableSwipeBack(boolean enable) {
+        if (mEnableSwipeBack == enable) {
+            return;
+        }
+        mEnableSwipeBack = enable;
+    }
+
     public boolean processTouchEvent(MotionEvent ev) {
+        if (!mEnableSwipeBack) {
+            return false;
+        }
+        if (mSwipeAnimPlaying) {
+            return true;
+        }
         int action = ev.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             mLastPointX = ev.getRawX();
+            Log.i(TAG, "processTouchEvent-ev-ACTION_DOWN-mLastPointX: " + mLastPointX);
         }
         // 获取触控点
         final int actionIndex = ev.getActionIndex();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
+                Log.i(TAG, "processTouchEvent-ev-ACTION_DOWN");
                 processSwipeBackEvent(SWIPE_STATE_ACTION_DOWN);
-                if (!swipeViewManager.init()) {
-                    
-                }
                 break;
             case MotionEvent.ACTION_MOVE:
+                Log.i(TAG, "processTouchEvent-ev-ACTION_MOVE");
                 final float curPointX = ev.getRawX();
-                mLastPointX = curPointX;
                 if (Math.abs(curPointX - mLastPointX) < mTouchSlop) {
                     return false;
                 } else {
 //                    Log.i("Activity", "curPointX: " + curPointX);
 //                    Log.i("Activity", "mLastPointX: " + mLastPointX);
                     mIsSwipeBack = true;
-                    callback.onSwipeBack();
 //                    return true;
                 }
                 if (actionIndex == 0) {
                     // 第一个触控点，开始滑动
                     final float distanceX = curPointX - mLastPointX;
                     mLastPointX = curPointX;
+                    Log.i(TAG, "processTouchEvent-ev-ACTION_MOVE-translateX");
                     translateX(mDistanceX + distanceX);
                     return true;
                 } else {
                     return true;
                 }
             case MotionEvent.ACTION_UP:
+                Log.i(TAG, "processTouchEvent-ev-ACTION_UP");
                 if (mDistanceX == 0) {
                     // 没有进行滑动
                     mIsSwipeBack = false;
@@ -114,9 +135,14 @@ public class ActivitySwipeBackHelper {
         switch (eventType) {
             case SWIPE_STATE_ACTION_DOWN:
                 // 预处理
+                Log.i(TAG, "processTouchEvent-SWIPE_STATE_ACTION_DOWN");
                 SystemUtil.hideInputMethod(mActivity, mActivity.getCurrentFocus());
+                if (!swipeViewManager.init()) {
+                    return;
+                }
                 break;
             case SWIPE_STATE_ACTION_UP:
+                Log.i(TAG, "processTouchEvent-SWIPE_STATE_ACTION_UP");
                 if (mDistanceX == 0) {
                     swipeViewManager.recover();
                 } else if (mDistanceX < SWIPE_THRESHOLD_ONE) {
@@ -126,23 +152,33 @@ public class ActivitySwipeBackHelper {
                 }
                 break;
             case SWIPE_STATE_ACTION_SWIPE_START:
-
+                Log.i(TAG, "processTouchEvent-SWIPE_STATE_ACTION_SWIPE_START");
+                startSwipeAnim();
                 break;
             case SWIPE_STATE_ACTION_SWIPE_END:
+                Log.i(TAG, "processTouchEvent-SWIPE_STATE_ACTION_SWIPE_END");
                 mDistanceX = 0;
                 mIsSwipeBack = false;
                 swipeViewManager.recover();
                 break;
             case SWIPE_STATE_ACTION_SWIPEBACK_START:
-
+                Log.i(TAG, "processTouchEvent-SWIPE_STATE_ACTION_SWIPEBACK_START");
+                startSwipeBackAnim();
                 break;
             case SWIPE_STATE_ACTION_SWIPEBACK_END:
+                Log.i(TAG, "processTouchEvent-SWIPE_STATE_ACTION_SWIPEBACK_END");
                 swipeViewManager.recover();
+                if (callback != null) {
+                    callback.onSwipeBack();
+                }
+                break;
+            default:
                 break;
         }
     }
 
     private void startSwipeAnim() {
+        mSwipeAnimPlaying = true;
         final int maxValue = 150;
         mValueAnimator = new ValueAnimator();
         mValueAnimator.setInterpolator(new DecelerateInterpolator(2f));
@@ -161,6 +197,7 @@ public class ActivitySwipeBackHelper {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 mValueAnimator.removeListener(this);
+                mSwipeAnimPlaying = false;
                 processSwipeBackEvent(SWIPE_STATE_ACTION_SWIPE_END);
             }
         });
@@ -168,6 +205,7 @@ public class ActivitySwipeBackHelper {
     }
 
     private void startSwipeBackAnim() {
+        mSwipeAnimPlaying = true;
         final int maxValue = 300;
         mValueAnimator = new ValueAnimator();
         mValueAnimator.setInterpolator(new DecelerateInterpolator());
@@ -186,6 +224,7 @@ public class ActivitySwipeBackHelper {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 animation.removeListener(this);
+                mSwipeAnimPlaying = false;
                 processSwipeBackEvent(SWIPE_STATE_ACTION_SWIPEBACK_END);
             }
         });
@@ -193,6 +232,7 @@ public class ActivitySwipeBackHelper {
     }
 
     private void translateX(float x) {
+        // todo 滑动退出后白屏？
         mDistanceX = x;
         mDistanceX = Math.max(0, mDistanceX);
         mDistanceX = Math.min(screenWidth, mDistanceX);

@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference;
 public class SwipeViewManager {
 
     private AppCompatActivity mCurrentActivity;
-    private WeakReference<AppCompatActivity> mPreviousActivity;
+//    private WeakReference<AppCompatActivity> mPreviousActivity;
     private SwipeBackActivityCallback mSwipeBackActivityCallback;
 
     private ViewGroup mCurrentContentView;
@@ -31,6 +31,7 @@ public class SwipeViewManager {
     protected boolean init() {
         mCurrentContentView = mCurrentActivity.findViewById(Window.ID_ANDROID_CONTENT);
         AppCompatActivity previousActivity = mSwipeBackActivityCallback.getPreviousActivity();
+//        mPreviousActivity = new WeakReference<>(previousActivity);
         if (previousActivity == null) {
             return false;
         }
@@ -39,8 +40,8 @@ public class SwipeViewManager {
         if (mPreviousDisplayView == null) {
             return false;
         }
-        mPreviousActivity = new WeakReference<>(previousActivity);
-        return false;
+
+        return true;
     }
 
     /**

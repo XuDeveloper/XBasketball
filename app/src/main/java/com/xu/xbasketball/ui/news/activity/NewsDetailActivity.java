@@ -66,6 +66,8 @@ public class NewsDetailActivity extends BaseActivity {
         // for Espresso Test
         EspressoIdlingResource.increment();
 
+        setUseSwipeToExit(true);
+
         String url = getIntent().getStringExtra(Constants.NEWS_URL);
         url = url.split("\\?")[0];
         String img = getIntent().getStringExtra(Constants.NEWS_IMG);
@@ -146,6 +148,12 @@ public class NewsDetailActivity extends BaseActivity {
             }
         });
         wvNewsDetail.load(url);
+    }
+
+    @Override
+    public void onSwipeBack() {
+        super.onSwipeBack();
+        finish();
     }
 
     @Override

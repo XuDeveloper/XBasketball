@@ -23,7 +23,6 @@
             android:layout_marginStart="8dp"
             android:text="没有今日战报哦，请到别处看看~" />
 
-
     </LinearLayout>
 
 </FrameLayout>
