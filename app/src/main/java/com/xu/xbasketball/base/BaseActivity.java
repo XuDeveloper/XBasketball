@@ -96,6 +96,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         if (compositeDisposable != null) {
             compositeDisposable.clear();
         }
+        if (helper != null) {
+            helper.finish();
+        }
     }
 
     protected void requestPermission(Consumer<Boolean> consumer, String... permissions) {

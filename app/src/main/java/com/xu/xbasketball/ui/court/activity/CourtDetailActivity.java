@@ -78,6 +78,8 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
     @Override
     public void initData() {
         // for Espresso Test
+        setUseSwipeToExit(true);
+
         EspressoIdlingResource.increment();
         String url = getIntent().getStringExtra(Constants.COURT_URL);
         String detailAddress = url.split("/")[url.split("/").length - 1];
@@ -251,6 +253,12 @@ public class CourtDetailActivity extends BaseMVPActivity<HupuCourtDetailPresente
             wvCourtDetail.clearWebView();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onSwipeBack() {
+        super.onSwipeBack();
+        finish();
     }
 
     public static void launch(Context context, String url) {

@@ -116,6 +116,7 @@ public class ActivitySwipeBackHelper {
                 if (mDistanceX == 0) {
                     // 没有进行滑动
                     mIsSwipeBack = false;
+                    swipeViewManager.recover();
                     return false;
                 }
                 if (mIsSwipeBack && actionIndex == 0) {
@@ -167,10 +168,10 @@ public class ActivitySwipeBackHelper {
                 break;
             case SWIPE_STATE_ACTION_SWIPEBACK_END:
                 Log.i(TAG, "processTouchEvent-SWIPE_STATE_ACTION_SWIPEBACK_END");
-                swipeViewManager.recover();
                 if (callback != null) {
                     callback.onSwipeBack();
                 }
+                swipeViewManager.recover();
                 break;
             default:
                 break;
@@ -232,11 +233,17 @@ public class ActivitySwipeBackHelper {
     }
 
     private void translateX(float x) {
-        // todo 滑动退出后白屏？
+        // todo 滑动退出后闪屏？alpha值变化？
         mDistanceX = x;
         mDistanceX = Math.max(0, mDistanceX);
         mDistanceX = Math.min(screenWidth, mDistanceX);
         swipeViewManager.translate(mDistanceX, screenWidth);
+    }
+
+    public void finish() {
+        if (mValueAnimator != null) {
+            mValueAnimator.cancel();
+        }
     }
 
     public interface SwipeBackCallback {
