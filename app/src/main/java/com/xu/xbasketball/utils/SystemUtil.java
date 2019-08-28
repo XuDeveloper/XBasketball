@@ -15,7 +15,7 @@ public class SystemUtil {
     public static boolean checkPermission(Context context, String permission) {
         PackageManager pm = context.getPackageManager();
         return (PackageManager.PERMISSION_GRANTED ==
-                pm.checkPermission(permission, "com.xu.xbasketball"));
+                pm.checkPermission(permission, context.getPackageName()));
     }
 
     public static void hideInputMethod(Context context, View view) {
